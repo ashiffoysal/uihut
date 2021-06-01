@@ -194,11 +194,6 @@
                             <span class="menu-title">Faq</span>
                         </a>
                     </div>
-
-                    
-                   
-                   
-            
                 </div>
             </div>
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
@@ -232,6 +227,36 @@
                                 <span class="bullet bullet-dot"></span>
                             </span>
                             <span class="menu-title">Terms & Connection</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Blog area start from here -->
+            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <i class="bi bi-person fs-2"></i>
+                    </span>
+                    <span class="menu-title">Blogs</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link" href="{{ route('admin.blog.category') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Category</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="menu-sub menu-sub-accordion menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link" href="{{ route('admin.blog.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Blogs</span>
                         </a>
                     </div>
                 </div>
