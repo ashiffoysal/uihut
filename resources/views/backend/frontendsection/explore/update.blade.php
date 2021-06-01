@@ -8,7 +8,7 @@
             <!--begin::Page title-->
             <div data-kt-place="true" data-kt-place-mode="prepend" data-kt-place-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center me-3 flex-wrap mb-5 mb-lg-0 lh-1">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">Category</h1>
+                <h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">Explore</h1>
                 <!--end::Title-->
             </div>
 
@@ -45,7 +45,7 @@
                     <!--end::Icon-->
                     <!--begin::Description-->
                     <div class="ms-6">
-                        <p class="list-unstyled text-gray-600 fw-bold fs-6 p-0 m-0">Update Category</p>
+                        <p class="list-unstyled text-gray-600 fw-bold fs-6 p-0 m-0">Update Explore</p>
                     </div>
                     <!--end::Description-->
                 </div>
@@ -56,49 +56,49 @@
                         <div class="card-header card-header-stretch overflow-auto">
 
                         </div>
-                        <form class="form" method="POST" id="kt_layout_builder_form" action="{{ route('admin.category.update') }}" enctype="multipart/form-data">
+                        <form class="form" method="POST" id="kt_layout_builder_form" action="{{ route('admin.explore.update') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body" data-select2-id="select2-data-90-elj6">
                                 <div class="tab-content pt-3" data-select2-id="select2-data-89-mk7z">
                                     <div class="tab-pane active" id="kt_builder_main" data-select2-id="select2-data-kt_builder_main">
                                         <div class="row mb-10">
-                                            <label class="col-lg-3 col-form-label text-lg-end">Category Name:</label>
+                                            <label class="col-lg-3 col-form-label text-lg-end">Title:</label>
                                             <div class="col-lg-9 col-xl-4">
                                                 <div class="form-check form-check-custom form-check-solid form-switch mb-2">
-                                                    <input class="form-control form-control-solid" type="text" name="name" placeholder="Category Name" value="{{$edit->name}}">
-                                                    <input  type="hidden" name="id" value="{{$edit->id}}">
+                                                    <input class="form-control form-control-solid" type="text" name="title" placeholder="Title" value="{{ $edit->title }}">
+                                                    <input type="hidden" name="id" value="{{ $edit->id }}">
                                                   
                                                 </div>
-                                                @error('name')
+                                                @error('title')
                                                         <div style="color:red">{{ $message }}</div>
                                                @enderror
                                             </div>
                                         </div>
                                         <div class="row mb-10">
-                                            <label class="col-lg-3 col-form-label text-lg-end">Category Icon:</label>
+                                            <label class="col-lg-3 col-form-label text-lg-end">Sub Title:</label>
                                             <div class="col-lg-9 col-xl-4">
                                                 <div class="form-check form-check-custom form-check-solid form-switch mb-2">
-                                                    <input class="form-control form-control-solid" type="text" name="icon" placeholder="Category Icon" value="{{$edit->icon}}">
+                                                    <textarea class="form-control form-control-solid" type="text" name="subtitle" placeholder="Sub Title">{{ $edit->details }}</textarea>
                                                 </div>
-                                                @error('icon')
+                                                @error('subtitle')
                                                         <div style="color:red">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                         </div>
                                         <div class="row mb-10">
-                                            <label class="col-lg-3 col-form-label text-lg-end">Category Image:</label>
-                                            <div class="col-lg-9 col-xl-4">
+                                            <label class="col-lg-3 col-form-label text-lg-end">Video:</label>
+                                            <div class="col-lg-2 col-xl-2">
 
                                                 <!--begin::Image input-->
                                                 <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(assets/media/avatars/blank.png)">
                                                     <!--begin::Preview existing avatar-->
-                                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{asset('public/uploads/category/'.$edit->image)}})"></div>
+                                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{asset('public/uploads/logo/')}})"></div>
                                                     <!--end::Preview existing avatar-->
                                                     <!--begin::Label-->
                                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
                                                         <i class="bi bi-pencil-fill fs-7"></i>
                                                         <!--begin::Inputs-->
-                                                        <input type="file" name="image" accept=".png, .jpg, .jpeg, .gif" />
+                                                        <input type="file" name="video" accept=".png, .jpg, .jpeg, .mp4" />
                                                         <!-- <input type="hidden" name="avatar_remove" /> -->
                                                         <!--end::Inputs-->
                                                     </label>
@@ -113,14 +113,21 @@
                                                         <i class="bi bi-x fs-2"></i>
                                                     </span>
                                                     <!--end::Remove-->
-                                                    @error('image')
-                                                        <div style="color:red">{{ $message }}</div>
-                                                    @enderror
+                                                   
                                                 </div>
-                                               
-                                                <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+                                                <!--end::Image input-->
+                                                <!--begin::Hint-->
+                                                <div class="form-text">Allowed file types: mp4</div>
+                                                @error('video')
+                                                        <div style="color:red">{{ $message }}</div>
+                                                @enderror
                                                 <!--end::Hint-->
                                             </div>
+                                            <div class="col-lg-3 col-xl-3">
+                                                <video src="{{url('public/storage/'.$edit->video) }}" height="145px"></video>
+                                            </div>
+
+                                            
                                         </div>
                                       
                                     </div>
@@ -137,6 +144,11 @@
                                             <span class="indicator-progress">Please wait...
                                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                         </button>
+                                        <!-- <button type="button" id="kt_layout_builder_reset" class="btn btn-active-light btn-color-muted">
+                                            <span class="indicator-label">Reset</span>
+                                            <span class="indicator-progress">Please wait...
+                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                        </button> -->
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +162,7 @@
                         <!--begin::Header-->
                         <div class="card-header border-0 pt-5">
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bolder fs-3 mb-1">All Category</span>
+                                <span class="card-label fw-bolder fs-3 mb-1">All Explore</span>
                                 <!-- <span class="text-muted mt-1 fw-bold fs-7">Over 500 orders</span> -->
                             </h3>
                             <div class="card-toolbar">
@@ -179,25 +191,22 @@
                                     <!--begin::Table head-->
                                     <thead>
                                         <tr class="fw-bolder text-muted">
-                                            <th class="min-w-150px">Category Name</th>
-                                            <th class="min-w-140px">Image</th>
-                                            <th class="min-w-120px">Icon</th>
+                                            <th class="min-w-150px">Title</th>
+                                            <th class="min-w-140px">Sub Title</th>
+                                            <!-- <th class="min-w-120px">Video</th> -->
                                             <th class="min-w-120px">Status</th>
                                             <th class="min-w-100px text-end">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($category as $data)
+                                    @foreach($allexplore as $data)
                                         <tr>
                                             <td>
-                                                <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">{{ $data->name  }}</a>
+                                                <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">{{$data->title}}</a>
                                                 
                                             </td>
-                                            <td>
-                                               <img src="{{asset('public/uploads/category/'.$data->image)}}" height="25px">
-
-                                            </td>
-                                            <td class="text-dark fw-bolder text-hover-primary fs-6"> {{ $data->icon}} </td>
+                                            <td>{{$data->details}}</td>
+                                            <!-- <td class="text-dark fw-bolder text-hover-primary fs-6"></td> -->
                                             <td>
                                                 @if($data->status==1)
                                                 <span class="badge badge-light-success">Active</span>
@@ -207,7 +216,7 @@
                                             </td>
                                             <td class="text-end">
                                                 @if($data->status==1)
-                                                <a href="{{url('admin/category/deactive/'.$data->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                                <a href="{{url('admin/explore/deactive/'.$data->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                     <span class="svg-icon svg-icon-3">
                                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -219,7 +228,7 @@
                                                     </span>
                                                 </a>
                                                 @else
-                                                <a href="{{url('admin/category/active/'.$data->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                                <a href="{{url('admin/explore/active/'.$data->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                     <span class="svg-icon svg-icon-3">
                                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -231,7 +240,7 @@
                                                     </span>
                                                 </a>
                                                 @endif
-                                                <a href="{{url('admin/category/edit/'.$data->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                                <a href="{{url('admin/explore/edit/'.$data->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                     <!--begin::Svg Icon | path: icons/duotone/Communication/Write.svg-->
                                                     <span class="svg-icon svg-icon-3">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -241,7 +250,7 @@
                                                     </span>
                                                     <!--end::Svg Icon-->
                                                 </a>
-                                                <a id="delete" href="{{url('/admin/category/delete/'.$data->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                                                <a id="delete" href="{{url('/admin/explore/delete/'.$data->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                                                     <!--begin::Svg Icon | path: icons/duotone/General/Trash.svg-->
                                                     <span class="svg-icon svg-icon-3">
                                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
