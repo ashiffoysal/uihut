@@ -1,21 +1,13 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -109,5 +101,18 @@ Route::post('/admin/explore/create', [App\Http\Controllers\Admin\ExploreControll
 Route::get('/admin/explore/active/{id}', [App\Http\Controllers\Admin\ExploreController::class, 'active']);
 Route::get('/admin/explore/deactive/{id}', [App\Http\Controllers\Admin\ExploreController::class, 'deactive']);
 Route::get('/admin/explore/edit/{id}', [App\Http\Controllers\Admin\ExploreController::class, 'edit']);
-Route::post('/admin/explore/update', [App\Http\Controllers\Admin\ExploreController::class, 'update'])->name('admin.faq.update');
+Route::post('/admin/explore/update', [App\Http\Controllers\Admin\ExploreController::class, 'update'])->name('admin.explore.update');
 Route::get('/admin/explore/delete/{id}', [App\Http\Controllers\Admin\ExploreController::class, 'Delete']);
+// subscriver
+Route::get('/admin/subscriver/index', [App\Http\Controllers\Admin\SubscriverController::class, 'index'])->name('admin.subscriver.create');
+Route::get('/admin/subscriver/active/{id}', [App\Http\Controllers\Admin\SubscriverController::class, 'active']);
+Route::get('/admin/subscriver/deactive/{id}', [App\Http\Controllers\Admin\SubscriverController::class, 'deactive']);
+Route::get('/admin/subscriver/delete/{id}', [App\Http\Controllers\Admin\SubscriverController::class, 'Delete']);
+// product controller
+Route::get('/admin/product/create', [App\Http\Controllers\Admin\ProductController::class, 'create'])->name('admin.product.create');
+Route::post('/admin/product/create', [App\Http\Controllers\Admin\ProductController::class, 'store'])->name('admin.product.create');
+Route::get('/admin/product/active/{id}', [App\Http\Controllers\Admin\ProductController::class, 'active']);
+Route::get('/admin/product/deactive/{id}', [App\Http\Controllers\Admin\ProductController::class, 'deactive']);
+Route::get('/admin/product/edit/{id}', [App\Http\Controllers\Admin\ProductController::class, 'edit']);
+Route::post('/admin/product/update', [App\Http\Controllers\Admin\ProductController::class, 'update'])->name('admin.product.update');
+Route::get('/admin/product/delete/{id}', [App\Http\Controllers\Admin\ProductController::class, 'Delete']);

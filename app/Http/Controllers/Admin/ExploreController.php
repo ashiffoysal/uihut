@@ -94,26 +94,25 @@ class ExploreController extends Controller
     public function edit($id){
         $edit=Explore::where('id',$id)->first();
         $allexplore=Explore::where('is_deleted',0)->get();
-        return view('backend.category.update',compact('edit','allexplore'));
+        return view('backend.frontendsection.explore.update',compact('edit','allexplore'));
     }
     // update
     public function update(Request $request){
         $validated = $request->validate([
-            'name' => 'required',
-          
+            'title' => 'required',
+            'subtitle' => 'required',
+           
         ]);
         $id=$request->id;
         $update=Explore::where('id',$id)->update([
-            'name'=>$request->name,
-            'icon'=>$request->icon,
+            'title'=>$request->title,
+            'details'=>$request->subtitle,
             'updated_at'=>Carbon::now()->toDateTimeString(),
         ]);
-        if($request->hasFile('image')) {
-            $image = $request->file('image');
-            $ImageName = 'logo' . '_' . time() . '.' . $image->getClientOriginalExtension();
-            Image::make($image)->save('public/uploads/category/' . $ImageName);
-            Category::where('id',$id)->update([
-                'image' => $ImageName,
+        if($request->hasFile('video')) {
+            $mainimage = $request->file('video')->store('image','public'); 
+            Explore::where('id', $id)->update([
+                'video' => $mainimage,
             ]);
         }
         if($update){

@@ -1,6 +1,5 @@
 @extends('layouts.backend')
 @section('content')
-
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Toolbar-->
     <div class="toolbar" id="kt_toolbar">
@@ -9,7 +8,7 @@
             <!--begin::Page title-->
             <div data-kt-place="true" data-kt-place-mode="prepend" data-kt-place-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center me-3 flex-wrap mb-5 mb-lg-0 lh-1">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">ReSubCategory</h1>
+                <h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">Category</h1>
                 <!--end::Title-->
             </div>
 
@@ -46,7 +45,7 @@
                     <!--end::Icon-->
                     <!--begin::Description-->
                     <div class="ms-6">
-                        <p class="list-unstyled text-gray-600 fw-bold fs-6 p-0 m-0">Create ReSubCategory</p>
+                        <p class="list-unstyled text-gray-600 fw-bold fs-6 p-0 m-0">Update Category</p>
                     </div>
                     <!--end::Description-->
                 </div>
@@ -57,18 +56,18 @@
                         <div class="card-header card-header-stretch overflow-auto">
 
                         </div>
-                        <form class="form" method="POST" id="kt_layout_builder_form" action="{{ route('admin.resubcategory.create') }}" enctype="multipart/form-data">
+                        <form class="form" method="POST" id="kt_layout_builder_form" action="{{ route('admin.category.update') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body" data-select2-id="select2-data-90-elj6">
                                 <div class="tab-content pt-3" data-select2-id="select2-data-89-mk7z">
                                     <div class="tab-pane active" id="kt_builder_main" data-select2-id="select2-data-kt_builder_main">
-
-                                      
                                         <div class="row mb-10">
-                                            <label class="col-lg-3 col-form-label text-lg-end">ReSubCategory Name:</label>
+                                            <label class="col-lg-3 col-form-label text-lg-end">Category Name:</label>
                                             <div class="col-lg-9 col-xl-4">
                                                 <div class="form-check form-check-custom form-check-solid form-switch mb-2">
-                                                    <input class="form-control form-control-solid" type="text" name="name" placeholder="ReSubCategory Name">
+                                                    <input class="form-control form-control-solid" type="text" name="name" placeholder="Category Name" value="{{$edit->name}}">
+                                                    <input  type="hidden" name="id" value="{{$edit->id}}">
+                                                  
                                                 </div>
                                                 @error('name')
                                                         <div style="color:red">{{ $message }}</div>
@@ -76,38 +75,54 @@
                                             </div>
                                         </div>
                                         <div class="row mb-10">
-                                            <label class="col-lg-3 col-form-label text-lg-end">Category:</label>
+                                            <label class="col-lg-3 col-form-label text-lg-end">Category Icon:</label>
                                             <div class="col-lg-9 col-xl-4">
                                                 <div class="form-check form-check-custom form-check-solid form-switch mb-2">
-                                                    <select name="category" class="form-select form-select-solid select2-hidden-accessible" data-control="select2" data-hide-search="true" data-placeholder="Select..." name="settings_customer" data-select2-id="select2-data-10-5avf" tabindex="-1" aria-hidden="true">
-                                                         <option value="" data-select2-id="select2-data-12-m2ht"></option>
-                                                        @foreach($category as $cate)
-                                                         <option value="{{$cate->id}}">{{$cate->name}}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    <input class="form-control form-control-solid" type="text" name="icon" placeholder="Category Icon" value="{{$edit->icon}}">
                                                 </div>
-                                                @error('category')
+                                                @error('icon')
                                                         <div style="color:red">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                         </div>
                                         <div class="row mb-10">
-                                            <label class="col-lg-3 col-form-label text-lg-end">SubCategory:</label>
+                                            <label class="col-lg-3 col-form-label text-lg-end">Category Image:</label>
                                             <div class="col-lg-9 col-xl-4">
-                                                <div class="form-check form-check-custom form-check-solid form-switch mb-2">
-                                                    <select name="subcategory" class="form-select form-select-solid subcategory" data-hide-search="true" data-placeholder="Select..." name="settings_customer" data-select2-id="select2-data-10-5avz" tabindex="-1" aria-hidden="true">
-                                                         
-                                                        
-                                                       
-                                                    </select>
-                                                </div>
-                                                @error('subcategory')
+
+                                                <!--begin::Image input-->
+                                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(assets/media/avatars/blank.png)">
+                                                    <!--begin::Preview existing avatar-->
+                                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{asset('public/uploads/category/'.$edit->image)}})"></div>
+                                                    <!--end::Preview existing avatar-->
+                                                    <!--begin::Label-->
+                                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                                        <!--begin::Inputs-->
+                                                        <input type="file" name="image" accept=".png, .jpg, .jpeg, .gif" />
+                                                        <!-- <input type="hidden" name="avatar_remove" /> -->
+                                                        <!--end::Inputs-->
+                                                    </label>
+                                                    <!--end::Label-->
+                                                    <!--begin::Cancel-->
+                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+                                                        <i class="bi bi-x fs-2"></i>
+                                                    </span>
+                                                    <!--end::Cancel-->
+                                                    <!--begin::Remove-->
+                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                                                        <i class="bi bi-x fs-2"></i>
+                                                    </span>
+                                                    <!--end::Remove-->
+                                                    @error('image')
                                                         <div style="color:red">{{ $message }}</div>
-                                                @enderror
+                                                    @enderror
+                                                </div>
                                                
+                                                <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+                                                <!--end::Hint-->
                                             </div>
                                         </div>
-                                     
+                                      
                                     </div>
                                 </div>
                             </div>
@@ -118,7 +133,7 @@
                                     <div class="col-lg-3"></div>
                                     <div class="col-lg-9">
                                         <button type="submit" id="kt_layout_builder_preview" class="btn btn-primary me-2">
-                                            <span class="indicator-label">Submit</span>
+                                            <span class="indicator-label">Update</span>
                                             <span class="indicator-progress">Please wait...
                                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                         </button>
@@ -132,11 +147,11 @@
                 </div>
                 <div class="col-md-6">
                     <div class="card mb-5 mb-xl-8">
-                
+                        <!--begin::Header-->
                         <div class="card-header border-0 pt-5">
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bolder fs-3 mb-1">All ReSubCategory</span>
-                             
+                                <span class="card-label fw-bolder fs-3 mb-1">All Category</span>
+                                <!-- <span class="text-muted mt-1 fw-bold fs-7">Over 500 orders</span> -->
                             </h3>
                             <div class="card-toolbar">
                                 <!--begin::Menu-->
@@ -157,30 +172,32 @@
                         </div>
               
                         <div class="card-body py-3">
-                         
+                            <!--begin::Table container-->
                             <div class="table-responsive">
-                          
+                                <!--begin::Table-->
                                 <table class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
-                                  
+                                    <!--begin::Table head-->
                                     <thead>
                                         <tr class="fw-bolder text-muted">
-                                            <th class="min-w-150px">ReSubCategory Name</th>
-                                            <th class="min-w-140px">Category</th>
-                                            <th class="min-w-150px">SubCategory Name</th>
+                                            <th class="min-w-150px">Category Name</th>
+                                            <th class="min-w-140px">Image</th>
+                                            <th class="min-w-120px">Icon</th>
                                             <th class="min-w-120px">Status</th>
                                             <th class="min-w-100px text-end">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($resubcategory as $data)
+                                    @foreach($category as $data)
                                         <tr>
                                             <td>
                                                 <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">{{ $data->name  }}</a>
                                                 
                                             </td>
-                                            <td><a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">{{ $data->category->name  }}</a></td>
                                             <td>
-                                            <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">{{$data->subcategory->name}}</a></td>
+                                               <img src="{{asset('public/uploads/category/'.$data->image)}}" height="25px">
+
+                                            </td>
+                                            <td class="text-dark fw-bolder text-hover-primary fs-6"> {{ $data->icon}} </td>
                                             <td>
                                                 @if($data->status==1)
                                                 <span class="badge badge-light-success">Active</span>
@@ -189,9 +206,8 @@
                                                 @endif
                                             </td>
                                             <td class="text-end">
-                                            <!-- <img src="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNTEyIDUxMiIgaGVpZ2h0PSI1MTIiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB3aWR0aD0iNTEyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxnPjxwYXRoIGQ9Im00MjQgNjRoLTg4di0xNmMwLTI2LjUxLTIxLjQ5LTQ4LTQ4LTQ4aC02NGMtMjYuNTEgMC00OCAyMS40OS00OCA0OHYxNmgtODhjLTIyLjA5MSAwLTQwIDE3LjkwOS00MCA0MHYzMmMwIDguODM3IDcuMTYzIDE2IDE2IDE2aDM4NGM4LjgzNyAwIDE2LTcuMTYzIDE2LTE2di0zMmMwLTIyLjA5MS0xNy45MDktNDAtNDAtNDB6bS0yMTYtMTZjMC04LjgyIDcuMTgtMTYgMTYtMTZoNjRjOC44MiAwIDE2IDcuMTggMTYgMTZ2MTZoLTk2eiIvPjxwYXRoIGQ9Im03OC4zNjQgMTg0Yy0yLjg1NSAwLTUuMTMgMi4zODYtNC45OTQgNS4yMzhsMTMuMiAyNzcuMDQyYzEuMjIgMjUuNjQgMjIuMjggNDUuNzIgNDcuOTQgNDUuNzJoMjQyLjk4YzI1LjY2IDAgNDYuNzItMjAuMDggNDcuOTQtNDUuNzJsMTMuMi0yNzcuMDQyYy4xMzYtMi44NTItMi4xMzktNS4yMzgtNC45OTQtNS4yMzh6bTI0MS42MzYgNDBjMC04Ljg0IDcuMTYtMTYgMTYtMTZzMTYgNy4xNiAxNiAxNnYyMDhjMCA4Ljg0LTcuMTYgMTYtMTYgMTZzLTE2LTcuMTYtMTYtMTZ6bS04MCAwYzAtOC44NCA3LjE2LTE2IDE2LTE2czE2IDcuMTYgMTYgMTZ2MjA4YzAgOC44NC03LjE2IDE2LTE2IDE2cy0xNi03LjE2LTE2LTE2em0tODAgMGMwLTguODQgNy4xNi0xNiAxNi0xNnMxNiA3LjE2IDE2IDE2djIwOGMwIDguODQtNy4xNiAxNi0xNiAxNnMtMTYtNy4xNi0xNi0xNnoiLz48L2c+PC9zdmc+" /> -->
                                                 @if($data->status==1)
-                                                <a href="{{url('admin/resubcategory/deactive/'.$data->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                                <a href="{{url('admin/category/deactive/'.$data->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                     <span class="svg-icon svg-icon-3">
                                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -203,7 +219,7 @@
                                                     </span>
                                                 </a>
                                                 @else
-                                                <a href="{{url('admin/resubcategory/active/'.$data->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                                <a href="{{url('admin/category/active/'.$data->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                                     <span class="svg-icon svg-icon-3">
                                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -215,18 +231,18 @@
                                                     </span>
                                                 </a>
                                                 @endif
-                                                <a href="{{url('admin/resubcategory/edit/'.$data->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                                   
+                                                <a href="{{url('admin/category/edit/'.$data->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                                    <!--begin::Svg Icon | path: icons/duotone/Communication/Write.svg-->
                                                     <span class="svg-icon svg-icon-3">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                             <path d="M12.2674799,18.2323597 L12.0084872,5.45852451 C12.0004303,5.06114792 12.1504154,4.6768183 12.4255037,4.38993949 L15.0030167,1.70195304 L17.5910752,4.40093695 C17.8599071,4.6812911 18.0095067,5.05499603 18.0083938,5.44341307 L17.9718262,18.2062508 C17.9694575,19.0329966 17.2985816,19.701953 16.4718324,19.701953 L13.7671717,19.701953 C12.9505952,19.701953 12.2840328,19.0487684 12.2674799,18.2323597 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.701953, 10.701953) rotate(-135.000000) translate(-14.701953, -10.701953)" />
                                                             <path d="M12.9,2 C13.4522847,2 13.9,2.44771525 13.9,3 C13.9,3.55228475 13.4522847,4 12.9,4 L6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 L12.9,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
                                                         </svg>
                                                     </span>
-                                                  
+                                                    <!--end::Svg Icon-->
                                                 </a>
-                                                <a id="delete" href="{{url('/admin/resubcategory/delete/'.$data->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
-                                               
+                                                <a id="delete" href="{{url('/admin/category/delete/'.$data->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                                                    <!--begin::Svg Icon | path: icons/duotone/General/Trash.svg-->
                                                     <span class="svg-icon svg-icon-3">
                                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -236,7 +252,7 @@
                                                             </g>
                                                         </svg>
                                                     </span>
-                                                   
+                                                    <!--end::Svg Icon-->
                                                 </a>
                                             </td>
                                         </tr>
@@ -258,29 +274,5 @@
     </div>
     <!--end::Post-->
 </div>
-<script type="text/javascript">
-  $(document).ready(function() {
-     $('select[name="category"]').on('change', function(){
-         var cate_id = $(this).val();
-        // alert(cate_id);
-         if(cate_id) {
-             $.ajax({
-                 url: "{{  url('/get/subcategory/all/') }}/"+cate_id,
-                 type:"GET",
-                 dataType:"json",
-                 success:function(data) {
 
-                        $('.subcategory').empty();
-                        $.each(data,function(index,districtObj){
-                         $('.subcategory').append('<option value="' + districtObj.id + '" >'+districtObj.name+'</option>');
-                       });
-                     }
-             });
-         } else {
-             alert('danger');
-         }
-
-     });
- });
-</script>
 @endsection
