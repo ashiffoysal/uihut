@@ -565,6 +565,7 @@ class ComposerStaticInitf6faad91a81a582b15f23c4bf2609be1
         'App\\Models\\Seo' => __DIR__ . '/../..' . '/app/Models/Seo.php',
         'App\\Models\\Social' => __DIR__ . '/../..' . '/app/Models/Social.php',
         'App\\Models\\SubCategory' => __DIR__ . '/../..' . '/app/Models/SubCategory.php',
+        'App\\Models\\Subscriver' => __DIR__ . '/../..' . '/app/Models/Subscriver.php',
         'App\\Models\\TermsAndCondition' => __DIR__ . '/../..' . '/app/Models/TermsAndCondition.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',

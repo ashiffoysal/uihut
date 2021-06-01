@@ -21,6 +21,33 @@
                     <span class="menu-icon">
                         <i class="bi bi-person fs-2"></i>
                     </span>
+                    <span class="menu-title">Product</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion menu-active-bg">
+                    <div class="menu-item ">
+                        <a class="menu-link {{ request()->routeIs('admin.product.create*') ? 'active' : '' }}" href="{{ route('admin.product.create') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Product Upload</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->routeIs('admin.clientreview.create*') ? 'active' : '' }}" href="{{route('admin.clientreview.create')}}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title"> Product Published</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <i class="bi bi-person fs-2"></i>
+                    </span>
                     <span class="menu-title">Home Page</span>
                     <span class="menu-arrow"></span>
                 </span>
@@ -92,6 +119,14 @@
                                 <span class="bullet bullet-dot"></span>
                             </span>
                             <span class="menu-title">Social</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->routeIs('admin.subscriver.create*') ? 'active' : '' }}"" href="{{route('admin.subscriver.create')}}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Subscriber</span>
                         </a>
                     </div>
             

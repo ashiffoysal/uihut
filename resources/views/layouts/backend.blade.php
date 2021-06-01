@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <!--begin::Head-->
 
 <head>
@@ -58,6 +59,7 @@
 							</svg>
 						</span>
 						<!--end::Svg Icon-->
+
 					</div>
 					<!--end::Aside toggler-->
 				</div>
