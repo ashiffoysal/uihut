@@ -111,3 +111,24 @@ Route::get('/admin/explore/deactive/{id}', [App\Http\Controllers\Admin\ExploreCo
 Route::get('/admin/explore/edit/{id}', [App\Http\Controllers\Admin\ExploreController::class, 'edit']);
 Route::post('/admin/explore/update', [App\Http\Controllers\Admin\ExploreController::class, 'update'])->name('admin.faq.update');
 Route::get('/admin/explore/delete/{id}', [App\Http\Controllers\Admin\ExploreController::class, 'Delete']);
+
+// Blog route start from here
+Route::prefix('/admin/blog')->group(function(){
+    Route::get('/',[App\Http\Controllers\Admin\BlogController::class, 'blogsIndex'])->name('admin.blog.index');
+    Route::get('/create',[App\Http\Controllers\Admin\BlogController::class, 'blogsCreate'])->name('admin.blog.create');
+    Route::post('/store',[App\Http\Controllers\Admin\BlogController::class, 'blogStore'])->name('admin.blog.store');
+    Route::get('/status/{id}',[App\Http\Controllers\Admin\BlogController::class, 'blogsStatus'])->name('admin.blog.status.change');
+    
+
+    // blog category area start
+
+    Route::prefix('/category')->group(function(){
+        Route::get('/',[App\Http\Controllers\Admin\BlogController::class, 'categoryIndex'])->name('admin.blog.category');
+        Route::post('/create',[App\Http\Controllers\Admin\BlogController::class, 'categoryCreate'])->name('admin.blog.category.create');
+        Route::get('/status/{id}',[App\Http\Controllers\Admin\BlogController::class, 'categoryStatusChange'])->name('admin.blog.category.status.change');
+
+        Route::get('/edit/{id}',[App\Http\Controllers\Admin\BlogController::class, 'categoryEdit'])->name('admin.blog.category.edit');
+        Route::post('/update/{id}',[App\Http\Controllers\Admin\BlogController::class, 'categoryUpdate'])->name('admin.blog.category.update');
+        Route::get('/delete/{id}',[App\Http\Controllers\Admin\BlogController::class, 'categoryDelete'])->name('admin.blog.category.delete');
+    });
+});
