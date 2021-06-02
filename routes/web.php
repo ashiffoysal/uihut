@@ -111,6 +111,7 @@ Route::prefix('/admin/blog')->group(function(){
     Route::get('/create',[App\Http\Controllers\Admin\BlogController::class, 'blogsCreate'])->name('admin.blog.create');
     Route::post('/store',[App\Http\Controllers\Admin\BlogController::class, 'blogStore'])->name('admin.blog.store');
     Route::get('/status/{id}',[App\Http\Controllers\Admin\BlogController::class, 'blogsStatus'])->name('admin.blog.status.change');
+    Route::get('/edit/{id}',[App\Http\Controllers\Admin\BlogController::class, 'blogsEdit'])->name('admin.blog.edit');
     
 
     // blog category area start

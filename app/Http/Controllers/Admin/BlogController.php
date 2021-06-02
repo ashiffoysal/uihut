@@ -172,9 +172,10 @@ class BlogController extends Controller
 
     public function blogsStatus($id)
     {
+        
         $blog = Blogs::findOrFail($id);
         if($blog){
-            if($blog->status =1){
+            if($blog->status ==1){
                 $blog->status = 0;
                 $blog->save();
                 $notification = array(
@@ -184,7 +185,6 @@ class BlogController extends Controller
                 return redirect()->back()->with($notification);
 
             }else{
-                
                 $blog->status = 1;
                 $blog->save();
                 $notification = array(
@@ -200,6 +200,13 @@ class BlogController extends Controller
             );
             return redirect()->back()->with($notification);
         }
+    }
+    // edit blog page
+    public function blogsEdit($id)
+    {
+        $categores = BlogCategory::where('is_deleted',0)->orderBy('id', 'desc')->get();
+        $blog = Blogs::findOrFail($id);
+        return view('backend.blog.update',compact('categores','blog'));
     }
 
 }
