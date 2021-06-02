@@ -1,62 +1,39 @@
 @extends('layouts.backend')
 @section('content')
-<!-- <style>
-.drag-area{
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  border: 4px dashed #fff;
-  height: 500px;
-  width: 712px;
-}
-.drag-area.active{
-  border: 2px solid #fff;
-}
-.drag-area .icon{
-  font-size: 100px;
-  color: #fff;
-}
-.drag-area header{
-  font-size: 30px;
-  font-weight: 500;
-  color: #fff;
-}
-.drag-area span{
-  font-size: 25px;
-  font-weight: 500;
-  color: #fff;
-  margin: 10px 0 15px 0;
-}
-.drag-area button{
-  padding: 10px 25px;
-  font-size: 20px;
-  font-weight: 500;
-  border: none;
-  outline: none;
-  background: #fff;
-  color: #5256ad;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.drag-area img{
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  border-radius: 5px;
-}
-.fas {
-    font-weight: 900;
-    font-size: 100px;
-    color: aliceblue;
-}
-.fa-trash{
-    color:red;
-}
-</style> -->
+<style>
+    .file_upload {
+        border: 3px dashed #7eabf3 !important;
+    }
+
+    p {
+        color: #5FAAE1 !important;
+        display: inline !important;
+        width: auto !important;
+    }
+
+    .bootstrap-tagsinput {
+        background-color: #f5f8fa;
+        border-color: #f5f8fa;
+        box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+        display: inline-block;
+        padding: 4px 6px;
+        color: #b9b9b9;
+        vertical-align: middle;
+        border-radius: 4px;
+        max-width: 100%;
+        line-height: 25px;
+        cursor: text;
+        width: 100%;
+        background: aliceblue;
+    }
+
+    .badge-info {
+        color: #fff;
+        background-color: #98969c;
+        margin-left: 8px;
+    }
+</style>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-    <!--begin::Toolbar-->
     <div class="toolbar" id="kt_toolbar">
         <!--begin::Container-->
         <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
@@ -73,7 +50,6 @@
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
         <div id="kt_content_container" class="container-fluid">
-            <!--begin::Layout Builder Notice-->
             <div class="card mb-10">
                 <div class="card-body d-flex align-items-center p-5 p-lg-8">
                     <!--begin::Icon-->
@@ -100,29 +76,40 @@
                     <!--end::Icon-->
                     <!--begin::Description-->
                     <div class="ms-6">
-                        <p class="list-unstyled text-gray-600 fw-bold fs-6 p-0 m-0">Create Products</p>
+                        <p class="list-unstyled text-gray-600 fw-bold fs-6 p-0 m-0">Uploads Products</p>
                     </div>
                     <!--end::Description-->
                 </div>
             </div>
             <div class="card">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card-body" data-select2-id="select2-data-90-elj6">
-                            <div class="tab-content pt-3" data-select2-id="select2-data-89-mk7z">
-                                <div class="tab-pane active" id="kt_builder_main" data-select2-id="select2-data-kt_builder_main">
-                                    <div class="row mb-10">
-                                        <div class="col-lg-9 col-xl-10">
-                                            
-                                            
+                <form action="{{ route('admin.product.create') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-5 col-xl-5">
+                            <div class="card-body" data-select2-id="select2-data-90-elj6">
+                                <div class="tab-content pt-3" data-select2-id="select2-data-89-mk7z">
+                                    <div class="tab-pane active" id="kt_builder_main" data-select2-id="select2-data-kt_builder_main">
+                                        <div class="row mb-10">
+                                            <!-- <div class="col-lg-2 col-xl-2"></div> -->
+                                            <div class="col-lg-12 col-xl-12">
+
+                                                <div id="product_img"></div>
+
+                                            </div>
+                                        </div>
+                                        <div class="row mb-10">
+                                            <!-- <div class="col-lg-2 col-xl-2"></div> -->
+                                            <div class="col-xl-12 col-lg-12 row" id="photos">
+
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                            <div class="card-body" data-select2-id="select2-data-90-elj6">
+                        <div class="col-md-6 col-xl-6">
+                            <div class="card-body">
                                 <div class="tab-content pt-3" data-select2-id="select2-data-89-mk7z">
                                     <div class="tab-pane active" id="kt_builder_main" data-select2-id="select2-data-kt_builder_main">
                                         <div class="row mb-10">
@@ -130,24 +117,25 @@
                                             <div class="col-lg-9 col-xl-7">
                                                 <div class="form-check form-check-custom form-check-solid form-switch mb-2">
                                                     <input class="form-control form-control-solid" type="text" name="title" placeholder="Title">
-                                                  
                                                 </div>
                                                 @error('title')
-                                                        <div style="color:red">{{ $message }}</div>
-                                               @enderror
+                                                <div style="color:red">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="row mb-10">
                                             <label class="col-lg-3 col-form-label text-lg-end">MainCategory:</label>
                                             <div class="col-lg-9 col-xl-7">
                                                 <div class="form-check form-check-custom form-check-solid form-switch mb-2">
-                                                    <select name="" id="" class="form-control form-control-solid">
-                                                        <option >--select--</option>
-                                                        <option >--select--</option>
+                                                    <select name="category" id="category" class="form-control form-control-solid">
+                                                        <option>--select--</option>
+                                                        @foreach($allcategory as $categoty)
+                                                        <option value="{{$categoty->id}}">{{ $categoty->name }}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
-                                                @error('icon')
-                                                        <div style="color:red">{{ $message }}</div>
+                                                @error('category')
+                                                <div style="color:red">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -155,13 +143,12 @@
                                             <label class="col-lg-3 col-form-label text-lg-end">SubCategory:</label>
                                             <div class="col-lg-9 col-xl-7">
                                                 <div class="form-check form-check-custom form-check-solid form-switch mb-2">
-                                                    <select name="" id="" class="form-control form-control-solid">
-                                                        <option >--select--</option>
-                                                        <option >--select--</option>
+                                                    <select name="subcategory" id="subcategory" class="form-control form-control-solid">
+                                                        <option>--select--</option>
                                                     </select>
                                                 </div>
-                                                @error('icon')
-                                                        <div style="color:red">{{ $message }}</div>
+                                                @error('subcategory')
+                                                <div style="color:red">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -169,52 +156,49 @@
                                             <label class="col-lg-3 col-form-label text-lg-end">ReSubCategory:</label>
                                             <div class="col-lg-9 col-xl-7">
                                                 <div class="form-check form-check-custom form-check-solid form-switch mb-2">
-                                                    <select name="" id="" class="form-control form-control-solid">
-                                                        <option >--select--</option>
-                                                        <option >--select--</option>
+                                                    <select name="resubcategory" id="resubcategory" class="form-control form-control-solid">
+                                                        <option>--select--</option>
                                                     </select>
                                                 </div>
-                                                @error('icon')
-                                                        <div style="color:red">{{ $message }}</div>
+                                                @error('resubcategory')
+                                                <div style="color:red">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                         </div>
-
                                         <div class="row mb-10">
                                             <label class="col-lg-3 col-form-label text-lg-end">Select Software:</label>
                                             <div class="col-lg-3 col-xl-3">
                                                 <div class="form-check form-check-custom form-check-solid form-switch mb-2">
-                                                    <select name="" id="" class="form-control form-control-solid">
-                                                        <option >--select--</option>
-                                                        <option >--select--</option>
+                                                    <select name="software[]" class="form-control form-control-solid">
+                                                        <option>--select--</option>
+                                                        @foreach($allsoftware as $cate)
+                                                        <option value="{{ $cate->id }}">{{ $cate->name }}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
-                                                @error('icon')
-                                                        <div style="color:red">{{ $message }}</div>
-                                                @enderror
                                             </div>
                                             <label class="col-lg-1 col-form-label text-lg-end">Link:</label>
                                             <div class="col-lg-3 col-xl-3">
                                                 <div class="form-check form-check-custom form-check-solid form-switch mb-2">
-                                                    <input class="form-control form-control-solid" type="text" name="link" placeholder="Link">
+                                                    <input class="form-control form-control-solid" type="text" name="link[]" placeholder="Link">
                                                 </div>
-                                                @error('icon')
-                                                        <div style="color:red">{{ $message }}</div>
-                                                @enderror
                                             </div>
+                                        </div>
+                                        <div class="add_more">
+
                                         </div>
                                         <div class="row mb-10">
                                             <div class="col-lg-3 col-xl-3">
                                             </div>
                                             <div class="col-lg-2 col-xl-2">
-                                                    <a href="" class="btn-sm"><i class="fa fa-plus"></i> Add More</a>
+                                                <a class="btn-sm" onclick="addmore()"><i class="fa fa-plus"></i> Add More </a>
                                             </div>
                                         </div>
                                         <div class="row mb-10">
                                             <label class="col-lg-3 col-form-label text-lg-end">Product Tag:</label>
                                             <div class="col-lg-9 col-xl-7">
                                                 <div class="form-check form-check-custom form-check-solid form-switch mb-2">
-                                                    <input class="form-control form-control-solid" type="text" name="title" placeholder="Tag">
+                                                    <input data-role="tagsinput" class="form-control form-control-solid" type="text" placeholder="Tag" name="tag">
                                                 </div>
                                             </div>
                                         </div>
@@ -222,9 +206,26 @@
                                             <label class="col-lg-3 col-form-label text-lg-end">Description:</label>
                                             <div class="col-lg-9 col-xl-7">
                                                 <div class="form-check form-check-custom form-check-solid form-switch mb-2">
-                                                    <input class="form-control form-control-solid" type="text" name="title" placeholder="Description">
+                                                    <textarea class="form-control form-control-solid" name="description" placeholder="Description"></textarea>
                                                 </div>
                                             </div>
+                                        </div>
+
+                                        <div class="row mb-8">
+                                            <label class="col-lg-3 col-form-label text-lg-end"></label>
+                                            <div class="col-xl-9">
+                                                <div class="d-flex fw-bold h-100">
+                                                    <div class="form-check form-check-custom form-check-solid me-9">
+                                                        <input class="form-check-input" type="radio" value="2" name="product_type" checked>
+                                                        <label class="form-check-label ms-3" for="Free">Free</label>
+                                                    </div>
+                                                    <div class="form-check form-check-custom form-check-solid">
+                                                        <input class="form-check-input" type="radio" value="1" name="product_type">
+                                                        <label class="form-check-label ms-3" for="Premium">Premium</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end::Col-->
                                         </div>
                                     </div>
                                 </div>
@@ -248,86 +249,84 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
-<!-- <script>
-$(document).ready(function(){
-
-const dropArea = document.querySelector(".drag-area"),
-dragText = dropArea.querySelector("header"),
-button = dropArea.querySelector("button"),
-input = dropArea.querySelector("input");
-let file; //this is a global variable and we'll use it inside multiple functions
- 
-button.onclick = ()=>{
-  input.click(); //if user click on the button then the input also clicked
-}
- 
-input.addEventListener("change", function(){
-  //getting user select file and [0] this means if user select multiple files then we'll select only the first one
-  file = this.files[0];
-  dropArea.classList.add("active");
-  showFile(); //calling function
-});
- 
- 
-//If user Drag File Over DropArea
-dropArea.addEventListener("dragover", (event)=>{
-  event.preventDefault(); //preventing from default behaviour
-  dropArea.classList.add("active");
-  dragText.textContent = "Release to Upload File";
-});
- 
-//If user leave dragged File from DropArea
-dropArea.addEventListener("dragleave", ()=>{
-  dropArea.classList.remove("active");
-  dragText.textContent = "Drag & Drop to Upload File";
-});
- 
-//If user drop File on DropArea
-dropArea.addEventListener("drop", (event)=>{
-  event.preventDefault(); //preventing from default behaviour
-  //getting user select file and [0] this means if user select multiple files then we'll select only the first one
-  file = event.dataTransfer.files[0];
-  showFile(); //calling function
-});
- 
-function showFile(){
-  let fileType = file.type; //getting selected file type
-  let validExtensions = ["image/jpeg", "image/jpg", "image/png"]; //adding some valid image extensions in array
-  if(validExtensions.includes(fileType)){ //if user selected file is an image file
-    let fileReader = new FileReader(); //creating new FileReader object
-    fileReader.onload = ()=>{
-      let fileURL = fileReader.result; //passing user file source in fileURL variable
-  	  // UNCOMMENT THIS BELOW LINE. I GOT AN ERROR WHILE UPLOADING THIS POST SO I COMMENTED IT
-       let imgTag = `<div id="delimg"><img src="${fileURL}" alt="image" height="40px"><i class="fa fa-trash" onclick="imagedelete()"></i></div>`; //creating an img tag and passing user selected file source inside src attribute
-      dropArea.innerHTML = imgTag; //adding that created img tag inside dropArea container
-    }
-    fileReader.readAsDataURL(file);
-  }else{
-    alert("This is not an Image File!");
-    dropArea.classList.remove("active");
-    dragText.textContent = "Drag & Drop to Upload File";
-  }
-}
 
 
-
-});
-
-
+<script>
+    $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
 </script>
 <script>
-    function imagedelete(){
-        $('#dragdrop').empty();
-       
-        $('#dragdrop').append('<div class="tab-pane active" id="kt_builder_main" data-select2-id="select2-data-kt_builder_main"><div class="row mb-10"><div class="col-lg-9 col-xl-10"><div class="form-check form-check-custom form-check-solid form-switch mb-2"  style=" background: #b3b0b0;"><div class="drag-area"><div class="icon"><i class="fas fa-cloud-upload-alt"></i></div><header>Drag & Drop to Upload File</header><span>OR</span><button>Browse File</button><input type="file" hidden></div></div></div></div></div>');
-        
+    function addmore() {
+        $(".add_more").append('<div class="row mb-10"><label class="col-lg-3 col-form-label text-lg-end">Select Software:</label><div class="col-lg-3 col-xl-3"><div class="form-check form-check-custom form-check-solid form-switch mb-2"><select name="software[]" id="" class="form-control form-control-solid">@foreach($allsoftware as $cate)<option value="{{ $cate->id }}">{{ $cate->name }}</option> @endforeach</select></div></div><label class="col-lg-1 col-form-label text-lg-end">Link:</label><div class="col-lg-3 col-xl-3"><div class="form-check form-check-custom form-check-solid form-switch mb-2"><input class="form-control form-control-solid" type="text" name="link[]" placeholder="Link"></div></div><div class="col-lg-2 col-xl-2 mt-4"><i onclick="delete_row(this)" class="fa fa-trash" style="color:red"></i></div></div>')
     }
-</script> -->
+
+    function delete_row(em) {
+
+        $(em).closest('.row').remove();
+
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $('select[name="category"]').on('change', function() {
+            var cate_id = $(this).val();
+
+            if (cate_id) {
+                $.ajax({
+                    url: "{{  url('/get/subcategory/all/') }}/" + cate_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+
+                        $('#subcategory').empty();
+                        $('#subcategory').append(' <option value="">--select--</option>');
+                        $.each(data, function(index, districtObj) {
+                            $('#subcategory').append('<option value="' + districtObj.id + '">' + districtObj.name + '</option>');
+                        });
+
+                    }
+                });
+            } else {
+                //  alert('danger');
+            }
+
+        });
+        //  resubcategory
+        $('select[name="subcategory"]').on('change', function() {
+            var subcate_id = $(this).val();
+
+            if (subcate_id) {
+                $.ajax({
+                    url: "{{  url('/get/resubcategory/all/') }}/" + subcate_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+
+                        $('#resubcategory').empty();
+                        $('#resubcategory').append(' <option value="">--select--</option>');
+                        $.each(data, function(index, districtObj) {
+                            $('#resubcategory').append('<option value="' + districtObj.id + '">' + districtObj.name + '</option>');
+                        });
+
+
+                    }
+                });
+            } else {
+                //  alert('danger');
+            }
+
+        });
+
+
+
+    });
+</script>
 
 @endsection

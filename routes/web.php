@@ -169,3 +169,22 @@ Route::get('/admin/product/edit/{id}', [App\Http\Controllers\Admin\ProductContro
 Route::post('/admin/product/update', [App\Http\Controllers\Admin\ProductController::class, 'update'])->name('admin.product.update');
 Route::get('/admin/product/delete/{id}', [App\Http\Controllers\Admin\ProductController::class, 'Delete']);
 
+Route::get('/get/subcategory/all/{cate_id}', [App\Http\Controllers\Admin\ProductController::class, 'getsubcategory']);
+Route::get('/get/resubcategory/all/{subcate_id}', [App\Http\Controllers\Admin\ProductController::class, 'getresubcategory']);
+
+
+
+
+
+
+
+
+// product controller
+Route::get('/admin/softwaretype/create', [App\Http\Controllers\Admin\SoftwareTypeController::class, 'create'])->name('admin.softwaretype.create');
+Route::post('/admin/softwaretype/create', [App\Http\Controllers\Admin\SoftwareTypeController::class, 'store'])->name('admin.softwaretype.create');
+Route::get('/admin/softwaretype/active/{id}', [App\Http\Controllers\Admin\SoftwareTypeController::class, 'active']);
+Route::get('/admin/softwaretype/deactive/{id}', [App\Http\Controllers\Admin\SoftwareTypeController::class, 'deactive']);
+Route::get('/admin/softwaretype/edit/{id}', [App\Http\Controllers\Admin\SoftwareTypeController::class, 'edit']);
+Route::post('/admin/softwaretype/update', [App\Http\Controllers\Admin\SoftwareTypeController::class, 'update'])->name('admin.softwaretype.update');
+Route::get('/admin/softwaretype/delete/{id}', [App\Http\Controllers\Admin\SoftwareTypeController::class, 'Delete']);
+
