@@ -29,7 +29,7 @@
                         <div class="d-flex align-items-center position-relative my-1">
                             <!--begin::Svg Icon | path: icons/duotone/General/Search.svg-->
                             <!--end::Svg Icon-->
-                            <button type="button" class="btn btn-danger" data-kt-user-table-select="delete_selected">All Delete</button>
+                            <button type="button" class="btn btn-danger" data-kt-user-table-select="delete_selected">Blogs</button>
                         </div>
                         <!--end::Search-->
                     </div>
@@ -66,10 +66,8 @@
                         <thead>
                             <!--begin::Table row-->
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                <th class="w-10px pe-2">
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                        <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_table_users .form-check-input" />
-                                    </div>
+                                <th class="min-w-50px">
+                                 SL
                                 </th>
                                 <th class="min-w-125px">Image</th>
                                 <th class="min-w-125px">Title</th>
@@ -90,9 +88,7 @@
                                 <tr>
                                     <!--begin::Checkbox-->
                                     <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
+                                    {{$loop->iteration}}
                                     </td>
                                     <!--end::Checkbox-->
                                     <!--begin::User=-->
@@ -167,7 +163,7 @@
                                                     </span>
                                                     <!--end::Svg Icon-->
                                                 </a>
-                                                <a id="delete" href="{{route('admin.blog.category.delete',$row->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                                                <a id="delete" href="{{route('admin.blog.delete',$row->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                                                     <!--begin::Svg Icon | path: icons/duotone/General/Trash.svg-->
                                                     <span class="svg-icon svg-icon-3">
                                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

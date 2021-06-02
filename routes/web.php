@@ -112,6 +112,8 @@ Route::prefix('/admin/blog')->group(function(){
     Route::post('/store',[App\Http\Controllers\Admin\BlogController::class, 'blogStore'])->name('admin.blog.store');
     Route::get('/status/{id}',[App\Http\Controllers\Admin\BlogController::class, 'blogsStatus'])->name('admin.blog.status.change');
     Route::get('/edit/{id}',[App\Http\Controllers\Admin\BlogController::class, 'blogsEdit'])->name('admin.blog.edit');
+    Route::post('/update/{id}',[App\Http\Controllers\Admin\BlogController::class, 'blogsUpdate'])->name('admin.blog.update');
+    Route::get('/delete/{id}',[App\Http\Controllers\Admin\BlogController::class, 'blogsDelete'])->name('admin.blog.delete');
     
 
     // blog category area start
@@ -125,6 +127,32 @@ Route::prefix('/admin/blog')->group(function(){
         Route::post('/update/{id}',[App\Http\Controllers\Admin\BlogController::class, 'categoryUpdate'])->name('admin.blog.category.update');
         Route::get('/delete/{id}',[App\Http\Controllers\Admin\BlogController::class, 'categoryDelete'])->name('admin.blog.category.delete');
     });
+});
+
+
+// About pixify area start
+
+Route::prefix('/pixefy')->group(function(){
+    
+    // About Piixefy route start
+    Route::get('/',[App\Http\Controllers\Admin\PixefyController::class, 'pixefyIndex'])->name('admin.pixefy.index');
+    Route::get('/create',[App\Http\Controllers\Admin\PixefyController::class, 'pixefyCreate'])->name('admin.pixefy.create');
+    Route::post('/store',[App\Http\Controllers\Admin\PixefyController::class, 'pixefyStore'])->name('admin.pixefy.store');
+    Route::get('/status/{id}',[App\Http\Controllers\Admin\PixefyController::class, 'pixefyStatus'])->name('admin.pixefy.status.change');
+    Route::get('/edit/{id}',[App\Http\Controllers\Admin\PixefyController::class, 'pixefyEdit'])->name('admin.pixefy.edit');
+    Route::get('/delete/{id}',[App\Http\Controllers\Admin\PixefyController::class, 'pixefyDelete'])->name('admin.pixefy.delete');
+    Route::post('/update/{id}',[App\Http\Controllers\Admin\PixefyController::class, 'pixefyUpdate'])->name('admin.pixefy.update');
+    
+    
+
+    // Topic area start
+    Route::get('/topics',[App\Http\Controllers\Admin\PixefyController::class, 'pixefyTopic'])->name('admin.pixefy.topics');
+    Route::post('/topics/create',[App\Http\Controllers\Admin\PixefyController::class, 'topicCreate'])->name('admin.pixefy.topic.create');
+    Route::get('/topics/status/{id}',[App\Http\Controllers\Admin\PixefyController::class, 'topicChangeStatus'])->name('admin.pixefy.topic.status.change');
+    Route::get('/topics/edit/{id}',[App\Http\Controllers\Admin\PixefyController::class, 'topicEdit'])->name('admin.pixefy.topic.edit');
+    Route::get('/topics/delete/{id}',[App\Http\Controllers\Admin\PixefyController::class, 'topicDelete'])->name('admin.pixefy.topics.delete');
+    Route::post('/topics/update/{id}',[App\Http\Controllers\Admin\PixefyController::class, 'topicUpdate'])->name('admin.pixefy.topic.update');
+    
 });
 
 // subscriver

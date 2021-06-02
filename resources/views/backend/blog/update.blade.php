@@ -1,5 +1,21 @@
 @extends('layouts.backend')
 @section('content')
+<style>
+    .thumbnailimg{
+        position: relative;
+    }
+    .removebtn{
+        position: absolute;
+        top: 0;
+        right: 0%;
+        border: none;
+        background: orangered;
+        color: white;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    
+</style>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Toolbar-->
     <div class="toolbar" id="kt_toolbar">
@@ -24,7 +40,7 @@
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
                     <!--begin:Form-->
-                    <form id="kt_modal_new_target_form" class="form" action="{{route('admin.blog.store')}}" enctype="multipart/form-data" method="post">
+                    <form id="kt_modal_new_target_form" class="form" action="{{route('admin.blog.update',$blog->id)}}" enctype="multipart/form-data" method="post">
                         @csrf
                         <!--begin::Heading-->
                         <div class="mb-13 text-center">
@@ -54,7 +70,7 @@
                                 <select id="searchitem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Category" name="blog_category">
                                     <option value="">....Select Category...</option>
                                     @foreach($categores as $row)
-                                    <option {{ $blog->id === $row->id ?'selected': ' '}} value="{{$row->id}}">{{$row->name}}</option>
+                                    <option {{ $blog->category_id == $row->id ?'selected': ' '}} value="{{$row->id}}">{{$row->name}}</option>
                                     @endforeach
                                 </select>
                                 @error('blog_category')
@@ -68,16 +84,11 @@
                         <div class="d-flex flex-column mb-8">
                             <label class="required fs-6 fw-bold mb-2">Details</label>
 
-                            <textarea class="form-control form-control-solid" id="editor1" rows="3" name="blog_details" placeholder="Type Target Details"></textarea>
+                            <textarea class="form-control form-control-solid" id="editor1" rows="3" name="blog_details" placeholder="Type Target Details">{!! $blog->details !!}</textarea>
                             @error('blog_details')
                                 <small class="text-danger">{{$message}}</small>
                             @enderror
                         </div>
-                        <!--end::Input group-->
-
-                        <!--begin::Input group-->
-
-                        <!--begin::Input group-->
                         <div class="row g-9 mb-8">
                             <!--begin::Col-->
                             <div class="d-flex flex-column mb-8 fv-row">
@@ -87,12 +98,11 @@
                                     <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a target priorty"></i>
                                 </label>
                                 <!--end::Label-->
-                                <input class="form-control form-control-solid" id="tags" value="" name="blog_tags" />
+                                <input class="form-control form-control-solid" id="tags" value="{{$blog->tags}}" name="blog_tags" />
                                 @error('tags')
                                     <small class="text-danger">{{$message}}</small>
                                 @enderror
                             </div>
-
                             <!--end::Input group-->
                             <div class="d-flex flex-column mb-8 fv-row">
                                 <div class="row">
@@ -101,6 +111,14 @@
                                         <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a target priorty"></i>
                                     </label>
                                     <div id="thumbnail_img"></div>
+                                    <div class="col-md-3">
+                                    
+                                        <div class="thumbnailimg">
+                                        <button type="button" class="removebtn" id="remove-files">x</button>
+                                            <img src="{{asset('public/uploads/blogs/')}}/{{$blog->image}}" class="img-fluid w-100" alt=""/>
+                                        </div>
+                                        
+                                    </div>
                                 </div>
                                 @error('thumbnail_img')
                                     <small class="text-danger">{{$message}}</small>
@@ -125,5 +143,14 @@
     </div>
 </div>
 </div>
+
+<script>
+$(document).ready(function(){
+	$('#remove-files').on('click', function(){
+        			
+		$(this).parents(".col-md-3").remove();
+	});
+});
+</script>
 
 @endsection

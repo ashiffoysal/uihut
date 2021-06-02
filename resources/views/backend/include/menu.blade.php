@@ -269,6 +269,36 @@
                     </div>
                 </div>
             </div>
+
+            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <i class="bi bi-person fs-2"></i>
+                    </span>
+                    <span class="menu-title">About Pixefy</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link" href="{{ route('admin.pixefy.topics') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Topics</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="menu-sub menu-sub-accordion menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link" href="{{ route('admin.pixefy.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">About Pixefy</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
          
         <!--end::Menu-->
