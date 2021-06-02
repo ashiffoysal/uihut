@@ -3183,6 +3183,8 @@
 	<script src="{{asset('public/backend')}}/assets/js/custom/account/settings/deactivate-account.js"></script>
 	<script src="{{asset('public/backend')}}/assets/js/custom/modals/two-factor-authentication.js"></script>
 	<script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
+
+	<script src="{{asset('public/backend')}}/assets/plugins/Bootstrap-4-Tag-Input-Plugin-jQuery/tagsinput.js"></script>
 	<script>
 		$(document).on("click", "#delete", function(e) {
 			e.preventDefault();
@@ -3256,6 +3258,7 @@
 
 	<script>
 		$(document).ready(function() {
+
 			$('#container').removeClass('mainnav-lg').addClass('mainnav-sm');
 			$("#thumbnail_img").spartanMultiImagePicker({
 				fieldName: 'thumbnail_img',
@@ -3273,13 +3276,30 @@
 					alert('File size too big');
 				}
 			});
+
 			$("#photos").spartanMultiImagePicker({
 				fieldName: 'photos[]',
 				maxCount: 10,
 				rowHeight: '200px',
-				groupClassName: 'col-lg-3 col-md-4 col-sm-4 col-xs-6',
+				groupClassName: 'col-xl-3 col-lg-3 col-md-4 col-sm-4 col-xs-6',
 				maxFileSize: '',
 				dropFileLabel: "Drop Here",
+				onExtensionErr: function(index, file) {
+					console.log(index, file, 'extension err');
+					alert('Please only input png or jpg type file')
+				},
+				onSizeErr: function(index, file) {
+					console.log(index, file, 'file size too big');
+					alert('File size too big');
+				}
+			});
+			$("#product_img").spartanMultiImagePicker({
+				fieldName: 'product_img',
+				maxCount: 1,
+				rowHeight: '450px',
+				groupClassName: 'col-xl-12 col-md-12 col-sm-12 col-xs-12',
+				maxFileSize: '',
+				dropFileLabel: "Drag & Drop",
 				onExtensionErr: function(index, file) {
 					console.log(index, file, 'extension err');
 					alert('Please only input png or jpg type file')
