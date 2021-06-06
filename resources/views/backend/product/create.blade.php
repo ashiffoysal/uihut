@@ -90,7 +90,7 @@
                                 <div class="tab-content pt-3" data-select2-id="select2-data-89-mk7z">
                                     <div class="tab-pane active" id="kt_builder_main" data-select2-id="select2-data-kt_builder_main">
                                         <div class="row mb-10">
-                                            <!-- <div class="col-lg-2 col-xl-2"></div> -->
+                                            
                                             <div class="col-lg-12 col-xl-12">
 
                                                 <div id="product_img"></div>
@@ -98,7 +98,6 @@
                                             </div>
                                         </div>
                                         <div class="row mb-10">
-                                            <!-- <div class="col-lg-2 col-xl-2"></div> -->
                                             <div class="col-xl-12 col-lg-12 row" id="photos">
 
                                             </div>
@@ -128,7 +127,7 @@
                                             <div class="col-lg-9 col-xl-7">
                                                 <div class="form-check form-check-custom form-check-solid form-switch mb-2">
                                                     <select name="category" id="category" class="form-control form-control-solid">
-                                                        <option>--select--</option>
+                                                        <option value="">--select--</option>
                                                         @foreach($allcategory as $categoty)
                                                         <option value="{{$categoty->id}}">{{ $categoty->name }}</option>
                                                         @endforeach
@@ -144,7 +143,7 @@
                                             <div class="col-lg-9 col-xl-7">
                                                 <div class="form-check form-check-custom form-check-solid form-switch mb-2">
                                                     <select name="subcategory" id="subcategory" class="form-control form-control-solid">
-                                                        <option>--select--</option>
+                                                        <option value="">--select--</option>
                                                     </select>
                                                 </div>
                                                 @error('subcategory')
@@ -157,7 +156,7 @@
                                             <div class="col-lg-9 col-xl-7">
                                                 <div class="form-check form-check-custom form-check-solid form-switch mb-2">
                                                     <select name="resubcategory" id="resubcategory" class="form-control form-control-solid">
-                                                        <option>--select--</option>
+                                                        <option value="">--select--</option>
                                                     </select>
                                                 </div>
                                                 @error('resubcategory')
@@ -165,35 +164,85 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="row mb-10">
-                                            <label class="col-lg-3 col-form-label text-lg-end">Select Software:</label>
-                                            <div class="col-lg-3 col-xl-3">
-                                                <div class="form-check form-check-custom form-check-solid form-switch mb-2">
-                                                    <select name="software[]" class="form-control form-control-solid">
-                                                        <option>--select--</option>
-                                                        @foreach($allsoftware as $cate)
-                                                        <option value="{{ $cate->id }}">{{ $cate->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <label class="col-lg-1 col-form-label text-lg-end">Link:</label>
-                                            <div class="col-lg-3 col-xl-3">
-                                                <div class="form-check form-check-custom form-check-solid form-switch mb-2">
-                                                    <input class="form-control form-control-solid" type="text" name="link[]" placeholder="Link">
+                                        <div class="row mb-8">
+                                            <label class="col-lg-3 col-form-label text-lg-end"></label>
+                                            <div class="col-xl-9">
+                                                <div class="d-flex fw-bold h-100">
+                                                    <div class="form-check form-check-custom form-check-solid me-9">
+                                                        <input class="form-check-input file_type" type="radio" value="2" id="likcheck" name="file_type" checked>
+                                                        <label class="form-check-label ms-3" for="Free">Links</label>
+                                                    </div>
+                                                    <div class="form-check form-check-custom form-check-solid">
+                                                        <input class="form-check-input file_type" type="radio"  value="1" id="uploadchck" name="file_type" >
+                                                        <label class="form-check-label ms-3" for="Premium">Uploads</label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="add_more">
+                                        <div id="linkdata">
+                                            <div class="row mb-10">
+                                                <label class="col-lg-3 col-form-label text-lg-end">Select Software:</label>
+                                                <div class="col-lg-3 col-xl-3">
+                                                    <div class="form-check form-check-custom form-check-solid form-switch mb-2">
+                                                        <select name="software[]" class="form-control form-control-solid">
+                                                            <option value="">--select--</option>
+                                                            @foreach($allsoftware as $cate)
+                                                            <option value="{{ $cate->id }}">{{ $cate->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <label class="col-lg-1 col-form-label text-lg-end">Link:</label>
+                                                <div class="col-lg-3 col-xl-3">
+                                                    <div class="form-check form-check-custom form-check-solid form-switch mb-2">
+                                                        <input class="form-control form-control-solid" type="text" name="link[]" placeholder="Link">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="add_more">
 
-                                        </div>
-                                        <div class="row mb-10">
-                                            <div class="col-lg-3 col-xl-3">
                                             </div>
-                                            <div class="col-lg-2 col-xl-2">
-                                                <a class="btn-sm" onclick="addmore()"><i class="fa fa-plus"></i> Add More </a>
+                                            <div class="row mb-10">
+                                                <div class="col-lg-3 col-xl-3">
+                                                </div>
+                                                <div class="col-lg-2 col-xl-2">
+                                                    <a class="btn-sm" onclick="addmore()"><i class="fa fa-plus"></i> Add More </a>
+                                                </div>
                                             </div>
                                         </div>
+                                        <div id="uploadsfile" style="display:none">
+                                            <div class="row mb-10">
+                                                <label class="col-lg-3 col-form-label text-lg-end">Select Software:</label>
+                                                <div class="col-lg-3 col-xl-3">
+                                                    <div class="form-check form-check-custom form-check-solid form-switch mb-2">
+                                                        <select name="softwarenew[]" class="form-control form-control-solid">
+                                                            <option>--select--</option>
+                                                            @foreach($allsoftware as $cate)
+                                                            <option value="{{ $cate->id }}">{{ $cate->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <label class="col-lg-1 col-form-label text-lg-end">Uploads:</label>
+                                                <div class="col-lg-3 col-xl-3">
+                                                    <div class="form-check form-check-custom form-check-solid form-switch mb-2">
+                                                        <input class="form-control form-control-solid" type="file" name="linkfile[]" accept=".zip,.rar,.7zip" multiple >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="add_more_uploads">
+
+                                            </div>
+                                            <div class="row mb-10">
+                                                <div class="col-lg-3 col-xl-3">
+                                                </div>
+                                                <div class="col-lg-2 col-xl-2">
+                                                    <a class="btn-sm" onclick="addmoreuploads()"><i class="fa fa-plus"></i> Add More </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
                                         <div class="row mb-10">
                                             <label class="col-lg-3 col-form-label text-lg-end">Product Tag:</label>
                                             <div class="col-lg-9 col-xl-7">
@@ -216,12 +265,28 @@
                                             <div class="col-xl-9">
                                                 <div class="d-flex fw-bold h-100">
                                                     <div class="form-check form-check-custom form-check-solid me-9">
-                                                        <input class="form-check-input" type="radio" value="2" name="product_type" checked>
+                                                        <input class="form-check-input" type="radio" value="2" name="product_type">
                                                         <label class="form-check-label ms-3" for="Free">Free</label>
                                                     </div>
                                                     <div class="form-check form-check-custom form-check-solid">
-                                                        <input class="form-check-input" type="radio" value="1" name="product_type">
+                                                        <input class="form-check-input" type="radio" value="1" name="product_type" checked>
                                                         <label class="form-check-label ms-3" for="Premium">Premium</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end::Col-->
+                                        </div>
+                                        <div class="row mb-8">
+                                            <label class="col-lg-3 col-form-label text-lg-end"></label>
+                                            <div class="col-xl-9">
+                                                <div class="d-flex fw-bold h-100">
+                                                    <div class="form-check form-check-custom form-check-solid me-9">
+                                                        <input class="form-check-input" type="radio" value="1" name="status" checked>
+                                                        <label class="form-check-label ms-3" for="Free">Active</label>
+                                                    </div>
+                                                    <div class="form-check form-check-custom form-check-solid">
+                                                        <input class="form-check-input" type="radio" value="0" name="status">
+                                                        <label class="form-check-label ms-3" for="Premium">Deactive</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -236,12 +301,12 @@
                                 <div class="row">
                                     <div class="col-lg-3"></div>
                                     <div class="col-lg-9">
-                                        <button type="submit" id="kt_layout_builder_preview" class="btn btn-info me-2">
+                                        <button type="submit" id="savetodraf"  class="btn btn-info me-2">
                                             <span class="indicator-label">Save to Draft</span>
                                             <span class="indicator-progress">Please wait...
                                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                         </button>
-                                        <button type="submit" id="kt_layout_builder_preview" class="btn btn-primary me-2">
+                                        <button type="submit" id="publish" class="btn btn-primary me-2">
                                             <span class="indicator-label">Publish</span>
                                             <span class="indicator-progress">Please wait...
                                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -265,12 +330,31 @@
     function addmore() {
         $(".add_more").append('<div class="row mb-10"><label class="col-lg-3 col-form-label text-lg-end">Select Software:</label><div class="col-lg-3 col-xl-3"><div class="form-check form-check-custom form-check-solid form-switch mb-2"><select name="software[]" id="" class="form-control form-control-solid">@foreach($allsoftware as $cate)<option value="{{ $cate->id }}">{{ $cate->name }}</option> @endforeach</select></div></div><label class="col-lg-1 col-form-label text-lg-end">Link:</label><div class="col-lg-3 col-xl-3"><div class="form-check form-check-custom form-check-solid form-switch mb-2"><input class="form-control form-control-solid" type="text" name="link[]" placeholder="Link"></div></div><div class="col-lg-2 col-xl-2 mt-4"><i onclick="delete_row(this)" class="fa fa-trash" style="color:red"></i></div></div>')
     }
+    function addmoreuploads() {
+        $(".add_more_uploads").append('<div class="row mb-10"><label class="col-lg-3 col-form-label text-lg-end">Select Software:</label><div class="col-lg-3 col-xl-3"><div class="form-check form-check-custom form-check-solid form-switch mb-2"><select name="softwarenew[]" id="" class="form-control form-control-solid">@foreach($allsoftware as $cate)<option value="{{ $cate->id }}">{{ $cate->name }}</option> @endforeach</select></div></div><label class="col-lg-1 col-form-label text-lg-end">uploads:</label><div class="col-lg-3 col-xl-3"><div class="form-check form-check-custom form-check-solid form-switch mb-2"><input class="form-control form-control-solid" type="file" name="linkfile[]" placeholder="Link" accept=".zip,.rar,.7zip" multiple></div></div><div class="col-lg-2 col-xl-2 mt-4"><i onclick="delete_row(this)" class="fa fa-trash" style="color:red"></i></div></div>')
+    }
 
     function delete_row(em) {
 
         $(em).closest('.row').remove();
 
     }
+</script>
+<script>
+ $(document).ready(function() {
+	$(".file_type").click(function() {
+		//alert("ok");
+		if ($("#likcheck").is(":checked")) {
+						// alert("pharmacy");
+			 $("#linkdata").show();
+             $("#uploadsfile").hide();
+		}
+		else {
+            $("#linkdata").hide();
+			$("#uploadsfile").show();
+		}
+	});
+});
 </script>
 <script type="text/javascript">
     $(document).ready(function() {

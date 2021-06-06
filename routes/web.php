@@ -162,24 +162,19 @@ Route::get('/admin/subscriver/deactive/{id}', [App\Http\Controllers\Admin\Subscr
 Route::get('/admin/subscriver/delete/{id}', [App\Http\Controllers\Admin\SubscriverController::class, 'Delete']);
 // product controller
 Route::get('/admin/product/create', [App\Http\Controllers\Admin\ProductController::class, 'create'])->name('admin.product.create');
+Route::get('/admin/product/index', [App\Http\Controllers\Admin\ProductController::class, 'index'])->name('admin.product.index');
 Route::post('/admin/product/create', [App\Http\Controllers\Admin\ProductController::class, 'store'])->name('admin.product.create');
 Route::get('/admin/product/active/{id}', [App\Http\Controllers\Admin\ProductController::class, 'active']);
 Route::get('/admin/product/deactive/{id}', [App\Http\Controllers\Admin\ProductController::class, 'deactive']);
 Route::get('/admin/product/edit/{id}', [App\Http\Controllers\Admin\ProductController::class, 'edit']);
 Route::post('/admin/product/update', [App\Http\Controllers\Admin\ProductController::class, 'update'])->name('admin.product.update');
 Route::get('/admin/product/delete/{id}', [App\Http\Controllers\Admin\ProductController::class, 'Delete']);
-
 Route::get('/get/subcategory/all/{cate_id}', [App\Http\Controllers\Admin\ProductController::class, 'getsubcategory']);
 Route::get('/get/resubcategory/all/{subcate_id}', [App\Http\Controllers\Admin\ProductController::class, 'getresubcategory']);
 
 
 
 
-
-
-
-
-// product controller
 Route::get('/admin/softwaretype/create', [App\Http\Controllers\Admin\SoftwareTypeController::class, 'create'])->name('admin.softwaretype.create');
 Route::post('/admin/softwaretype/create', [App\Http\Controllers\Admin\SoftwareTypeController::class, 'store'])->name('admin.softwaretype.create');
 Route::get('/admin/softwaretype/active/{id}', [App\Http\Controllers\Admin\SoftwareTypeController::class, 'active']);
