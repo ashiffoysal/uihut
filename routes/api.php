@@ -24,3 +24,12 @@ Route::get('/token', function (Request $request) {
     $token = $user->createToken('Token Name')->accessToken;
     return response()->json($token);
 });
+
+Route::post('/user/register',[App\Http\Controllers\Api\UserController::class, 'register']);
+Route::post('/user/email/varify',[App\Http\Controllers\Api\UserController::class, 'emailVarify']);
+Route::post('/login',[App\Http\Controllers\Api\UserController::class, 'login']);
+
+Route::middleware('auth:api')->group(function () {
+    Route::post('logout',[App\Http\Controllers\Api\UserController::class, 'logout']);
+    Route::get('user', 'Api\AuthController@user');
+});

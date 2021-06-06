@@ -1,5 +1,6 @@
 <template>
   <div class="row">
+    <notifications/>
     <header-component />
     <router-view></router-view>
     <footer-component/>
