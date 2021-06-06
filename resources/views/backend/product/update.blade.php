@@ -1,14 +1,47 @@
 @extends('layouts.backend')
 @section('content')
+
+<style>
+    .file_upload {
+        border: 3px dashed #7eabf3 !important;
+    }
+
+    p {
+        color: #5FAAE1 !important;
+        display: inline !important;
+        width: auto !important;
+    }
+
+    .bootstrap-tagsinput {
+        background-color: #f5f8fa;
+        border-color: #f5f8fa;
+        box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+        display: inline-block;
+        padding: 4px 6px;
+        color: #b9b9b9;
+        vertical-align: middle;
+        border-radius: 4px;
+        max-width: 100%;
+        line-height: 25px;
+        cursor: text;
+        width: 100%;
+        background: aliceblue;
+    }
+
+    .badge-info {
+        color: #fff;
+        background-color: #98969c;
+        margin-left: 8px;
+    }
+</style>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-    <!--begin::Toolbar-->
     <div class="toolbar" id="kt_toolbar">
         <!--begin::Container-->
         <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
             <!--begin::Page title-->
             <div data-kt-place="true" data-kt-place-mode="prepend" data-kt-place-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center me-3 flex-wrap mb-5 mb-lg-0 lh-1">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">Category</h1>
+                <h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">Products</h1>
                 <!--end::Title-->
             </div>
 
@@ -18,19 +51,15 @@
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
         <div id="kt_content_container" class="container-fluid">
-            <!--begin::Layout Builder Notice-->
             <div class="card mb-10">
                 <div class="card-body d-flex align-items-center p-5 p-lg-8">
                     <!--begin::Icon-->
                     <div class="d-flex h-50px w-50px h-lg-80px w-lg-80px flex-shrink-0 flex-center position-relative align-self-start align-self-lg-center mt-3 mt-lg-0">
-                        <!--begin::Svg Icon | path: icons/duotone/Layout/Layout-polygon.svg-->
                         <span class="svg-icon svg-icon-primary position-absolute opacity-15">
                             <svg xmlns="http://www.w3.org/2000/svg" width="70px" height="70px" viewBox="0 0 70 70" fill="none" class="h-50px w-50px h-lg-80px w-lg-80px">
                                 <path d="M28 4.04145C32.3316 1.54059 37.6684 1.54059 42 4.04145L58.3109 13.4585C62.6425 15.9594 65.3109 20.5812 65.3109 25.5829V44.4171C65.3109 49.4188 62.6425 54.0406 58.3109 56.5415L42 65.9585C37.6684 68.4594 32.3316 68.4594 28 65.9585L11.6891 56.5415C7.3575 54.0406 4.68911 49.4188 4.68911 44.4171V25.5829C4.68911 20.5812 7.3575 15.9594 11.6891 13.4585L28 4.04145Z" fill="#000000"></path>
                             </svg>
                         </span>
-                        <!--end::Svg Icon-->
-                        <!--begin::Svg Icon | path: icons/duotone/Tools/Tools.svg-->
                         <span class="svg-icon svg-icon-2x svg-icon-lg-3x svg-icon-primary position-absolute">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -40,89 +69,352 @@
                                 </g>
                             </svg>
                         </span>
-                        <!--end::Svg Icon-->
                     </div>
-                    <!--end::Icon-->
-                    <!--begin::Description-->
                     <div class="ms-6">
-                        <p class="list-unstyled text-gray-600 fw-bold fs-6 p-0 m-0">Update Category</p>
+                        <p class="list-unstyled text-gray-600 fw-bold fs-6 p-0 m-0">Update Products</p>
                     </div>
-                    <!--end::Description-->
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header card-header-stretch overflow-auto">
-
-                        </div>
-                        <form class="form" method="POST" id="kt_layout_builder_form" action="{{ route('admin.category.update') }}" enctype="multipart/form-data">
-                            @csrf
+            <div class="card">
+                <form action="{{ route('admin.product.update') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-5 col-xl-5">
                             <div class="card-body" data-select2-id="select2-data-90-elj6">
                                 <div class="tab-content pt-3" data-select2-id="select2-data-89-mk7z">
                                     <div class="tab-pane active" id="kt_builder_main" data-select2-id="select2-data-kt_builder_main">
                                         <div class="row mb-10">
-                                            <label class="col-lg-3 col-form-label text-lg-end">Category Name:</label>
-                                            <div class="col-lg-9 col-xl-4">
-                                                <div class="form-check form-check-custom form-check-solid form-switch mb-2">
-                                                    <input class="form-control form-control-solid" type="text" name="name" placeholder="Category Name" value="{{$edit->name}}">
-                                                    <input  type="hidden" name="id" value="{{$edit->id}}">
-                                                  
+
+                                            <div id="editimage" class="col-xl-12 col-md-12 col-sm-12 col-xs-12 spartan_item_wrapper" data-spartanindexrow="0" style="margin-bottom : 20px; ">
+                                                <div style="position: relative;">
+                                                    <div class="spartan_item_loader" data-spartanindexloader="0" style="position: absolute; width: 100%; height: 450px; background: rgba(255,255,255, 0.7); z-index: 22; text-align: center; align-items: center; margin: auto; justify-content: center; flex-direction: column; display : none; font-size : 1.7em; color: #CECECE"><i class="fas fa-sync fa-spin"></i></div>
+                                                    <label class="file_upload" style="width: 100%; height: 450px; border: 2px dashed #ddd; border-radius: 3px; cursor: pointer; text-align: center; overflow: hidden; padding: 5px; margin-top: 5px; margin-bottom : 5px; position : relative; display: flex; align-items: center; margin: auto; justify-content: center; flex-direction: column;">
+                                                        <a href="javascript:void(0)" data-spartanindexremove="0" style="right: 3px; top: 3px; background: rgb(237, 60, 32); border-radius: 3px; width: 30px; height: 30px; line-height: 30px; text-align: center; text-decoration: none; color: rgb(255, 255, 255); position: absolute !important;" class="spartan_remove_row">
+
+                                                            <i class="fas fa-times" onclick="editimageremove(this)"></i> </a>
+                                                        <img style="width: 100%; margin: 0px auto; vertical-align: middle; display: ;" data-spartanindexi="0" src="{{asset('public/uploads/products/thumbnail/'.$edit->thumbnail_img)}}">
+                                                        <input class="form-control spartan_image_input" accept="image/*" data-spartanindexinput="0" style="display : none" name="product_img" type="file">
+                                                    </label>
                                                 </div>
-                                                @error('name')
-                                                        <div style="color:red">{{ $message }}</div>
-                                               @enderror
+                                            </div>
+                                            <div id="product_img" style="display: none;">
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="bluck_img">
+                                            <div class="row mb-10">
+                                                @if(is_array(json_decode($edit->gallery_img)))
+                                                @foreach (json_decode($edit->gallery_img) as $key => $photo)
+                                                <div class="lol col-xl-3 col-lg-3 col-md-4 col-sm-4 col-xs-6 spartan_item_wrapper" data-spartanindexrow="0" style="margin-bottom : 20px; ">
+                                                    <div style="position: relative;">
+                                                        <div class="spartan_item_loader" data-spartanindexloader="0" style=" position: absolute; width: 100%; height: 200px; background: rgba(255,255,255, 0.7); z-index: 22; text-align: center; align-items: center; margin: auto; justify-content: center; flex-direction: column; display : none; font-size : 1.7em; color: #CECECE"><i class="fas fa-sync fa-spin"></i></div>
+                                                        <label class="file_upload" style="width: 100%; height: 200px; border: 2px dashed #ddd; border-radius: 3px; cursor: pointer; text-align: center; overflow: hidden; padding: 5px; margin-top: 5px; margin-bottom : 5px; position : relative; display: flex; align-items: center; margin: auto; justify-content: center; flex-direction: column;">
+                                                            <a data-spartanindexremove="0" style="right: 3px; top: 3px; background: rgb(237, 60, 32); border-radius: 3px; width: 30px; height: 30px; line-height: 30px; text-align: center; text-decoration: none; color: rgb(255, 255, 255); position: absolute !important;" class="">
+
+                                                                <i class="fas fa-times" onclick="removegallary(this)"></i></a>
+                                                                <input type="hidden" name="previous_photos[]" value="{{ $photo }}">
+                                                            <img style="width:100%; margin: 0px auto; vertical-align: middle; display: ;" data-spartanindexi="0" src="{{url('storage/app/public/'.$photo) }}">
+                                                            <!-- <input class="form-control spartan_image_input" accept="image/*" data-spartanindexinput="0" style="display : flex" name="photos[]" type="file"></label>  -->
+                                                    </div>
+                                                </div>
+                                                @endforeach
+                                                @endif
+                                                <div class="col-xl-12 col-lg-12 row" id="photos">
+
+                                                </div>
+
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-6">
+                            <div class="card-body">
+                                <div class="tab-content pt-3" data-select2-id="select2-data-89-mk7z">
+                                    <div class="tab-pane active" id="kt_builder_main" data-select2-id="select2-data-kt_builder_main">
                                         <div class="row mb-10">
-                                            <label class="col-lg-3 col-form-label text-lg-end">Category Icon:</label>
-                                            <div class="col-lg-9 col-xl-4">
+                                            <label class="col-lg-3 col-form-label text-lg-end">Title:</label>
+                                            <div class="col-lg-9 col-xl-7">
                                                 <div class="form-check form-check-custom form-check-solid form-switch mb-2">
-                                                    <input class="form-control form-control-solid" type="text" name="icon" placeholder="Category Icon" value="{{$edit->icon}}">
+                                                    <input class="form-control form-control-solid" type="text" name="title" placeholder="Title" value="{{ $edit->title }}">
+                                                    <input type="hidden" name="id" value="{{ $edit->id }}">
                                                 </div>
-                                                @error('icon')
-                                                        <div style="color:red">{{ $message }}</div>
+                                                @error('title')
+                                                <div style="color:red">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                         </div>
                                         <div class="row mb-10">
-                                            <label class="col-lg-3 col-form-label text-lg-end">Category Image:</label>
-                                            <div class="col-lg-9 col-xl-4">
-
-                                                <!--begin::Image input-->
-                                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(assets/media/avatars/blank.png)">
-                                                    <!--begin::Preview existing avatar-->
-                                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{asset('public/uploads/category/'.$edit->image)}})"></div>
-                                                    <!--end::Preview existing avatar-->
-                                                    <!--begin::Label-->
-                                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
-                                                        <i class="bi bi-pencil-fill fs-7"></i>
-                                                        <!--begin::Inputs-->
-                                                        <input type="file" name="image" accept=".png, .jpg, .jpeg, .gif" />
-                                                        <!-- <input type="hidden" name="avatar_remove" /> -->
-                                                        <!--end::Inputs-->
-                                                    </label>
-                                                    <!--end::Label-->
-                                                    <!--begin::Cancel-->
-                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
-                                                        <i class="bi bi-x fs-2"></i>
-                                                    </span>
-                                                    <!--end::Cancel-->
-                                                    <!--begin::Remove-->
-                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
-                                                        <i class="bi bi-x fs-2"></i>
-                                                    </span>
-                                                    <!--end::Remove-->
-                                                    @error('image')
-                                                        <div style="color:red">{{ $message }}</div>
-                                                    @enderror
+                                            <label class="col-lg-3 col-form-label text-lg-end">MainCategory:</label>
+                                            <div class="col-lg-9 col-xl-7">
+                                                <div class="form-check form-check-custom form-check-solid form-switch mb-2">
+                                                    <select name="category" id="category" class="form-control form-control-solid">
+                                                        <option value="">--select--</option>
+                                                        @foreach($allcategory as $category)
+                                                        <option value="{{$category->id}}" @if($edit->cate_id==$category->id) selected @endif>{{ $category->name }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
-                                               
-                                                <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
-                                                <!--end::Hint-->
+                                                @error('category')
+                                                <div style="color:red">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
+                                        @php
+                                        $allsubcategory = App\Models\SubCategory::where('is_deleted',0)->where('cate_id',$edit->cate_id)->get();
+                                        $allresubcategory = App\Models\ReSubCategory::where('is_deleted',0)->where('subcate_id',$edit->subcate_id)->get();
+                                        @endphp
+                                        <div class="row mb-10">
+                                            <label class="col-lg-3 col-form-label text-lg-end">SubCategory:</label>
+                                            <div class="col-lg-9 col-xl-7">
+                                                <div class="form-check form-check-custom form-check-solid form-switch mb-2">
+                                                    <select name="subcategory" id="subcategory" class="form-control form-control-solid">
+                                                        <option value="">--select--</option>
+                                                        @foreach($allsubcategory as $subcate)
+                                                        <option value="{{ $subcate->id }}" @if($edit->subcate_id == $subcate->id) selected @endif>{{ $subcate->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                @error('subcategory')
+                                                <div style="color:red">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row mb-10">
+                                            <label class="col-lg-3 col-form-label text-lg-end">ReSubCategory:</label>
+                                            <div class="col-lg-9 col-xl-7">
+                                                <div class="form-check form-check-custom form-check-solid form-switch mb-2">
+                                                    <select name="resubcategory" id="resubcategory" class="form-control form-control-solid">
+                                                        <option value="">--select--</option>
+                                                        @foreach($allresubcategory as $resubcate)
+                                                        <option value="{{ $resubcate->id }}" @if($edit->resubcate_id == $resubcate->id) selected @endif >{{ $resubcate->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                @error('resubcategory')
+                                                <div style="color:red">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row mb-8">
+                                            <label class="col-lg-3 col-form-label text-lg-end"></label>
+                                            <div class="col-xl-9">
+                                                <div class="d-flex fw-bold h-100">
+                                                    <div class="form-check form-check-custom form-check-solid me-9">
+                                                        <input class="form-check-input file_type" type="radio" value="2" id="likcheck" name="file_type" @if($edit->file_type==2) checked @endif>
+                                                        <label class="form-check-label ms-3" for="Free">Links</label>
+                                                    </div>
+                                                    <div class="form-check form-check-custom form-check-solid">
+                                                        <input class="form-check-input file_type" type="radio"  value="1" id="uploadchck" name="file_type" @if($edit->file_type==1) checked @endif>
+                                                        <label class="form-check-label ms-3" for="Premium">Uploads</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                       
+                                        <div id="linkdata" @if($edit->file_type==2) @else style="display:none" @endif>
+                                            @if($edit->file_type==2)
+                                                <div class="row mb-10 asif">
+                                                    <div class="col-lg-7">
+                                                    @foreach (json_decode($edit->software) as $key => $soft)
+                                                    <div class="row mb-10">
+                                                        <label class="col-lg-5 col-form-label text-lg-end">Select Software:</label>
+                                                        <div class="col-lg-6 col-xl-6">
+                                                            <div class="form-check form-check-custom form-check-solid form-switch mb-2">
+                                                                <select name="software[]" class="form-control form-control-solid">
+                                                                    <option>--select--</option>
+                                                                    @foreach($allsoftware as $cate)
+                                                                    <option value="{{ $cate->id }}" @if($soft==$cate->id) selected @endif>{{ $cate->name }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @endforeach
+                                                    </div>
+                                                    <div class="col-lg-5">
+                                                    @foreach(json_decode($edit->link) as $key => $like)
+                                                    <div class="row mb-10">
+                                                        <label class="col-lg-2 col-form-label text-lg-end">Link:</label>
+                                                        <div class="col-lg-6 col-xl-6">
+                                                            <div class="form-check form-check-custom form-check-solid form-switch mb-2">
+                                                                <input class="form-control form-control-solid" type="text" name="link[]" placeholder="Link" value="{{ $like }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <i onclick="delete_row(this)" class="fa fa-trash" style="color:red"></i>
+                                                        </div>
+                                                    </div>
+                                                    @endforeach
+                                                    </div>
+                                                </div>
+                                            @else
+                                            <div class="row mb-10">
+                                                <label class="col-lg-3 col-form-label text-lg-end">Select Software:</label>
+                                                <div class="col-lg-3 col-xl-3">
+                                                    <div class="form-check form-check-custom form-check-solid form-switch mb-2">
+                                                        <select name="software[]" class="form-control form-control-solid">
+                                                            <option>--select--</option>
+                                                            @foreach($allsoftware as $cate)
+                                                            <option value="{{ $cate->id }}">{{ $cate->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <label class="col-lg-1 col-form-label text-lg-end">Link:</label>
+                                                <div class="col-lg-3 col-xl-3">
+                                                    <div class="form-check form-check-custom form-check-solid form-switch mb-2">
+                                                        <input class="form-control form-control-solid" type="text" name="link[]" placeholder="Link" value="">
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <i onclick="delete_row(this)" class="fa fa-trash" style="color:red"></i>
+                                                </div>
+
+                                            </div>
+                                            @endif
+
+                                            <div class="add_more">
+
+                                            </div>
+                                            <div class="row mb-10">
+                                                <div class="col-lg-3 col-xl-3">
+                                                </div>
+                                                <div class="col-lg-2 col-xl-2">
+                                                    <a class="btn-sm" onclick="addmore()"><i class="fa fa-plus"></i> Add More </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end -->
+                                        <div id="uploadsfile" @if($edit->file_type==1) @else style="display:none" @endif>
+                                         @if($edit->file_type==1)
+                                                <div class="row mb-10 ">
+                                                    <div class="col-lg-7">
+                                                        @foreach (json_decode($edit->software) as $key => $soft)
+                                                        <div class="row mb-10">
+                                                            <label class="col-lg-5 col-form-label text-lg-end">Select Software:</label>
+                                                            <div class="col-lg-6 col-xl-6">
+                                                                <div class="form-check form-check-custom form-check-solid form-switch mb-2">
+                                                                    <select name="softwarenew[]" class="form-control form-control-solid">
+                                                                        <option>--select--</option>
+                                                                        @foreach($allsoftware as $cate)
+                                                                        <option value="{{ $cate->id }}" @if($soft==$cate->id) selected @endif>{{ $cate->name }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @endforeach
+                                                    </div>
+                                                    <div class="col-lg-5">
+                                                        @foreach(json_decode($edit->link) as $key => $like)
+                                                        <div class="row mb-10" >
+                                                            <label class="col-lg-3 col-form-label text-lg-end">uploads:</label>
+                                                            <div class="col-lg-5 col-xl-5">
+                                                                <div class="form-check form-check-custom form-check-solid form-switch mb-2">
+                                                                    <!-- <input class="form-control form-control-solid" type="file" name="linkfile[]" placeholder="Link"> -->
+                                                                    <span class="mt-4"> {{ $like  }}</span>
+                                                                    <input class="form-control form-control-solid" type="hidden" name="previouslinkupdate[]" placeholder="Link" value="{{ $like }}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <i onclick="delete_row(this)" class="fa fa-trash" style="color:red"></i>
+                                                            </div>
+                                                        </div>
+                                                        @endforeach
+                                                    </div>
+
+                                                </div>
+                                        @else
+                                            <div class="row mb-10">
+                                                <label class="col-lg-3 col-form-label text-lg-end">Select Software:</label>
+                                                <div class="col-lg-3 col-xl-3">
+                                                    <div class="form-check form-check-custom form-check-solid form-switch mb-2">
+                                                        <select name="softwarenew[]" class="form-control form-control-solid">
+                                                            <option>--select--</option>
+                                                            @foreach($allsoftware as $cate)
+                                                            <option value="{{ $cate->id }}">{{ $cate->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <label class="col-lg-1 col-form-label text-lg-end">Uploads:</label>
+                                                <div class="col-lg-3 col-xl-3">
+                                                    <div class="form-check form-check-custom form-check-solid form-switch mb-2">
+                                                        <input class="form-control form-control-solid" type="file" name="linkfile[]" accept=".zip,.rar,.7zip" multiple>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                            <div class="add_more_uploads">
+
+                                            </div>
+                                            <div class="row mb-10">
+                                                <div class="col-lg-3 col-xl-3">
+                                                </div>
+                                                <div class="col-lg-2 col-xl-2">
+                                                    <a class="btn-sm" onclick="addmoreuploads()"><i class="fa fa-plus"></i> Add More </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="row mb-10">
+                                            <label class="col-lg-3 col-form-label text-lg-end">Product Tag:</label>
+                                            <div class="col-lg-9 col-xl-7">
+                                                <div class="form-check form-check-custom form-check-solid form-switch mb-2">
+                                                    <input type="hidden" name="id" value="{{ $edit->id }}">
+                                                    <input data-role="tagsinput" class="form-control form-control-solid" type="text" placeholder="Tag" name="tag" value="{{ $edit->tag }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-10">
+                                            <label class="col-lg-3 col-form-label text-lg-end">Description:</label>
+                                            <div class="col-lg-9 col-xl-7">
+                                                <div class="form-check form-check-custom form-check-solid form-switch mb-2">
+                                                    <textarea class="form-control form-control-solid" name="description" placeholder="Description">{{ $edit->description }}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-8">
+                                            <label class="col-lg-3 col-form-label text-lg-end"></label>
+                                            <div class="col-xl-9">
+                                                <div class="d-flex fw-bold h-100">
+                                                    <div class="form-check form-check-custom form-check-solid me-9">
+                                                        <input class="form-check-input" type="radio" value="2" name="product_type" @if($edit->product_type==2) checked @endif>
+                                                        <label class="form-check-label ms-3" for="Free">Free</label>
+                                                    </div>
+                                                    <div class="form-check form-check-custom form-check-solid">
+                                                        <input class="form-check-input" type="radio" value="1" name="product_type" @if($edit->product_type==1) checked @endif>
+                                                        <label class="form-check-label ms-3" for="Premium">Premium</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end::Col-->
+                                        </div>
+                                        <div class="row mb-8">
+                                            <label class="col-lg-3 col-form-label text-lg-end"></label>
+                                            <div class="col-xl-9">
+                                                <div class="d-flex fw-bold h-100">
+                                                    <div class="form-check form-check-custom form-check-solid me-9">
+                                                        <input class="form-check-input" type="radio" value="1" name="status" @if($edit->status==1) checked @endif>
+                                                        <label class="form-check-label ms-3" for="Free">Active</label>
+                                                    </div>
+                                                    <div class="form-check form-check-custom form-check-solid">
+                                                        <input class="form-check-input" type="radio" value="0" name="status" @if($edit->status==0) checked @endif>
+                                                        <label class="form-check-label ms-3" for="Premium">Deactive</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end::Col-->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -140,139 +432,120 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--end::Footer-->
-                        </form>
-                        <!--end::Form-->
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card mb-5 mb-xl-8">
-                        <!--begin::Header-->
-                        <div class="card-header border-0 pt-5">
-                            <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bolder fs-3 mb-1">All Category</span>
-                                <!-- <span class="text-muted mt-1 fw-bold fs-7">Over 500 orders</span> -->
-                            </h3>
-                            <div class="card-toolbar">
-                                <!--begin::Menu-->
-                                <button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
-                                
-                                    <span class="svg-icon svg-icon-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="5" y="5" width="5" height="5" rx="1" fill="#000000" />
-                                                <rect x="14" y="5" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
-                                                <rect x="5" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
-                                                <rect x="14" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
-                                            </g>
-                                        </svg>
-                                    </span>
-                                </button>
-                            </div>
                         </div>
-              
-                        <div class="card-body py-3">
-                            <!--begin::Table container-->
-                            <div class="table-responsive">
-                                <!--begin::Table-->
-                                <table class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
-                                    <!--begin::Table head-->
-                                    <thead>
-                                        <tr class="fw-bolder text-muted">
-                                            <th class="min-w-150px">Category Name</th>
-                                            <th class="min-w-140px">Image</th>
-                                            <th class="min-w-120px">Icon</th>
-                                            <th class="min-w-120px">Status</th>
-                                            <th class="min-w-100px text-end">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($category as $data)
-                                        <tr>
-                                            <td>
-                                                <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">{{ $data->name  }}</a>
-                                                
-                                            </td>
-                                            <td>
-                                               <img src="{{asset('public/uploads/category/'.$data->image)}}" height="25px">
-
-                                            </td>
-                                            <td class="text-dark fw-bolder text-hover-primary fs-6"> {{ $data->icon}} </td>
-                                            <td>
-                                                @if($data->status==1)
-                                                <span class="badge badge-light-success">Active</span>
-                                                @else
-                                                <span class="badge badge-light-danger">Deactive</span>
-                                                @endif
-                                            </td>
-                                            <td class="text-end">
-                                                @if($data->status==1)
-                                                <a href="{{url('admin/category/deactive/'.$data->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                                    <span class="svg-icon svg-icon-3">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                                <rect x="0" y="0" width="24" height="24" />
-                                                                <path d="M7,3 L17,3 C19.209139,3 21,4.790861 21,7 C21,9.209139 19.209139,11 17,11 L7,11 C4.790861,11 3,9.209139 3,7 C3,4.790861 4.790861,3 7,3 Z M7,9 C8.1045695,9 9,8.1045695 9,7 C9,5.8954305 8.1045695,5 7,5 C5.8954305,5 5,5.8954305 5,7 C5,8.1045695 5.8954305,9 7,9 Z" fill="#000000" />
-                                                                <path d="M7,13 L17,13 C19.209139,13 21,14.790861 21,17 C21,19.209139 19.209139,21 17,21 L7,21 C4.790861,21 3,19.209139 3,17 C3,14.790861 4.790861,13 7,13 Z M17,19 C18.1045695,19 19,18.1045695 19,17 C19,15.8954305 18.1045695,15 17,15 C15.8954305,15 15,15.8954305 15,17 C15,18.1045695 15.8954305,19 17,19 Z" fill="#000000" opacity="0.3" />
-                                                            </g>
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                                @else
-                                                <a href="{{url('admin/category/active/'.$data->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                                    <span class="svg-icon svg-icon-3">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                                <rect x="0" y="0" width="24" height="24" />
-                                                                <path d="M7,3 L17,3 C19.209139,3 21,4.790861 21,7 C21,9.209139 19.209139,11 17,11 L7,11 C4.790861,11 3,9.209139 3,7 C3,4.790861 4.790861,3 7,3 Z M7,9 C8.1045695,9 9,8.1045695 9,7 C9,5.8954305 8.1045695,5 7,5 C5.8954305,5 5,5.8954305 5,7 C5,8.1045695 5.8954305,9 7,9 Z" fill="#000000" />
-                                                                <path d="M7,13 L17,13 C19.209139,13 21,14.790861 21,17 C21,19.209139 19.209139,21 17,21 L7,21 C4.790861,21 3,19.209139 3,17 C3,14.790861 4.790861,13 7,13 Z M17,19 C18.1045695,19 19,18.1045695 19,17 C19,15.8954305 18.1045695,15 17,15 C15.8954305,15 15,15.8954305 15,17 C15,18.1045695 15.8954305,19 17,19 Z" fill="#000000" opacity="0.3" />
-                                                            </g>
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                                @endif
-                                                <a href="{{url('admin/category/edit/'.$data->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                                    <!--begin::Svg Icon | path: icons/duotone/Communication/Write.svg-->
-                                                    <span class="svg-icon svg-icon-3">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                            <path d="M12.2674799,18.2323597 L12.0084872,5.45852451 C12.0004303,5.06114792 12.1504154,4.6768183 12.4255037,4.38993949 L15.0030167,1.70195304 L17.5910752,4.40093695 C17.8599071,4.6812911 18.0095067,5.05499603 18.0083938,5.44341307 L17.9718262,18.2062508 C17.9694575,19.0329966 17.2985816,19.701953 16.4718324,19.701953 L13.7671717,19.701953 C12.9505952,19.701953 12.2840328,19.0487684 12.2674799,18.2323597 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.701953, 10.701953) rotate(-135.000000) translate(-14.701953, -10.701953)" />
-                                                            <path d="M12.9,2 C13.4522847,2 13.9,2.44771525 13.9,3 C13.9,3.55228475 13.4522847,4 12.9,4 L6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 L12.9,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </a>
-                                                <a id="delete" href="{{url('/admin/category/delete/'.$data->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
-                                                    <!--begin::Svg Icon | path: icons/duotone/General/Trash.svg-->
-                                                    <span class="svg-icon svg-icon-3">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                                <rect x="0" y="0" width="24" height="24" />
-                                                                <path d="M6,8 L6,20.5 C6,21.3284271 6.67157288,22 7.5,22 L16.5,22 C17.3284271,22 18,21.3284271 18,20.5 L18,8 L6,8 Z" fill="#000000" fill-rule="nonzero" />
-                                                                <path d="M14,4.5 L14,4 C14,3.44771525 13.5522847,3 13,3 L11,3 C10.4477153,3 10,3.44771525 10,4 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z" fill="#000000" opacity="0.3" />
-                                                            </g>
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                    <!--end::Table body-->
-                                </table>
-                                <!--end::Table-->
-                            </div>
-                            <!--end::Table container-->
-                        </div>
-                        <!--begin::Body-->
                     </div>
-                </div>
+                </form>
             </div>
-            <!--end::Card-->
         </div>
-        <!--end::Container-->
     </div>
-    <!--end::Post-->
 </div>
+
+
+<script>
+    $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
+</script>
+<script>
+    function addmore() {
+        $(".add_more").append('<div class="row mb-10"><label class="col-lg-3 col-form-label text-lg-end">Select Software:</label><div class="col-lg-3 col-xl-3"><div class="form-check form-check-custom form-check-solid form-switch mb-2"><select name="software[]" id="" class="form-control form-control-solid">@foreach($allsoftware as $cate)<option value="{{ $cate->id }}">{{ $cate->name }}</option> @endforeach</select></div></div><label class="col-lg-2 col-form-label text-lg-end">Link:</label><div class="col-lg-2 col-xl-2"><div class="form-check form-check-custom form-check-solid form-switch mb-2"><input class="form-control form-control-solid" type="text" name="link[]" placeholder="Link"></div></div><div class="col-lg-2 col-xl-2"><i onclick="delete_row(this)" class="fa fa-trash" style="color:red"></i></div></div>')
+    }
+    function addmoreuploads() {
+        $(".add_more_uploads").append('<div class="row mb-10"><label class="col-lg-3 col-form-label text-lg-end">Select Software:</label><div class="col-lg-3 col-xl-3"><div class="form-check form-check-custom form-check-solid form-switch mb-2"><select name="softwarenew[]" id="" class="form-control form-control-solid">@foreach($allsoftware as $cate)<option value="{{ $cate->id }}">{{ $cate->name }}</option> @endforeach</select></div></div><label class="col-lg-2 col-form-label text-lg-end" style="margin-left:15px">uploads:</label><div class="col-lg-2 col-xl-2"><div class="form-check form-check-custom form-check-solid form-switch mb-2"><input class="form-control form-control-solid" type="file" name="linkfile[]" placeholder="Link" accept=".zip,.rar,.7zip" multiple></div></div><div class="col-lg-1 col-xl-1 mt-4"><i onclick="delete_row(this)" class="fa fa-trash" style="color:red"></i></div></div>')
+    }
+    function delete_row(em) {
+
+        $(em).closest('.asif').remove();
+
+    }
+</script>
+<!-- / -->
+
+<script>
+ $(document).ready(function() {
+	$(".file_type").click(function() {
+		//alert("ok");
+		if ($("#likcheck").is(":checked")) {
+						// alert("pharmacy");
+			 $("#linkdata").show();
+             $("#uploadsfile").hide();
+		}
+		else {
+            $("#linkdata").hide();
+			$("#uploadsfile").show();
+		}
+	});
+});
+</script>
+
+
+<!-- ///////////////////////////////////////// -->
+
+<script>
+    function editimageremove(em) {
+        $("#editimage").hide();
+        $("#product_img").show();
+    }
+</script>
+<script>
+    function removegallary(em) {
+        $(em).closest('.lol').remove();
+    }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $('select[name="category"]').on('change', function() {
+            var cate_id = $(this).val();
+
+            if (cate_id) {
+                $.ajax({
+                    url: "{{  url('/get/subcategory/all/') }}/" + cate_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+
+                        $('#subcategory').empty();
+                        $('#subcategory').append(' <option value="">--select--</option>');
+                        $.each(data, function(index, districtObj) {
+                            $('#subcategory').append('<option value="' + districtObj.id + '">' + districtObj.name + '</option>');
+                        });
+
+                    }
+                });
+            } else {
+                //  alert('danger');
+            }
+
+        });
+        //  resubcategory
+        $('select[name="subcategory"]').on('change', function() {
+            var subcate_id = $(this).val();
+
+            if (subcate_id) {
+                $.ajax({
+                    url: "{{  url('/get/resubcategory/all/') }}/" + subcate_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+
+                        $('#resubcategory').empty();
+                        $('#resubcategory').append(' <option value="">--select--</option>');
+                        $.each(data, function(index, districtObj) {
+                            $('#resubcategory').append('<option value="' + districtObj.id + '">' + districtObj.name + '</option>');
+                        });
+
+
+                    }
+                });
+            } else {
+                //  alert('danger');
+            }
+
+        });
+
+
+
+    });
+</script>
 
 @endsection

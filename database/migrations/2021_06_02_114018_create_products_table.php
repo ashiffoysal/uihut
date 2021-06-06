@@ -23,6 +23,9 @@ class CreateProductsTable extends Migration
             $table->text('tag')->nullable();
             $table->text('description')->nullable();
             $table->integer('product_type')->nullable();
+            $table->integer('file_type')->nullable();
+            $table->text('software')->nullable();
+            $table->text('link')->nullable();
             $table->text('thumbnail_img')->nullable();
             $table->text('gallery_img')->nullable();
             $table->string('creator_by')->nullable();
