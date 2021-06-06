@@ -25,7 +25,9 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "vue-notification": "^1.3.20",
         "vue-router": "^3.5.1",
+        "vuelidate": "^0.7.6",
         "vuex": "^3.6.2"
     }
 }
