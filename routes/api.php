@@ -29,6 +29,14 @@ Route::post('/user/register',[App\Http\Controllers\Api\UserController::class, 'r
 Route::post('/user/email/varify',[App\Http\Controllers\Api\UserController::class, 'emailVarify']);
 Route::post('/login',[App\Http\Controllers\Api\UserController::class, 'login']);
 
+// shwo home section route
+
+Route::get('/banner',[App\Http\Controllers\Api\HomeController::class, 'showBanner']);
+Route::get('/categores',[App\Http\Controllers\Api\HomeController::class, 'showCategores']);
+Route::get('/explores',[App\Http\Controllers\Api\HomeController::class, 'showExplores']);
+Route::get('/clientsay',[App\Http\Controllers\Api\HomeController::class, 'showClientReview']);
+Route::get('/show/pricing',[App\Http\Controllers\Api\HomeController::class, 'showPrice']);
+
 Route::middleware('auth:api')->group(function () {
     Route::post('logout',[App\Http\Controllers\Api\UserController::class, 'logout']);
     Route::get('user', 'Api\AuthController@user');
