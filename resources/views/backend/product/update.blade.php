@@ -221,7 +221,7 @@
                                                 <div class="row mb-10 asif">
                                                     <div class="col-lg-7">
                                                     @foreach (json_decode($edit->software) as $key => $soft)
-                                                    <div class="row mb-10">
+                                                    <div class="row mb-10" id="deleted_main_{{ $key }}">
                                                         <label class="col-lg-5 col-form-label text-lg-end">Select Software:</label>
                                                         <div class="col-lg-6 col-xl-6">
                                                             <div class="form-check form-check-custom form-check-solid form-switch mb-2">
@@ -238,7 +238,7 @@
                                                     </div>
                                                     <div class="col-lg-5">
                                                     @foreach(json_decode($edit->link) as $key => $like)
-                                                    <div class="row mb-10">
+                                                    <div class="row mb-10" id="deleted_child_{{ $key }}">
                                                         <label class="col-lg-2 col-form-label text-lg-end">Link:</label>
                                                         <div class="col-lg-6 col-xl-6">
                                                             <div class="form-check form-check-custom form-check-solid form-switch mb-2">
@@ -246,7 +246,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-1">
-                                                            <i onclick="delete_row(this)" class="fa fa-trash" style="color:red"></i>
+                                                            <i onclick="delete_rowitem({{$key}})" id="{{ $key }}" class="fa fa-trash" style="color:red"></i>
                                                         </div>
                                                     </div>
                                                     @endforeach
@@ -296,7 +296,7 @@
                                                 <div class="row mb-10 ">
                                                     <div class="col-lg-7">
                                                         @foreach (json_decode($edit->software) as $key => $soft)
-                                                        <div class="row mb-10">
+                                                        <div class="row mb-10" id="deleted_main_{{ $key }}">
                                                             <label class="col-lg-5 col-form-label text-lg-end">Select Software:</label>
                                                             <div class="col-lg-6 col-xl-6">
                                                                 <div class="form-check form-check-custom form-check-solid form-switch mb-2">
@@ -313,7 +313,7 @@
                                                     </div>
                                                     <div class="col-lg-5">
                                                         @foreach(json_decode($edit->link) as $key => $like)
-                                                        <div class="row mb-10" >
+                                                        <div class="row mb-10" id="deleted_child_{{ $key }}" >
                                                             <label class="col-lg-3 col-form-label text-lg-end">uploads:</label>
                                                             <div class="col-lg-5 col-xl-5">
                                                                 <div class="form-check form-check-custom form-check-solid form-switch mb-2">
@@ -323,7 +323,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-1">
-                                                                <i onclick="delete_row(this)" class="fa fa-trash" style="color:red"></i>
+                                                                <i  onclick="delete_rowitem({{$key}})" id="{{ $key }}" class="fa fa-trash" style="color:red"></i>
                                                             </div>
                                                         </div>
                                                         @endforeach
@@ -453,9 +453,16 @@
     }
     function delete_row(em) {
 
-        $(em).closest('.asif').remove();
+        $(em).closest('.row').remove();
 
     }
+
+    function delete_rowitem(id){
+        $('#deleted_child_'+id).remove();
+        $('#deleted_main_'+id).remove();
+    }
+
+ 
 </script>
 <!-- / -->
 

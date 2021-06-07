@@ -131,18 +131,21 @@
 						<!--end::Toolbar-->
 						<!--begin::Post-->
 						<div class="post d-flex flex-column-fluid" id="kt_post">
-							<!--begin::Container-->
+						
 							<div id="kt_content_container" class="container-fluid">
 								<!--begin::Card-->
 								<div class="card">
+								<form action="{{route('admin.product.alldeleted')}}" method="post">
+						     		@csrf
 									<!--begin::Card header-->
 									<div class="card-header border-0 pt-6">
 										<!--begin::Card title-->
 										<div class="card-title">
 											<!--begin::Search-->
 											<div class="d-flex align-items-center position-relative my-1">
-												
-												<a href="" class="btn btn-danger">Delete</a>
+										
+												<button name="submit" value="delete"  class="btn btn-danger">Delete</button>
+											
 											</div>
 											<!--end::Search-->
 										</div>
@@ -233,7 +236,7 @@
 													<!--begin::Checkbox-->
 													<td>
 														<div class="form-check form-check-sm form-check-custom form-check-solid">
-															<input class="form-check-input" type="checkbox" value="1" />
+															<input class="form-check-input" type="checkbox" name="delid[]" value="{{$data->id}}"/>
 														</div>
 													</td>
 													<!--end::Checkbox-->
@@ -344,8 +347,10 @@
 											</tbody>
 										</table>
 									</div>
+									</form>
 								</div>
 							</div>
+						
 						</div>
 					</div>
 

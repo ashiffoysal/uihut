@@ -162,6 +162,9 @@ Route::get('/admin/subscriver/deactive/{id}', [App\Http\Controllers\Admin\Subscr
 Route::get('/admin/subscriver/delete/{id}', [App\Http\Controllers\Admin\SubscriverController::class, 'Delete']);
 // product controller
 Route::get('/admin/product/create', [App\Http\Controllers\Admin\ProductController::class, 'create'])->name('admin.product.create');
+Route::post('/admin/product/alldelete', [App\Http\Controllers\Admin\ProductController::class, 'deleteall'])->name('admin.product.alldeleted');
+
+
 Route::get('/admin/product/index', [App\Http\Controllers\Admin\ProductController::class, 'index'])->name('admin.product.index');
 Route::post('/admin/product/create', [App\Http\Controllers\Admin\ProductController::class, 'store'])->name('admin.product.create');
 Route::get('/admin/product/active/{id}', [App\Http\Controllers\Admin\ProductController::class, 'active']);

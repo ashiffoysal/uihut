@@ -301,12 +301,12 @@
                                 <div class="row">
                                     <div class="col-lg-3"></div>
                                     <div class="col-lg-9">
-                                        <button type="submit" id="savetodraf"  class="btn btn-info me-2">
+                                        <button type="submit" name="submit" value="savedraft"  class="btn btn-info me-2">
                                             <span class="indicator-label">Save to Draft</span>
                                             <span class="indicator-progress">Please wait...
                                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                         </button>
-                                        <button type="submit" id="publish" class="btn btn-primary me-2">
+                                        <button type="submit" name="submit" value="publish" class="btn btn-primary me-2">
                                             <span class="indicator-label">Publish</span>
                                             <span class="indicator-progress">Please wait...
                                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
