@@ -47,6 +47,15 @@ class ProductController extends Controller
     }
     public function store(Request $request)
     {
+
+
+
+     
+
+
+
+
+
         $proname = $request->title;
         $slug = preg_replace('/[^A-Za-z0-9-]+/', '-', $proname);
 
@@ -69,6 +78,15 @@ class ProductController extends Controller
         $product->file_type = $request->file_type;
         $product->creator_by = Auth::user()->id;
         $product->created_at = Carbon::now()->toDateString();
+
+        switch ($request->input('submit')) {
+            case 'savedraft':
+                $product->draft = 0;
+                break;
+            case 'publish':
+                $product->draft = 1;
+                break;
+        }
 
         if ($request->hasFile('product_img')) {
             $image = $request->file('product_img');
@@ -288,10 +306,6 @@ class ProductController extends Controller
                 $product->link = json_encode($loka);
 
             }
-
-
-
-
             
         }
 
@@ -331,4 +345,35 @@ class ProductController extends Controller
             return redirect()->route('admin.product.create')->with($notification);
         }
     }
+//new all delete
+    public function deleteall(Request $request){
+        $deleteid = $request['delid'];
+        if ($deleteid) {
+            $deletpost = Product::whereIn('id', $deleteid)->update([
+                'is_deleted'=>1,
+            ]);
+            if ($deletpost) {
+                $notification = array(
+                    'messege' => 'Multiple Delete Success',
+                    'alert-type' => 'success'
+                );
+                return Redirect()->back()->with($notification);
+            } else {
+                $notification = array(
+                    'messege' => 'Multiple Delete Faild',
+                    'alert-type' => 'errors'
+                );
+                return Redirect()->back()->with($notification);
+            }
+        } else {
+            $notification = array(
+                'messege' => 'Nothing To Delete',
+                'alert-type' => 'info'
+            );
+            return Redirect()->back()->with($notification);
+        }
+    }
+
+
+
 }
