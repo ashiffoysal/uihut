@@ -1,0 +1,14 @@
+require('./bootstrap');
+window.Vue = require('vue').default;
+Vue.use(Notifications)
+import Notifications from 'vue-notification'
+
+import router from './routes'
+import store from './store'
+
+Vue.component('mainComponent', require('./components/master.vue').default);
+const app = new Vue({
+    el: '#app',
+    router,
+    store
+});
