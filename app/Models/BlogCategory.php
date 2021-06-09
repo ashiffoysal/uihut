@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class BlogCategory extends Model
 {
     use HasFactory;
+
+
+    public function getBlogCountAttribute($value)
+    {
+        $blogcount =Blogs::where('category_id',$this->id)->get();
+        return $blogcount->count();
+    }
 }

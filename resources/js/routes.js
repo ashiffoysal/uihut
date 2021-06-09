@@ -59,11 +59,35 @@ let routes = [
             },
         ],
     },
+
+    {
+        path: '/blogs',
+        component: require('./components/blog/blog').default,
+        name: 'blogs',
+       
+    },
+    {
+        path: '/privacy_&_policy',
+        component: require('./components/privacypolicy/privacy_&_policy').default,
+        name: 'privacy',
+       
+    },
+    {
+        path: '/licence',
+        component: require('./components/licencing/licence').default,
+        name: 'licence',
+       
+    },
+
+
 ];
 
 const router = new VueRouter({
+    history: true,
+    hashbang: false,
+    // linkActiveClass: 'active',
     routes,
-    // mode: 'history',
+     
 });
 
 router.beforeEach((to, from, next) => {

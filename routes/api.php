@@ -28,9 +28,13 @@ Route::get('/token', function (Request $request) {
 Route::post('/user/register',[App\Http\Controllers\Api\UserController::class, 'register']);
 Route::post('/user/email/varify',[App\Http\Controllers\Api\UserController::class, 'emailVarify']);
 Route::post('/login',[App\Http\Controllers\Api\UserController::class, 'login']);
+// blog catgegory
+Route::get('/blog/category',[App\Http\Controllers\Api\BlogController::class, 'index']);
+Route::get('/allblog',[App\Http\Controllers\Api\BlogController::class, 'allblog']);
+Route::get('/privacypolicy',[App\Http\Controllers\Api\PrivacyPolicyController::class, 'index']);
+Route::get('/licence',[App\Http\Controllers\Api\LicenceController::class, 'index']);
 
 // shwo home section route
-
 Route::get('/banner',[App\Http\Controllers\Api\HomeController::class, 'showBanner']);
 Route::get('/categores',[App\Http\Controllers\Api\HomeController::class, 'showCategores']);
 Route::get('/explores',[App\Http\Controllers\Api\HomeController::class, 'showExplores']);
