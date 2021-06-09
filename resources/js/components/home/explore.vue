@@ -3,7 +3,7 @@
     <h2>This is Explore</h2>
     <ul
       class="list-group mt-2"
-      v-for="(explore, index) in getExplores"
+      v-for="(explore, index) in explores"
       :key="index"
     >
       <li class="list-group-item">{{ explore.title }}</li>
@@ -22,12 +22,9 @@
 <script>
 export default {
   name: "HomeCategory",
-  mounted() {
-    this.$store.dispatch("retriveExplore");
-  },
-  computed: {
-    getExplores() {
-      return this.$store.getters.getExplores;
+  props: {
+    explores: {
+      require: true,
     },
   },
 };
