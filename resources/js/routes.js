@@ -5,43 +5,61 @@ Vue.use(VueRouter)
 let routes = [
     {
         path: '/',
-        component: require('./components/home/main').default,
+        component: require('./components/home/master').default,
+        children:[
+            {
+                path: '/',
+                component: require('./components/home/main').default,
+            },
+            {
+                path: '/register',
+                component: require('./components/auth/register').default,
+                name: 'register',
+                meta: {
+                    requiredVisitor: true,
+                }
+            },
+        
+            {
+                path: '/email_varify/:email/:id',
+                component: require('./components/auth/email_varify').default,
+                name: 'email_varify'
+            },
+            {
+                path: '/login',
+                component: require('./components/auth/login').default,
+                name: 'login',
+                meta: {
+                    requiredVisitor: true,
+                }
+            },
+            {
+                path: '/logout',
+                component: require('./components/auth/logout').default,
+                name: 'logout',
+            },
+            {
+                path: '/dashboard',
+                component: require('./components/dashboard/dashboard').default,
+                name: 'dashboard',
+                meta: {
+                    requiresAuth: true,
+                }
+            },
+        ]
     },
     {
-        path: '/register',
-        component: require('./components/auth/register').default,
-        name: 'register',
-        meta: {
-            requiredVisitor: true,
-        }
+        path:'/web/template',
+        component: require('./components/products/product_master').default,
+        children:[
+            {
+                path: '/web/template',
+                component: require('./components/products/product_list/product_list').default,
+                name: 'web_template',
+            },
+        ],
     },
 
-    {
-        path: '/email_varify/:email/:id',
-        component: require('./components/auth/email_varify').default,
-        name: 'email_varify'
-    },
-    {
-        path: '/login',
-        component: require('./components/auth/login').default,
-        name: 'login',
-        meta: {
-            requiredVisitor: true,
-        }
-    },
-    {
-        path: '/logout',
-        component: require('./components/auth/logout').default,
-        name: 'logout',
-    },
-    {
-        path: '/dashboard',
-        component: require('./components/dashboard/dashboard').default,
-        name: 'dashboard',
-        meta: {
-            requiresAuth: true,
-        }
-    },
     {
         path: '/blogs',
         component: require('./components/blog/blog').default,
@@ -61,7 +79,9 @@ let routes = [
        
     },
 
+
 ];
+
 const router = new VueRouter({
     history: true,
     hashbang: false,

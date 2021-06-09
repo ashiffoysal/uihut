@@ -2,7 +2,7 @@
   <div class="text-center card p-5">
     <h2>This is Pricing</h2>
     <div class="row">
-      <div class="col-lg-4" v-for="(price, index) in getPrice" :key="price.id">
+      <div class="col-lg-4" v-for="(price, index) in prices" :key="price.id">
         <div class="prising_area">
           <ul class="list-group">
             <li class="list-group-item"><b>Title :</b>{{ price.title }}</li>
@@ -34,11 +34,10 @@
 <script>
 export default {
   name: "PricingComponent",
-  data() {
-    return {
-      existClass: "list-group-item text-white",
-      conClass: "bg-primary",
-    };
+  props:{
+    prices:{
+      require:true,
+    }
   },
   methods: {
     getColor(index) {
@@ -47,14 +46,6 @@ export default {
       }else{
            return 'list-group-item text-white bg-success'
       }
-    },
-  },
-  mounted() {
-    this.$store.dispatch("retrivePrice");
-  },
-  computed: {
-    getPrice() {
-      return this.$store.getters.getPrice;
     },
   },
 };

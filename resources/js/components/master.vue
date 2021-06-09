@@ -1,20 +1,11 @@
 <template>
   <div class="row">
-    <notifications/>
-    <header-component />
-    <router-view></router-view>
-    <footer-component/>
+      <notifications/>
+      <router-view></router-view>
   </div>
 </template>
 <script>
-
-import headerComponent from "./inc/header";
-import footerComponent from "./inc/footer";
 export default {
-  name: "master",
-  components: {
-    headerComponent,
-    footerComponent
-  },
-};
+  name:'MasterComponent',
+}
 </script>
