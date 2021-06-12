@@ -46,6 +46,30 @@ let routes = [
                     requiresAuth: true,
                 }
             },
+            {
+                path: '/blogs',
+                component: require('./components/blog/blog').default,
+                name: 'blogs',
+               
+            },
+            {
+                path: '/privacy_&_policy',
+                component: require('./components/privacypolicy/privacy_&_policy').default,
+                name: 'privacy',
+               
+            },
+            {
+                path: '/licence',
+                component: require('./components/licencing/licence').default,
+                name: 'licence',
+               
+            },
+            {
+                path: '/termsandcondition',
+                component: require('./components/termsandcondition/termsandcondition').default,
+                name: 'termsandcondition',
+               
+            },
         ]
     },
     {
@@ -60,24 +84,7 @@ let routes = [
         ],
     },
 
-    {
-        path: '/blogs',
-        component: require('./components/blog/blog').default,
-        name: 'blogs',
-       
-    },
-    {
-        path: '/privacy_&_policy',
-        component: require('./components/privacypolicy/privacy_&_policy').default,
-        name: 'privacy',
-       
-    },
-    {
-        path: '/licence',
-        component: require('./components/licencing/licence').default,
-        name: 'licence',
-       
-    },
+    
 
 
 ];
