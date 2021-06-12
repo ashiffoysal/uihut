@@ -10,6 +10,7 @@ let routes = [
             {
                 path: '/',
                 component: require('./components/home/main').default,
+                name:'home',
             },
             {
                 path: '/register',
@@ -64,28 +65,28 @@ let routes = [
                 name: 'licence',
                
             },
+
             {
                 path: '/termsandcondition',
                 component: require('./components/termsandcondition/termsandcondition').default,
                 name: 'termsandcondition',
                
             },
+
         ]
     },
     {
-        path:'/web/template',
+        path:'/',
         component: require('./components/products/product_master').default,
+        redirect: '/web_template',
         children:[
             {
-                path: '/web/template',
-                component: require('./components/products/product_list/product_list').default,
-                name: 'web_template',
+                path: '/:cat/:subcat',
+                component: require('./components/products/product_list/products').default,
+                name: 'products',       
             },
         ],
     },
-
-    
-
 
 ];
 

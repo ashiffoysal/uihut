@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\SubCategory;
+use Illuminate\Support\Str;
 use Image;
 use Carbon\Carbon;
 
@@ -29,6 +30,7 @@ class SubCategoryController extends Controller
         ]);
         $insert=SubCategory::insertGetId([
             'name'=>$request->name,
+            'slug'=>Str::slug($request->name,'-'),
             'cate_id'=>$request->category,
             'created_at'=>carbon::now()->toDateTimeString(),
         ]);
@@ -103,6 +105,7 @@ class SubCategoryController extends Controller
         $id=$request->id;
         $update=SubCategory::where('id',$id)->update([
             'name'=>$request->name,
+            'slug'=>Str::slug($request->name,'-'),
             'cate_id'=>$request->category,
             'updated_at'=>Carbon::now()->toDateTimeString(),
         ]);

@@ -18,27 +18,20 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
-
-                <li class="nav-item btn btn-sm btn-warning m-1">
-                  <a class="nav-link" href="#"
-                    >Web Template <span class="sr-only">(current)</span></a
-                  >
+                <li
+                  class="nav-item btn btn-sm btn-warning m-1"
+                  v-for="cat in categores"
+                  :key="cat.id"
+                >
+                  <router-link
+                    :to="{
+                      name: 'products',
+                      params: { cat: cat.slug, subcat: cat.subcate },
+                    }"
+                    class="nav-link"
+                    >{{ cat.name }}<span class="sr-only">(current)</span>
+                  </router-link>
                 </li>
-
-                <li class="nav-item btn btn-sm btn-warning m-1">
-                  <a class="nav-link" href="#"
-                    >Ilistator <span class="sr-only">(current)</span></a
-                  >
-                </li>
-
-                <li class="nav-item btn btn-sm btn-warning m-1">
-                  <a class="nav-link" href="#"
-                    >Icon <span class="sr-only">(current)</span></a
-                  >
-                </li>
-
-                
-               
               </ul>
               <form class="form-inline my-2 my-lg-0">
                 <input
@@ -63,26 +56,39 @@
           class="btn-group ml-4 mt-4"
           role="group"
           aria-label="Basic example"
+          v-for="subcat in subcategores"
+          :key="subcat.id"
         >
           <button
             type="button"
             class="btn btn-secondary border-right border-info"
+            @click="selectSubCategory(subcat.slug)"
           >
-            Template
-          </button>
-          <button type="button" class="btn btn-secondary border-info">
-            Block
+            {{ subcat.name }}
           </button>
         </div>
+
         <ul class="list-group m-4">
-          <li class="list-group-item">Cras justo odio</li>
-          <li class="list-group-item">Dapibus ac facilisis in</li>
-          <li class="list-group-item">Morbi leo risus</li>
-          <li class="list-group-item">Porta ac consectetur ac</li>
-          <li class="list-group-item">Vestibulum at eros</li>
+          <li
+            class="list-group-item"
+            v-for="resub in resubcategores"
+            :key="resub.id"
+          >
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="defaultCheck1"
+              />
+              <label class="form-check-label" for="defaultCheck1">
+                {{ resub.name
+                }}<small class="text-right">({{ resub.products_count }})</small>
+              </label>
+            </div>
+          </li>
         </ul>
       </div>
-      <div class="col-lg-8">
+      <div class="col-lg-7">
         <div class="row">
           <div class="col-lg-6">
             <div class="card mt-4" style="width: 18rem">
@@ -169,6 +175,119 @@
           </div>
         </div>
       </div>
+
+      <div class="col-lg-1">
+        <div class="dropdown mt-4">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          ></button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
+<script>
+export default {
+  name: "ProductsComponent",
+  data() {
+    return {
+      categores: [],
+      subcategores: [],
+      resubcategores: [],
+      products: [],
+    };
+  },
+  created() {
+    this.retriveCategores();
+    this.retriveSubCategores();
+    this.retriveReSubCategores();
+    this.retriveProduct();
+  },
+  watch: {
+    $route(to, from) {
+      this.retriveCategores();
+      this.retriveSubCategores();
+      this.retriveReSubCategores();
+      this.retriveProduct();
+    },
+  },
+  methods: {
+    // retrive category menu
+    retriveCategores() {
+      axios
+        .get("/get/product/categores")
+        .then((res) => {
+          this.categores = res.data.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    // retrive sub category
+    retriveSubCategores() {
+      var cat = this.$route.params.cat;
+      axios
+        .get(`/get/product/subcategores/${cat}`)
+        .then((res) => {
+          this.subcategores = res.data.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    // retrive resub category
+    retriveReSubCategores() {
+      var cat = this.$route.params.cat;
+      var subcat = this.$route.params.subcat;
+      axios
+        .get(`/get/product/resubcategores/${cat}/${subcat}`)
+        .then((res) => {
+          this.resubcategores = res.data.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    // get data click on sub category
+    selectSubCategory($slug) {
+      var cat = this.$route.params.cat;
+      var subcat = $slug;
+      axios
+        .get(`/get/product/resubcategores/${cat}/${subcat}`)
+        .then((res) => {
+          this.resubcategores = res.data.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    // Retrive product
+    retriveProduct() {
+      var cat = this.$route.params.cat;
+      var subcat = this.$route.params.subcat;
+      axios
+        .get(`/get/product/${cat}/${subcat}`)
+        .then((res) => {
+          this.products = res.data.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
+};
+</script>

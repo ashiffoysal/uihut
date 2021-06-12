@@ -20,6 +20,8 @@ class CategoryCollection extends ResourceCollection
                     'name' => $data->name,
                     'image' => asset('public/uploads/category/'.$data->image),
                     'icon' => $data->icon,
+                    'slug' => $data->slug,
+                    'subcat' => $data->subcategory->slug ??' ',
                 ];
             })
         ];

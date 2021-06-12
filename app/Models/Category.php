@@ -9,5 +9,9 @@ class Category extends Model
 {
     use HasFactory;
   
+    public function subcategory()
+    {
+        return $this->hasOne('App\Models\SubCategory','cate_id')->where('is_deleted',0)->where('status',1);
+    }
    
 }

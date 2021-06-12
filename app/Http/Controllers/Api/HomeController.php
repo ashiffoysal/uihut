@@ -7,6 +7,7 @@ use App\Http\Resources\BannerCollection;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\ClientReviewCollection;
 use App\Http\Resources\ExploreCollection;
+use App\Http\Resources\HeaderSubCategoryResource;
 use App\Http\Resources\PackageCollection;
 use App\Models\Category;
 use App\Models\ClientReview;
@@ -49,4 +50,11 @@ class HomeController extends Controller
     {
         return new PackageCollection(Package::where('status',1)->where('is_deleted',0)->get());
     }
+
+    //Get Header Category and Sub Category
+    public function getHeaderSubCategory()
+    {
+        return new HeaderSubCategoryResource(Category::with('subcategory')->where('status',1)->where('is_deleted',0)->first());
+    }
+
 }
