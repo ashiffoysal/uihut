@@ -10,10 +10,10 @@
         <h3>All Blog</h3>
         <div class="blogelement" v-if="blogdata.length > 0">
             <tr v-for="(blog,index) in blogdata" :key="index">
-            <td>{{blog.title}}</td>
-            <td>{{blog.category_id}}</td>
-            <td>{{blog.details}}</td>
-            <td>{{blog.tags}}</td>
+            <td>{{ blog.title }}</td>
+            <td>{{ blog.category_id }}</td>
+            <td>{{ blog.details }}</td>
+            <td>{{ blog.tags }}</td>
             <td> <img :src="blog.image" alt=""></td>
         </tr>
         <pagination :data="blogdata">
