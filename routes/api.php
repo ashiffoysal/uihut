@@ -40,6 +40,13 @@ Route::get('/categores',[App\Http\Controllers\Api\HomeController::class, 'showCa
 Route::get('/explores',[App\Http\Controllers\Api\HomeController::class, 'showExplores']);
 Route::get('/clientsay',[App\Http\Controllers\Api\HomeController::class, 'showClientReview']);
 Route::get('/show/pricing',[App\Http\Controllers\Api\HomeController::class, 'showPrice']);
+Route::get('/show/header/category',[App\Http\Controllers\Api\HomeController::class, 'getHeaderSubCategory']);
+Route::get('/get/product/categores',[App\Http\Controllers\Api\ProductController::class, 'getCategores']);
+Route::get('/get/product/subcategores/{catID}',[App\Http\Controllers\Api\ProductController::class, 'getSubCategores']);
+Route::get('/get/product/resubcategores/{catID}/{subcatID}',[App\Http\Controllers\Api\ProductController::class, 'getReSubCategores']);
+
+Route::get('/get/product/{catID}/{subcatID}',[App\Http\Controllers\Api\ProductController::class, 'getProductByID']);
+
 
 Route::middleware('auth:api')->group(function () {
     Route::post('logout',[App\Http\Controllers\Api\UserController::class, 'logout']);

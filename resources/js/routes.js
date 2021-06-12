@@ -10,6 +10,7 @@ let routes = [
             {
                 path: '/',
                 component: require('./components/home/main').default,
+                name:'home',
             },
             {
                 path: '/register',
@@ -46,40 +47,38 @@ let routes = [
                     requiresAuth: true,
                 }
             },
+            {
+                path: '/blogs',
+                component: require('./components/blog/blog').default,
+                name: 'blogs',
+               
+            },
+            {
+                path: '/privacy_&_policy',
+                component: require('./components/privacypolicy/privacy_&_policy').default,
+                name: 'privacy',
+               
+            },
+            {
+                path: '/licence',
+                component: require('./components/licencing/licence').default,
+                name: 'licence',
+               
+            },
         ]
     },
     {
-        path:'/web/template',
+        path:'/',
         component: require('./components/products/product_master').default,
+        redirect: '/web_template',
         children:[
             {
-                path: '/web/template',
-                component: require('./components/products/product_list/product_list').default,
-                name: 'web_template',
+                path: '/:cat/:subcat',
+                component: require('./components/products/product_list/products').default,
+                name: 'products',       
             },
         ],
     },
-
-    {
-        path: '/blogs',
-        component: require('./components/blog/blog').default,
-        name: 'blogs',
-       
-    },
-    {
-        path: '/privacy_&_policy',
-        component: require('./components/privacypolicy/privacy_&_policy').default,
-        name: 'privacy',
-       
-    },
-    {
-        path: '/licence',
-        component: require('./components/licencing/licence').default,
-        name: 'licence',
-       
-    },
-
-
 ];
 
 const router = new VueRouter({

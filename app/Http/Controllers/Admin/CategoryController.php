@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Image;
 
@@ -26,6 +27,7 @@ class CategoryController extends Controller
         ]);
         $insert=Category::insertGetId([
             'name'=>$request->name,
+            'slug'=>Str::slug($request->name,'-'),
             'icon'=>$request->icon,
             'image'=>'',
             'created_at'=>carbon::now()->toDateTimeString(),
@@ -107,6 +109,7 @@ class CategoryController extends Controller
         $id=$request->id;
         $update=Category::where('id',$id)->update([
             'name'=>$request->name,
+            'slug'=>Str::slug($request->name,'-'),
             'icon'=>$request->icon,
             'updated_at'=>Carbon::now()->toDateTimeString(),
         ]);

@@ -12,6 +12,8 @@ const store = new Vuex.Store({
 		explores:{},
 		clientsays:{},
 		price:{},
+		category:'',
+		subcategores:{},
 	},
 
 	// getter area start
@@ -34,6 +36,15 @@ const store = new Vuex.Store({
 		},
 		getPrice:(state)=>{
 			return state.price;
+		},
+		getSubCategory:(state)=>{
+			return state.category;
+		},
+		getProduct:(state)=>{
+			return state.products;
+		},
+		getSubCategores:(state)=>{
+			return state.subcategores;
 		}
 	},
 
@@ -130,7 +141,30 @@ const store = new Vuex.Store({
 			.catch((error) => {
 				console.log(error);		
 			});
+		},
+
+		// get category and subcategory orderby for menu
+		getHeaderSubcat(context){
+			axios.get("/show/header/category"
+			).then((res) => {
+				context.commit('HEADER_SUB_CATEGORY',res.data.data);
+			})
+			.catch((error) => {
+				console.log(error);		
+			});
+		},
+
+		// get Sub Category by Category ID
+		retriveSubCategory(context,cat){
+			axios.get("/show/product/subcategory/"+cat
+			).then((res) => {
+				context.commit('PRODUCT_SUB_CATEGORY',res.data.data);
+			})
+			.catch((error) => {
+				console.log(error);		
+			});
 		}
+		
 	},
 
 	// mutations area start
@@ -155,7 +189,17 @@ const store = new Vuex.Store({
 		},
 		RETRIVE_PRICE(state,data){
 			return state.price = data;
-		}
+		},
+		HEADER_SUB_CATEGORY(state,data){
+			return state.category = data;
+		},
+		RETRIVE_PRODUCT(state,data){
+			return state.products = data;
+		},
+		PRODUCT_SUB_CATEGORY(state,data){
+			return state.subcategores = data;
+		},
+		
 	},
 });
 

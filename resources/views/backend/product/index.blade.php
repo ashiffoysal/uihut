@@ -260,7 +260,7 @@
 													</td>
 													<!--end::User=-->
 													<!--begin::Role=-->
-													<td>{{$data->category->name}}</td>
+													<td>{{$data->category->name ?? ''}}</td>
                                                 
 													<!--end::Role=-->
 													<!--begin::Last login=-->

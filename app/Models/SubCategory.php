@@ -12,4 +12,6 @@ class SubCategory extends Model
     {
         return $this->hasOne('App\Models\Category','id','cate_id');
     }
+
+    
 }

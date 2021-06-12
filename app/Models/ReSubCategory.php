@@ -16,4 +16,8 @@ class ReSubCategory extends Model
     {
         return $this->hasOne('App\Models\SubCategory','id','subcate_id');
     }
+    public function products()
+    {
+        return $this->hasMany(Product::class,'resubcate_id','id');
+    }
 }
