@@ -33,6 +33,8 @@ Route::get('/blog/category',[App\Http\Controllers\Api\BlogController::class, 'in
 Route::get('/allblog',[App\Http\Controllers\Api\BlogController::class, 'allblog']);
 Route::get('/privacypolicy',[App\Http\Controllers\Api\PrivacyPolicyController::class, 'index']);
 Route::get('/licence',[App\Http\Controllers\Api\LicenceController::class, 'index']);
+Route::get('/termsandcondition',[App\Http\Controllers\Api\TremsAndConditionController::class, 'index']);
+Route::get('/social',[App\Http\Controllers\Api\TremsAndConditionController::class, 'social']);
 
 // shwo home section route
 Route::get('/banner',[App\Http\Controllers\Api\HomeController::class, 'showBanner']);

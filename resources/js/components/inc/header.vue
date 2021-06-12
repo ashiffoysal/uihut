@@ -2,8 +2,13 @@
       <div class="col-lg-12">
           <div class="header card m-2 p-5 text-center">
               <h2>Header and Menu Area</h2>
+
               <router-link class="btn btn-primary" :to="{name:'home'}">Home</router-link>
               <router-link class="btn btn-primary mt-4" :to="{name:'products',params:{cat:getHeaderSubcat.slug,subcat:getHeaderSubcat.subcat,id:getHeaderSubcat.id}}">Products</router-link>
+
+
+
+
               <router-link class="btn btn-primary mt-4" to="/blogs">Blog</router-link>
               <router-link class="btn btn-primary mt-4" v-if="!logedIn" :to="{name:'register'}">Register</router-link>
               <router-link class="btn btn-primary mt-4" v-if="!logedIn" :to="{name:'login'}">Login</router-link>

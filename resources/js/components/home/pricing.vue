@@ -15,11 +15,7 @@
             </li>
             <li class="list-group-item">
               <ul class="list-group">
-                <li
-                  class="list-group-item"
-                  v-for="(feature, index) in price.feature"
-                  :key="index"
-                >
+                <li class="list-group-item" v-for="(feature, index) in price.feature" :key="index">
                   {{ feature }}
                 </li>
               </ul>

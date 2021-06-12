@@ -65,6 +65,14 @@ let routes = [
                 name: 'licence',
                
             },
+
+            {
+                path: '/termsandcondition',
+                component: require('./components/termsandcondition/termsandcondition').default,
+                name: 'termsandcondition',
+               
+            },
+
         ]
     },
     {
@@ -79,6 +87,7 @@ let routes = [
             },
         ],
     },
+
 ];
 
 const router = new VueRouter({
