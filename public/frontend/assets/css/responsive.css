@@ -1,0 +1,295 @@
+@media (min-width: 1400px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+        max-width: 1140px;
+    }
+    .testimonial-area .container,
+    .aabbro-pricing-area .container {
+        max-width: 1530px;
+    }
+}
+
+/* Medium Layout: 1367px. */
+
+@media only screen and (min-width: 1200px) and (max-width: 1367px) {
+
+}
+
+
+/* Medium Layout: 1280px. */
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    
+}
+
+
+/* Tablet Layout: 768px. */
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    
+}
+
+@media only screen and (max-width: 991px) {
+    .aabbro-navbar {
+        padding: 15px !important
+    }
+    
+    button.navbar-toggler {
+        background-color: #6382e9;
+        padding: 7px 5px;
+        width: 35px;
+        text-align: center;
+    }
+    
+    button.navbar-toggler span.navbar-toggler-icon {
+        position: relative;
+        display: block;
+        border: 2px solid #fff;
+        border-left: none;
+        border-right: none;
+        width: 100%;
+    }
+    
+    button.navbar-toggler span.navbar-toggler-icon:after {
+        position: absolute;
+        content: '';
+        height: 2px;
+        width: 100%;
+        background-color: #fff;
+        left: 0;
+        top: 7px;
+    }
+    .aabbro-navbar ul.navbar-nav li a {
+        text-align: left;
+    }
+    .aabbro-navbar ul.navbar-nav li:last-child {
+        margin: 0px;
+    }
+    header.aabbro-header {
+        background-color: #804eec;
+    }
+    header.navbar-fixed-top {
+        background: #F9F9F9;
+    }
+    .er-btn-mobile{ 
+        display: block !important;
+    }
+
+    .hero-content h1 {
+        font-size: 32px;
+        line-height: 42px;
+    }
+    
+    .hero-content p {
+        font-size: 18px;
+        line-height: 30px;
+        margin-top: 14px;
+        margin-bottom: 32px;
+    }
+    
+    .hero-img-video video.aabbro-video-player {
+        height: 220px;
+        margin-bottom: -110px;
+        border: 15px solid #f9f9f9;
+        border-radius: 10px;
+    }
+    
+    .hero-area {
+        padding-top: 105px;
+    }
+    
+    .hero-img-video {
+        margin-bottom: 0px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-top: 40px;
+    }
+    
+    .product-category-area {
+        padding-top: 155px;
+    }
+    
+    .section-head h2 {
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 36px;
+    }
+    
+    .product-category-area .section-head {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .er-btn {
+        text-align: center;
+        display: none;
+    }
+    
+    .product-caegory-wrapper {
+        padding-top: 0px;
+    }
+    
+    .product-category-area {
+        padding-bottom: 60px;
+    }
+    
+    .atia-img {
+        padding: 24px;
+    }
+    
+    .atia-img video.aabbro-video-player {
+        height: 245px;
+        border-width: 15px;
+    }
+    
+    .atia-text {
+        padding: 24px;
+    }
+    
+    .atia-text h2 {
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 36px;
+    }
+    
+    .atia-text p {
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 30px;
+        margin: 20px auto;
+    }
+    
+    ul.atia-list li {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 30px;
+    }
+    .aabbro-navbar ul.navbar-nav {
+        margin-top: 50px;
+        margin-bottom: 40px !important;
+    }
+    
+    .aabbro-navbar ul.navbar-nav li a {
+        padding: 12px 0px;
+    }
+    
+    .aabbro-navbar ul.navbar-nav li a.sign-in-btn {
+        margin-top: 20px;
+    }
+}
+/* Mobile Layout: 320px. */
+
+@media only screen and (max-width: 767px) {
+    .sprice-head ul li:first-child {
+        display: none;
+    }
+    .abbro-mb-order-2 {
+        order: 2!important;
+    }
+    .stt-qouts {
+        margin-top: 20px;
+    }
+    .abbro-mb-order-1 {
+        order: 1!important;
+    }
+    .testimonial-area {
+        padding: 40px 0px;
+    }
+    
+    .tsec-head {}
+    
+    .tsec-head h2 {
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 36px;
+        max-width: 260px;
+        text-align: center;
+        margin: 0px auto;
+    }
+    
+    .single-testimonial {
+        margin: 0px auto;
+        margin-bottom: 24px;
+    }
+    
+    .single-testimonial .st-img {
+        width: 100%;
+    }
+    
+    .single-testimonial .st-text {
+        width: 100%;
+        float: unset;
+    }
+    
+    .aabbro-pricing-area {
+        padding: 60px 0px 30px;
+    }
+    
+    .pricing-section-head h2 {
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 36px;
+    }
+    
+    .pricing-section-head {
+        margin-bottom: 24px;
+    }
+    
+    .single-pricing {
+        margin-top: 0px;
+        margin-bottom: 32px;
+    }
+    
+    .call-to-action-area .cta-text {
+        padding-top: 60px;
+        text-align: center;
+        margin-left: 25px;
+        margin-right: 25px;
+        padding-bottom: 0px;
+    }
+    
+    .call-to-action-area .cta-text h2 {
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 36px;
+        margin-bottom: 24px;
+    }
+    
+    .call-to-action-area .cta-text a {
+        display: block;
+        margin-bottom: 16px;
+    }
+    
+    .cta-img {
+        text-align: center;
+    }
+
+    .footer-widget {
+        padding-top: 60px;
+        padding-bottom: 40px;
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+    
+    .sf-widget {
+        padding: 0px;
+        margin-top: 10px;
+    }
+    
+    .sf-widget h4 {
+        margin-bottom: 16px;
+    }
+}
+
+
+/* Wide Mobile Layout: 480px. */
+
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+    
+}
+
+
+/* Wide Mobile Layout: 480px. */
+
+@media only screen and (min-width: 240px) and (max-width: 480px) {
+    
+}

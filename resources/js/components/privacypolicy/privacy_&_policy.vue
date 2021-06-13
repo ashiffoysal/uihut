@@ -2,9 +2,9 @@
   <div class="col-lg-12">
     <div class="text-center card p-5">
         <h1>
-            THis is Privacy Policy 
+            THis is Privacy Policy
         </h1>
-            <p>{{ privacy.details }}</p>
+          <p>{{getPrivacyPolicy.details}} </p>
        
 
         </div>
@@ -16,25 +16,14 @@
 <script>
 export default {
   name: "privacy",
-  data(){
-      return {
-          privacy: [],
-         
-      }
-  },
   mounted(){
-
-    this.loadprivacy();
-     
+    this.$store.dispatch('retrivePrivacypolicy');
     },
-  methods:{
-      loadprivacy(){
-          axios.get('/privacypolicy').then(response=>{
-              this.privacy=response.data;
-          });
-      },
-    
-  },
+  computed:{
+    getPrivacyPolicy(){
+      return this.$store.getters.getPrivacyPolicy;
+    }
+  }
   
 };
 </script>
