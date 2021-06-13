@@ -78,8 +78,12 @@ let routes = [
     {
         path:'/',
         component: require('./components/products/product_master').default,
-        redirect: '/web_template',
         children:[
+            {
+                path: '/:cat/:subcat',
+                component: require('./components/products/product_list/products').default,
+                name: 'products',       
+            },
             {
                 path: '/:cat/:subcat',
                 component: require('./components/products/product_list/products').default,
