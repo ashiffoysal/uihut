@@ -29,7 +29,7 @@
                       params: { cat: cat.slug, subcat: cat.subcate },
                     }"
                     class="nav-link"
-                    >{{ cat.name }}<span class="sr-only">(current)</span>
+                    >{{ cat.name }} {{selected}}<span class="sr-only">(current)</span>
                   </router-link>
                 </li>
               </ul>
@@ -39,6 +39,7 @@
                   type="search"
                   placeholder="Search"
                   aria-label="Search"
+                  v-model="search"
                 />
                 <button
                   class="btn btn-outline-success my-2 my-sm-0"
@@ -59,13 +60,14 @@
           v-for="subcat in subcategores"
           :key="subcat.id"
         >
-          <button
-            type="button"
-            class="btn btn-secondary border-right border-info"
-            @click="selectSubCategory(subcat.slug)"
-          >
-            {{ subcat.name }}
-          </button>
+          <router-link
+            :to="{
+              name: 'products',
+              params: { cat: getCategerySlug, subcat: subcat.slug },
+            }"
+            class="btn btn-primary"
+            >{{ subcat.name }}<span class="sr-only">(current)</span>
+          </router-link>
         </div>
 
         <ul class="list-group m-4">
@@ -78,7 +80,9 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                id="defaultCheck1"
+                :id="'id'+resub.id"
+                :value="resub.id"
+                v-model="selected.resubcat"
               />
               <label class="form-check-label" for="defaultCheck1">
                 {{ resub.name
@@ -90,89 +94,30 @@
       </div>
       <div class="col-lg-7">
         <div class="row">
-          <div class="col-lg-6">
-            <div class="card mt-4" style="width: 18rem">
-              <!-- <img class="card-img-top" src="..." alt="Card image cap" /> -->
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+          <div class="col-lg-6" v-for="product in products" :key="product.id">
+            <router-link class="nav-link" :to="{name:'singleProduct',params:{id:product.id}}">
+              <div class="card mt-4" style="width: 18rem">
+                <img
+                  class="card-img-top"
+                  :src="product.image"
+                  alt="Card image cap"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">{{ product.title }}</h5>
+                </div>
               </div>
-            </div>
+            </router-link>
           </div>
 
-          <div class="col-lg-6">
-            <div class="card mt-4" style="width: 18rem">
-              <!-- <img class="card-img-top" src="..." alt="Card image cap" /> -->
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-          </div>
+          <button
+            type="button"
+            @click="productLoadMore"
+            class="btn btn-primary text-center m-4"
+          >
+            Load More
+          </button>
 
-          <div class="col-lg-6">
-            <div class="card mt-4" style="width: 18rem">
-              <!-- <img class="card-img-top" src="..." alt="Card image cap" /> -->
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6">
-            <div class="card mt-4" style="width: 18rem">
-              <!-- <img class="card-img-top" src="..." alt="Card image cap" /> -->
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6">
-            <div class="card mt-4" style="width: 18rem">
-              <!-- <img class="card-img-top" src="..." alt="Card image cap" /> -->
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6">
-            <div class="card mt-4" style="width: 18rem">
-              <!-- <img class="card-img-top" src="..." alt="Card image cap" /> -->
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-          </div>
+          <!-- <a  :href="http://localhost/uihut/uihut613/api/get/product/category-2/SubCategory-4?page=2">dfdas</a> -->
         </div>
       </div>
 
@@ -186,10 +131,20 @@
             aria-haspopup="true"
             aria-expanded="false"
           ></button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+
+          <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                   value="1"
+                id="flexCheckDefault"
+                v-model="selected.filter"
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+                Default checkbox
+              </label>
+            </div>
           </div>
         </div>
       </div>
@@ -205,6 +160,12 @@ export default {
       subcategores: [],
       resubcategores: [],
       products: [],
+      search:'',
+      selected:{
+        resubcat:[],
+        filter:[],
+        search:''
+      }
     };
   },
   created() {
@@ -219,6 +180,9 @@ export default {
       this.retriveSubCategores();
       this.retriveReSubCategores();
       this.retriveProduct();
+      this.selected.resubcat =[];
+      this.selected.filter =[];
+      this.selected.search ='';
     },
   },
   methods: {
@@ -263,6 +227,7 @@ export default {
 
     // get data click on sub category
     selectSubCategory($slug) {
+      alert("ok");
       var cat = this.$route.params.cat;
       var subcat = $slug;
       axios
@@ -288,6 +253,27 @@ export default {
           console.log(error);
         });
     },
+
+    // Load More Product
+
+    productLoadMore() {
+      var cat = this.$route.params.cat;
+      var subcat = this.$route.params.subcat;
+      axios
+        .get(`/get/product/${cat}/${subcat}?page=2`)
+        .then((res) => {
+          this.products.push(res.data.data[0]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
+
+  computed:{
+    getCategerySlug(){
+      return this.$route.params.cat;
+    }
+  }
 };
 </script>
