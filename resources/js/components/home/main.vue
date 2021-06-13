@@ -1,5 +1,5 @@
 <template>
-  <div class="col-lg-12">
+  <div>
     <Banner-component :banners="getBanner"/>
     <Category-component :categores="getCategores"/>
     <Explore-component :explores="getExplores"/>

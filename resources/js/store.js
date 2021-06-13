@@ -14,6 +14,8 @@ const store = new Vuex.Store({
 		price:{},
 		category:'',
 		subcategores:{},
+		privacyPolicy:{},
+		licencing:{},
 	},
 
 	// getter area start
@@ -45,7 +47,13 @@ const store = new Vuex.Store({
 		},
 		getSubCategores:(state)=>{
 			return state.subcategores;
-		}
+		},
+		getPrivacyPolicy:(state)=>{
+			return state.privacyPolicy;
+		},
+		getLicencing:(state)=>{
+			return state.licencing;
+		},
 	},
 
 	// action area start
@@ -163,6 +171,28 @@ const store = new Vuex.Store({
 			.catch((error) => {
 				console.log(error);		
 			});
+		},
+
+		// retrive Privacy policy
+
+		retrivePrivacypolicy(context){
+			axios.get("/privacypolicy"
+			).then((res) => {
+				context.commit('RETRIVE_PRIVACY_POLICY',res.data);
+			})
+			.catch((error) => {
+				console.log(error);		
+			});
+		},
+		// licencing
+		retriveLicencing(context){
+			axios.get("/licence"
+			).then((res) => {
+				context.commit('RETRIVE_LICENCING',res.data);
+			})
+			.catch((error) => {
+				console.log(error);		
+			});
 		}
 		
 	},
@@ -198,6 +228,12 @@ const store = new Vuex.Store({
 		},
 		PRODUCT_SUB_CATEGORY(state,data){
 			return state.subcategores = data;
+		},
+		RETRIVE_PRIVACY_POLICY(state,data){
+			return state.privacyPolicy = data;
+		},
+		RETRIVE_LICENCING(state,data){
+			return state.licencing = data;
 		},
 		
 	},
