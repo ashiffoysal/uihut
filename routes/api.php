@@ -44,8 +44,17 @@ Route::get('/clientsay',[App\Http\Controllers\Api\HomeController::class, 'showCl
 Route::get('/show/pricing',[App\Http\Controllers\Api\HomeController::class, 'showPrice']);
 Route::get('/show/header/category',[App\Http\Controllers\Api\HomeController::class, 'getHeaderSubCategory']);
 Route::get('/get/product/categores',[App\Http\Controllers\Api\ProductController::class, 'getCategores']);
+Route::get('/product/{id}',[App\Http\Controllers\Api\ProductController::class, 'getSingleProduct']);
+
 Route::get('/get/product/subcategores/{catID}',[App\Http\Controllers\Api\ProductController::class, 'getSubCategores']);
 Route::get('/get/product/resubcategores/{catID}/{subcatID}',[App\Http\Controllers\Api\ProductController::class, 'getReSubCategores']);
+
+
+
+Route::get('/get/filter/product/{cat}/{subcat}',[App\Http\Controllers\Api\ProductController::class, 'getFilterProduct']);
+
+
+
 
 Route::get('/get/product/{catID}/{subcatID}',[App\Http\Controllers\Api\ProductController::class, 'getProductByID']);
 

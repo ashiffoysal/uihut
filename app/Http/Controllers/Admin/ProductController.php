@@ -47,15 +47,7 @@ class ProductController extends Controller
     }
     public function store(Request $request)
     {
-
-
-
-     
-
-
-
-
-
+        
         $proname = $request->title;
         $slug = preg_replace('/[^A-Za-z0-9-]+/', '-', $proname);
 
@@ -65,10 +57,18 @@ class ProductController extends Controller
             'product_img' => 'required',
         ]);
 
+        $cat = Category::findOrFail($request->category);
+        $cat_slug = $cat?$cat->slug:' ';
+
+        $subcat = SubCategory::findOrFail($request->subcategory);
+        $subcat_slug = $subcat?$subcat->slug:' ';
+
         $product = new Product;
         $product->title = $request->title;
         $product->cate_id = $request->category;
+        $product->cat_slug = $cat_slug;
         $product->subcate_id = $request->subcategory;
+        $product->subcat_slug = $subcat_slug;
         $product->resubcate_id = $request->resubcategory;
         $product->tag = $request->tag;
         $product->slug = $slug;
@@ -229,10 +229,19 @@ class ProductController extends Controller
            
         ]);
 
+        $cat = Category::findOrFail($request->category);
+        $cat_slug = $cat?$cat->slug:' ';
+
+        $subcat = SubCategory::findOrFail($request->subcategory);
+        $subcat_slug = $subcat?$subcat->slug:' ';
+
+
         $product = Product::findOrFail($id);
         $product->title = $request->title;
         $product->cate_id = $request->category;
+        $product->cat_slug = $cat_slug;
         $product->subcate_id = $request->subcategory;
+        $product->subcat_slug = $subcat_slug;
         $product->resubcate_id = $request->resubcategory;
         $product->tag = $request->tag;
         $product->slug = $slug;

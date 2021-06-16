@@ -85,9 +85,9 @@ let routes = [
                 name: 'products',       
             },
             {
-                path: '/:cat/:subcat',
-                component: require('./components/products/product_list/products').default,
-                name: 'products',       
+                path: '/:id',
+                component: require('./components/products/product_list/product_details').default,
+                name: 'singleProduct',       
             },
         ],
     },

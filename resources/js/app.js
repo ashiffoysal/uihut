@@ -2,7 +2,6 @@ require('./bootstrap');
 window.Vue = require('vue').default;
 Vue.use(Notifications)
 import Notifications from 'vue-notification'
-var $ = require( "jquery" );
 
 import router from './routes'
 import store from './store'

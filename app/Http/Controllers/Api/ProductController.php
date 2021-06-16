@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductCategoryCollection;
 use App\Http\Resources\ProductCollection;
+use App\Http\Resources\ProductResource;
 use App\Http\Resources\ReSubCategoryCollection;
 use App\Http\Resources\SubCategoryCollection;
 use App\Models\Category;
@@ -51,5 +52,33 @@ class ProductController extends Controller
             $products=Product::where('cate_id',$category->id)->where('subcate_id',$subcat->id)->where('status',1)->where('is_deleted',0)->paginate(10);
            return new ProductCollection($products);
         }
+    }
+
+    // Get Single Product
+
+    public function getSingleProduct($id)
+    {
+        return new ProductResource(Product::findOrFail($id));
+    }
+
+    // Get Filter Product
+    public function getFilterProduct(Request $request,$cat,$subcat)
+    {
+        
+        $resubcat = $request->input('resubcat', []);
+        $search = $request->search;
+
+        $products = Product::when(isset($cat),function($q) use ($cat){
+                $q->where('cat_slug',$cat);
+        })->when(isset($subcat),function($q) use ($subcat){
+            $q->where('subcat_slug',$subcat);
+        })->when(count($resubcat),function($q) use ($resubcat){
+            $q->whereIn('resubcate_id',$resubcat);
+        })->when(isset($search),function($q) use($search){
+            $q->where('title', 'like', '%' . $search . '%');
+        })
+        ->paginate(1);
+
+        return new ProductCollection($products);
     }
 }
