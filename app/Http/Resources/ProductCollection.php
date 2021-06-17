@@ -21,10 +21,12 @@ class ProductCollection extends ResourceCollection
                     'title' => $data->title,
                     'image'=> asset('public/uploads/products/thumbnail/'.$data->thumbnail_img),
                 ];
-            })
+            }),
+            'link'=>$request->next_page_url,
         ];
     }
 
+   
     public function with($request)
     {
         return [
