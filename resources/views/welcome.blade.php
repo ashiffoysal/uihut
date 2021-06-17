@@ -47,6 +47,8 @@
     <div id="app">
         <main-component></main-component>
     </div>
+    @paddle
+
 </body>
     <!-- Scripts -->
     <!-- jQuery Plugin -->

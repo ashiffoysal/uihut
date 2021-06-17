@@ -16,6 +16,7 @@ const store = new Vuex.Store({
 		subcategores:{},
 		privacyPolicy:{},
 		licencing:{},
+		logo:{},
 	},
 
 	// getter area start
@@ -53,6 +54,9 @@ const store = new Vuex.Store({
 		},
 		getLicencing:(state)=>{
 			return state.licencing;
+		},
+		getLogo:(state)=>{
+			return state.logo;
 		},
 	},
 
@@ -193,6 +197,16 @@ const store = new Vuex.Store({
 			.catch((error) => {
 				console.log(error);		
 			});
+		},
+
+		retriveLogo(context){
+			axios.get("/logo"
+			).then((res) => {
+				context.commit('RETRIVE_LOGO',res.data);
+			})
+			.catch((error) => {
+				console.log(error);		
+			});
 		}
 		
 	},
@@ -234,6 +248,9 @@ const store = new Vuex.Store({
 		},
 		RETRIVE_LICENCING(state,data){
 			return state.licencing = data;
+		},
+		RETRIVE_LOGO(state,data){
+			return state.logo = data;
 		},
 		
 	},

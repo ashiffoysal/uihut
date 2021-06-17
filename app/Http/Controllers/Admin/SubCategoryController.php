@@ -28,9 +28,12 @@ class SubCategoryController extends Controller
             'name' => 'required',
             'category' => 'required',
         ]);
+        $proname = $request->name;
+        $slug = preg_replace('/[^A-Za-z0-9-]+/', '-', $proname);
+
         $insert=SubCategory::insertGetId([
             'name'=>$request->name,
-            'slug'=>Str::slug($request->name,'-'),
+            'slug'=> $slug,
             'cate_id'=>$request->category,
             'created_at'=>carbon::now()->toDateTimeString(),
         ]);
@@ -103,9 +106,11 @@ class SubCategoryController extends Controller
             'category' => 'required',
         ]);
         $id=$request->id;
+        $proname = $request->name;
+        $slug = preg_replace('/[^A-Za-z0-9-]+/', '-', $proname);
         $update=SubCategory::where('id',$id)->update([
             'name'=>$request->name,
-            'slug'=>Str::slug($request->name,'-'),
+            'slug'=>$slug,
             'cate_id'=>$request->category,
             'updated_at'=>Carbon::now()->toDateTimeString(),
         ]);

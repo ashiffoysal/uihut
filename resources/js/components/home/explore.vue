@@ -1,6 +1,6 @@
 <template>
   <div class="text-center card p-5">
-    <h2>This is Explore</h2>
+    <h2>This is Ex</h2>
     <ul
       class="list-group mt-2"
       v-for="(explore, index) in explores"

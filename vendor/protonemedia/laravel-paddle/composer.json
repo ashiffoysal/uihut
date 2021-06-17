@@ -1,0 +1,59 @@
+{
+    "name": "protonemedia/laravel-paddle",
+    "description": "Paddle.com integration for Laravel",
+    "keywords": [
+        "protonemedia",
+        "laravel-paddle",
+        "paddle"
+    ],
+    "homepage": "https://github.com/protonemedia/laravel-paddle",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Pascal Baljet",
+            "email": "pascal@protone.media",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.3|^8.0",
+        "ext-openssl": "*",
+        "egulias/email-validator": "^2.1.10",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "illuminate/support": "^8.0",
+        "illuminate/validation": "^8.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ProtoneMedia\\LaravelPaddle\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ProtoneMedia\\LaravelPaddle\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ProtoneMedia\\LaravelPaddle\\PaddleServiceProvider"
+            ],
+            "aliases": {
+                "Paddle": "ProtoneMedia\\LaravelPaddle\\Paddle"
+            }
+        }
+    }
+}

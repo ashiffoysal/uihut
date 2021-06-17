@@ -34,7 +34,9 @@ Route::get('/allblog',[App\Http\Controllers\Api\BlogController::class, 'allblog'
 Route::get('/privacypolicy',[App\Http\Controllers\Api\PrivacyPolicyController::class, 'index']);
 Route::get('/licence',[App\Http\Controllers\Api\LicenceController::class, 'index']);
 Route::get('/termsandcondition',[App\Http\Controllers\Api\TremsAndConditionController::class, 'index']);
-Route::get('/social',[App\Http\Controllers\Api\TremsAndConditionController::class, 'social']);
+
+Route::get('/social',[App\Http\Controllers\Api\LogoController::class, 'social']);
+Route::get('/logo',[App\Http\Controllers\Api\LogoController::class, 'Logo']);
 
 // shwo home section route
 Route::get('/banner',[App\Http\Controllers\Api\HomeController::class, 'showBanner']);
