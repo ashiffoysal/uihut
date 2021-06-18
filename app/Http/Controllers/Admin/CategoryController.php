@@ -22,12 +22,18 @@ class CategoryController extends Controller
     }
     // store
     public function store(Request $request){
+       
+
         $validated = $request->validate([
             'name' => 'required',
         ]);
+
+        $proname = $request->name;
+        $slug = preg_replace('/[^A-Za-z0-9-]+/', '-', $proname);
+
         $insert=Category::insertGetId([
             'name'=>$request->name,
-            'slug'=>Str::slug($request->name,'-'),
+            'slug'=>$slug,
             'icon'=>$request->icon,
             'image'=>'',
             'created_at'=>carbon::now()->toDateTimeString(),
@@ -107,9 +113,13 @@ class CategoryController extends Controller
           
         ]);
         $id=$request->id;
+
+        $proname = $request->name;
+        $slug = preg_replace('/[^A-Za-z0-9-]+/', '-', $proname);
+        
         $update=Category::where('id',$id)->update([
             'name'=>$request->name,
-            'slug'=>Str::slug($request->name,'-'),
+            'slug'=>$slug,
             'icon'=>$request->icon,
             'updated_at'=>Carbon::now()->toDateTimeString(),
         ]);

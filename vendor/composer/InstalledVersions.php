@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '869cf2d08afd9bb65f33516f7401149ade9ce9f3',
+    'reference' => '983d48ee0a9fe67249a8d9c52656afec1030f393',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -486,7 +486,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '869cf2d08afd9bb65f33516f7401149ade9ce9f3',
+      'reference' => '983d48ee0a9fe67249a8d9c52656afec1030f393',
     ),
     'laravel/passport' => 
     array (
@@ -827,6 +827,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'c73c6737305e779771147af66c96ca6a7ed8a741',
+    ),
+    'protonemedia/laravel-paddle' => 
+    array (
+      'pretty_version' => '2.2.2',
+      'version' => '2.2.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'a994a8ae0562087d1fc8ebbb8b63a5c65b5f8e84',
     ),
     'psr/container' => 
     array (

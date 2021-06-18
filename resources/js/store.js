@@ -7,6 +7,9 @@ const store = new Vuex.Store({
 
 	state: {
 		token: localStorage.getItem('access_token') || null,
+
+		logo:{},
+
 		homebanner: {},
 		categores: {},
 		explores: {},
@@ -22,6 +25,7 @@ const store = new Vuex.Store({
 		productReSubCategores: {},
 		mainProducts: {},
 		productlink: {},
+
 	},
 
 	// getter area start
@@ -60,6 +64,11 @@ const store = new Vuex.Store({
 		getLicencing: (state) => {
 			return state.licencing;
 		},
+
+		getLogo:(state)=>{
+			return state.logo;
+		},
+
 		getSingleProduct: (state) => {
 			return state.singleProduct;
 		},
@@ -78,6 +87,7 @@ const store = new Vuex.Store({
 		nextPageLink:(state)=>{
 			return state.productlink.next !=null;
 		}
+
 	},
 
 	// action area start
@@ -225,6 +235,21 @@ const store = new Vuex.Store({
 			).then((res) => {
 				context.commit('RETRIVE_PRODUCT_BY_ID', res.data.data);
 			})
+
+			.catch((error) => {
+				console.log(error);		
+			});
+		},
+
+		retriveLogo(context){
+			axios.get("/logo"
+			).then((res) => {
+				context.commit('RETRIVE_LOGO',res.data);
+			})
+			.catch((error) => {
+				console.log(error);		
+			});
+
 				.catch((error) => {
 					console.log(error);
 					context.commit('RETRIVE_PRODUCT_BY_ID', data);
@@ -299,6 +324,7 @@ const store = new Vuex.Store({
 
 		storeLoadMoreProduct(context,data){
 			context.commit('STORE_LOAD_MORE_PRODUCT', data);
+
 		}
 	},
 
@@ -340,6 +366,12 @@ const store = new Vuex.Store({
 		RETRIVE_LICENCING(state, data) {
 			return state.licencing = data;
 		},
+
+		RETRIVE_LOGO(state,data){
+			return state.logo = data;
+		},
+		
+
 		RETRIVE_PRODUCT_BY_ID(state, data) {
 			return state.singleProduct = data;
 		},
@@ -364,6 +396,7 @@ const store = new Vuex.Store({
 		RETRIVE_PRODUCT_LINK(state,data){
 			return state.productlink = data
 		}
+
 
 	},
 });

@@ -2,13 +2,12 @@
      <header class="aabbro-header"> 
         <nav class="navbar navbar-expand-lg aabbro-navbar">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                    <div class="logo">
-                        <img src="assets/img/main-logo.png" alt="Logo" class="main-logo">
-                        <img src="assets/img/main-logo-2.png" alt="Logo" class="sticky-logo">
-
+                <router-link class="navbar-brand" to="/">
+                    <div class="logo" v-if="getLogo" > 
+                        <img :src="getLogo.logo" alt="Logo" class="main-logo">
+                        <img :src="getLogo.logo" alt="Logo" class="sticky-logo">
                     </div>
-                </a>
+                </router-link>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -40,6 +39,15 @@
 <script>
 export default {
     name:'Header_Part',
+        props:{
+            getLogo:{
+                required:true,
+            }
+        },
+        mounted(){
+        this.$store.dispatch('getHeaderSubcat');
+        
+    },
     computed:{
         logedIn(){
             return this.$store.getters.logedIn;
@@ -47,9 +55,10 @@ export default {
         getHeaderSubcat(){
             return this.$store.getters.getSubCategory;
         },
+       
     },
-    mounted(){
-        this.$store.dispatch('getHeaderSubcat');
-    }
+
+
+
 }
 </script>

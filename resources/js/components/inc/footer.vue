@@ -4,25 +4,25 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="sf-widget sf-logo-text">
-                            <img src="assets/img/footer-logo.png" alt="">
-                            <p>Phosfluorescently expedite revolution
-                                communities for compelling function
-                                uniquely disseminate it’s principle.</p>
-                            <ul class="footer-social">
+                        <div class="sf-widget sf-logo-text"  v-if="getLogo">
+                           
+                         <router-link to="/"><img :src="getLogo.logo" alt="logo"></router-link>  
+                            <p>{{ getLogo.company_motto }}</p>
+                            <ul class="footer-social" v-if="Soicals">
+                               
                                 <li>
-                                    <a href="#" class="social-facebook">
+                                    <a v-bind:href="Soicals.facebook" target="_blank" class="social-facebook">
                                         <i class="fa fa-facebook" aria-hidden="true"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="social-twitter">
+                                    <a v-bind:href="Soicals.twitter" target="_blank" class="social-twitter">
                                         <i class="fa fa-twitter" aria-hidden="true"></i>
                                     </a>
                                 </li>
                               
                                 <li>
-                                    <a href="#" class="social-linkedin">
+                                    <a v-bind:href="Soicals.linkend" target="_blank" class="social-linkedin">
                                         <i class="fa fa-linkedin" aria-hidden="true"></i>
                                     </a>
                                 </li>
@@ -75,8 +75,41 @@
             <p>© 2021, aabbro Allright reserved.</p> 
         </div>
     </footer>
-
 </template>
+
+<script>
+export default {
+    name:'FooterCompnents',
+       props:{
+            getLogo:{
+                required:true,
+            }
+        },
+    data(){
+        return {
+              Soicals:[],
+          }        
+    },
+ 
+     mounted(){
+         this.loadSocial();
+      },
+    
+      methods:{
+          loadSocial(){
+             axios.get('/social').then(response=>{
+                 this.Soicals = response.data;
+             })
+          }
+      },
+    
+
+    
+}
+</script>
+
+
+
 
 
 
