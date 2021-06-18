@@ -20,7 +20,7 @@
               <ul class="navbar-nav mr-auto">
                 <li
                   class="nav-item btn btn-sm btn-warning m-1"
-                  v-for="cat in categores"
+                  v-for="cat in getProductCategores"
                   :key="cat.id"
                 >
                   <router-link
@@ -29,7 +29,7 @@
                       params: { cat: cat.slug, subcat: cat.subcate },
                     }"
                     class="nav-link"
-                    >{{ cat.name }} {{selected}}<span class="sr-only">(current)</span>
+                    >{{ cat.name }}<span class="sr-only">(current)</span>
                   </router-link>
                 </li>
               </ul>
@@ -39,7 +39,7 @@
                   type="search"
                   placeholder="Search"
                   aria-label="Search"
-                  v-model="search"
+                  v-model="selected.search"
                 />
                 <button
                   class="btn btn-outline-success my-2 my-sm-0"
@@ -57,7 +57,7 @@
           class="btn-group ml-4 mt-4"
           role="group"
           aria-label="Basic example"
-          v-for="subcat in subcategores"
+          v-for="subcat in getProductSubCategores"
           :key="subcat.id"
         >
           <router-link
@@ -73,14 +73,14 @@
         <ul class="list-group m-4">
           <li
             class="list-group-item"
-            v-for="resub in resubcategores"
+            v-for="resub in getProductReSubCategores"
             :key="resub.id"
           >
             <div class="form-check">
               <input
                 class="form-check-input"
                 type="checkbox"
-                :id="'id'+resub.id"
+                :id="'id' + resub.id"
                 :value="resub.id"
                 v-model="selected.resubcat"
               />
@@ -94,8 +94,15 @@
       </div>
       <div class="col-lg-7">
         <div class="row">
-          <div class="col-lg-6" v-for="product in products" :key="product.id">
-            <router-link class="nav-link" :to="{name:'singleProduct',params:{id:product.id}}">
+          <div
+            class="col-lg-6"
+            v-for="product in getMainProducts"
+            :key="product.id"
+          >
+            <router-link
+              class="nav-link"
+              :to="{ name: 'singleProduct', params: { id: product.id } }"
+            >
               <div class="card mt-4" style="width: 18rem">
                 <img
                   class="card-img-top"
@@ -111,8 +118,9 @@
 
           <button
             type="button"
-            @click="productLoadMore"
+            @click="loadMoreProduct"
             class="btn btn-primary text-center m-4"
+            v-if="showLoadMoreButton"
           >
             Load More
           </button>
@@ -137,7 +145,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                   value="1"
+                value="1"
                 id="flexCheckDefault"
                 v-model="selected.filter"
               />
@@ -156,124 +164,91 @@ export default {
   name: "ProductsComponent",
   data() {
     return {
-      categores: [],
-      subcategores: [],
-      resubcategores: [],
-      products: [],
-      search:'',
-      selected:{
-        resubcat:[],
-        filter:[],
-        search:''
-      }
+      page: 2,
+      selected: {
+        resubcat: [],
+        filter: [],
+        search: "",
+      },
     };
   },
   created() {
-    this.retriveCategores();
-    this.retriveSubCategores();
-    this.retriveReSubCategores();
-    this.retriveProduct();
+    var cat = this.$route.params.cat;
+    var subcat = this.$route.params.subcat;
+    this.$store.dispatch("retriveCategores");
+    this.$store.dispatch("retriveSubCategores", cat);
+    this.$store.dispatch("retriveReSubCategores", { cat: cat, subcat: subcat });
+    this.$store.dispatch("retriveProduct", { cat: cat, subcat: subcat });
   },
+
+  computed: {
+    getCategerySlug() {
+      return this.$route.params.cat;
+    },
+    getProductCategores() {
+      return this.$store.getters.getProductCategores;
+    },
+    getProductSubCategores() {
+      return this.$store.getters.getProductSubCategores;
+    },
+    getProductReSubCategores() {
+      return this.$store.getters.getProductReSubCategores;
+    },
+    getMainProducts() {
+      return this.$store.getters.getMainProducts;
+    },
+    showLoadMoreButton(){
+      return this.$store.getters.nextPageLink;
+    }
+  },
+
   watch: {
     $route(to, from) {
-      this.retriveCategores();
-      this.retriveSubCategores();
-      this.retriveReSubCategores();
-      this.retriveProduct();
-      this.selected.resubcat =[];
-      this.selected.filter =[];
-      this.selected.search ='';
+      var cat = this.$route.params.cat;
+      var subcat = this.$route.params.subcat;
+      this.$store.dispatch("retriveCategores");
+      this.$store.dispatch("retriveSubCategores", cat);
+      this.$store.dispatch("retriveReSubCategores", {
+        cat: cat,
+        subcat: subcat,
+      });
+
+      this.$store.dispatch("retriveProduct", { cat: cat, subcat: subcat });
+      this.selected.resubcat = [];
+      this.selected.filter = [];
+      this.selected.search = "";
+    },
+    selected: {
+      handler: function () {
+        var cat = this.$route.params.cat;
+        var subcat = this.$route.params.subcat;
+        this.$store.dispatch("retriveFilterProduct", {
+          cat: cat,
+          subcat: subcat,
+          items: this.selected,
+        });
+      },
+      deep: true,
     },
   },
+
   methods: {
-    // retrive category menu
-    retriveCategores() {
-      axios
-        .get("/get/product/categores")
-        .then((res) => {
-          this.categores = res.data.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
 
-    // retrive sub category
-    retriveSubCategores() {
-      var cat = this.$route.params.cat;
-      axios
-        .get(`/get/product/subcategores/${cat}`)
-        .then((res) => {
-          this.subcategores = res.data.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-
-    // retrive resub category
-    retriveReSubCategores() {
+    // product pagination
+    loadMoreProduct() {
       var cat = this.$route.params.cat;
       var subcat = this.$route.params.subcat;
       axios
-        .get(`/get/product/resubcategores/${cat}/${subcat}`)
+        .get(`get/filter/product/${cat}/${subcat}?page=${this.page}`)
         .then((res) => {
-          this.resubcategores = res.data.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-
-    // get data click on sub category
-    selectSubCategory($slug) {
-      alert("ok");
-      var cat = this.$route.params.cat;
-      var subcat = $slug;
-      axios
-        .get(`/get/product/resubcategores/${cat}/${subcat}`)
-        .then((res) => {
-          this.resubcategores = res.data.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-
-    // Retrive product
-    retriveProduct() {
-      var cat = this.$route.params.cat;
-      var subcat = this.$route.params.subcat;
-      axios
-        .get(`/get/product/${cat}/${subcat}`)
-        .then((res) => {
-          this.products = res.data.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-
-    // Load More Product
-
-    productLoadMore() {
-      var cat = this.$route.params.cat;
-      var subcat = this.$route.params.subcat;
-      axios
-        .get(`/get/product/${cat}/${subcat}?page=2`)
-        .then((res) => {
-          this.products.push(res.data.data[0]);
+          var data = res.data.data;
+          this.$store.dispatch('storeLoadMoreProduct',data)
+          this.page += 1;
         })
         .catch((error) => {
           console.log(error);
         });
     },
   },
-
-  computed:{
-    getCategerySlug(){
-      return this.$route.params.cat;
-    }
-  }
 };
 </script>
