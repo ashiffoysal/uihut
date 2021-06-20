@@ -40,6 +40,7 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="{{asset('public/frontend')}}/img/favicon.ico">
+    <script> window._asset = '{{ asset('') }}'; </script>
 
 </head>
 

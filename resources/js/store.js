@@ -25,7 +25,8 @@ const store = new Vuex.Store({
 		productReSubCategores: {},
 		mainProducts: {},
 		productlink: {},
-
+		softwares: {},
+		tagResubCategores: {},
 	},
 
 	// getter area start
@@ -86,6 +87,12 @@ const store = new Vuex.Store({
 		},
 		nextPageLink:(state)=>{
 			return state.productlink.next !=null;
+		},
+		getSoftwares: (state) =>{
+			return state.softwares;
+		},
+		getTagResubCategores: (state) =>{
+			return state.tagResubCategores;
 		}
 
 	},
@@ -249,11 +256,6 @@ const store = new Vuex.Store({
 			.catch((error) => {
 				console.log(error);		
 			});
-
-				.catch((error) => {
-					console.log(error);
-					context.commit('RETRIVE_PRODUCT_BY_ID', data);
-				});
 		},
 
 		// retrive categores
@@ -320,8 +322,34 @@ const store = new Vuex.Store({
 				});
 		},
 
-		// store load more product
 
+		// retrive software type
+		retriveSoftware(context, payload) {
+			axios
+				.get("/get/software/type")
+				.then((res) => {
+					context.commit('RETRIVE_SOFTWARE_TYPE', res.data);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+
+		// retrive tag resub categores
+		retriveTagResuCategores(context, payload) {
+			axios
+				.get("/get/resub/categores/tag",{
+					params: payload
+				})
+				.then((res) => {
+					context.commit('RETRIVE_TAG_RESUB_CATEGORY', res.data);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+
+		// store load more product
 		storeLoadMoreProduct(context,data){
 			context.commit('STORE_LOAD_MORE_PRODUCT', data);
 
@@ -370,8 +398,6 @@ const store = new Vuex.Store({
 		RETRIVE_LOGO(state,data){
 			return state.logo = data;
 		},
-		
-
 		RETRIVE_PRODUCT_BY_ID(state, data) {
 			return state.singleProduct = data;
 		},
@@ -385,9 +411,11 @@ const store = new Vuex.Store({
 			return state.productReSubCategores = data;
 		},
 		RETRIVE_MAIN_PRODUCT(state, data) {
+			state.mainProducts = [];
 			return state.mainProducts = data;
 		},
 		RETRIVE_FILTER_PRODUCT(state, data) {
+			state.mainProducts = [];
 			return state.mainProducts = data;
 		},
 		STORE_LOAD_MORE_PRODUCT(state,data){
@@ -395,6 +423,12 @@ const store = new Vuex.Store({
 		},
 		RETRIVE_PRODUCT_LINK(state,data){
 			return state.productlink = data
+		},
+		RETRIVE_SOFTWARE_TYPE(state,data){
+			return state.softwares = data
+		},
+		RETRIVE_TAG_RESUB_CATEGORY(state,data){
+			return state.tagResubCategores = data
 		}
 
 
