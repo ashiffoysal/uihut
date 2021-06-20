@@ -55,6 +55,11 @@ let routes = [
 
         ]
     },
+    // { 
+    //     path: '/:catchAll(.*)', 
+    //     component: require('./components/errors/404').default,
+    //     name: 'NotFound'
+    //   },
     {
         path:'/',
         component: require('./components/products/product_master').default,
@@ -71,6 +76,7 @@ let routes = [
             },
         ],
     },
+    
 
     {
         path:'/login',

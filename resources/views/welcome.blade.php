@@ -39,7 +39,11 @@
     <link rel="stylesheet" href="{{asset('public/frontend')}}/assets/css/responsive.css">
 
     <!-- Favicon -->
+
     <link rel="shortcut icon" type="image/png" href="{{asset('public/frontend')}}/assets/img/favicon.ico">
+
+    <script> window._asset = '{{ asset('') }}'; </script>
+
 
 </head>
 

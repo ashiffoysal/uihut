@@ -1,5 +1,6 @@
 require('./bootstrap');
 window.Vue = require('vue').default;
+Vue.mixin(require('./mixin/assets'));
 Vue.use(Notifications)
 import Notifications from 'vue-notification'
 

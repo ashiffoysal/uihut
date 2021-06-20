@@ -51,6 +51,10 @@ Route::get('/product/{id}',[App\Http\Controllers\Api\ProductController::class, '
 Route::get('/get/product/subcategores/{catID}',[App\Http\Controllers\Api\ProductController::class, 'getSubCategores']);
 Route::get('/get/product/resubcategores/{catID}/{subcatID}',[App\Http\Controllers\Api\ProductController::class, 'getReSubCategores']);
 
+Route::get('/count/item/{catID}/{subcatID}',[App\Http\Controllers\Api\ProductController::class, 'countFreeItem']);
+Route::get('/get/software/type',[App\Http\Controllers\Api\ProductController::class, 'softwareType']);
+Route::get('/get/resub/categores/tag',[App\Http\Controllers\Api\ProductController::class, 'getResubCategoreTag']);
+
 
 
 Route::get('/get/filter/product/{cat}/{subcat}',[App\Http\Controllers\Api\ProductController::class, 'getFilterProduct']);
