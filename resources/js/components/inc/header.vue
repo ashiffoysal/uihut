@@ -25,7 +25,7 @@
                             <a class="nav-link" href="#">Coustom Service</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link sign-in-btn" href="#">Sign In</a>
+                            <router-link class="nav-link sign-in-btn" :to="{name:'login'}">Sign In</router-link>
                         </li>
                     </ul>
     

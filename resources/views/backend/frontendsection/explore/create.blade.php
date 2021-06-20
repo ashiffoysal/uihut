@@ -84,6 +84,34 @@
                                                 @enderror
                                             </div>
                                         </div>
+
+                                        <div class="row mb-10">
+                                            <label class="col-lg-3 col-form-label text-lg-end">Details:</label>
+                                            <div class="col-lg-9 col-xl-4">
+                                                <div class="form-check form-check-custom form-check-solid form-switch mb-2">
+                                                    <input type="text" class="form-control form-control-solid" name="details_more[]" placeholder="Details">
+                                                </div>
+                                                @error('details_text')
+                                                        <div style="color:red">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div id="feature">
+
+                                        </div>
+                                        <div class="row mb-10">
+                                            <label class="col-lg-3 col-form-label text-lg-end"></label>
+                                            <div class="col-lg-9 col-xl-4">
+                                                <div class="form-check form-check-custom form-check-solid form-switch mb-2">
+                                                    <a href="#" onclick="add_more()"><i class="fa fa-plus"></i> Add More</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+
                                         <div class="row mb-10">
                                             <label class="col-lg-3 col-form-label text-lg-end">Video:</label>
                                             <div class="col-lg-9 col-xl-4">
@@ -196,10 +224,10 @@
                                     @foreach($allexplore as $data)
                                         <tr>
                                             <td>
-                                                <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">{{$data->title}}</a>
+                                                <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">{{Str::limit($data->title,20)}}</a>
                                                 
                                             </td>
-                                            <td>{{$data->details}}</td>
+                                            <td>{{Str::limit($data->details,50)}}</td>
                                             <!-- <td class="text-dark fw-bolder text-hover-primary fs-6"></td> -->
                                             <td>
                                                 @if($data->status==1)
@@ -277,5 +305,19 @@
     </div>
     <!--end::Post-->
 </div>
-
+<script>
+   var i=1;
+    function add_more() {
+        // $("#feature").append("ok");
+         $("#feature").append("<div class='row mb-10'><label class='col-lg-3 col-form-label text-lg-end'>Details</label><div class='col-lg-9 col-xl-4'><div class='form-check form-check-custom form-check-solid form-switch mb-2'><input class='form-control form-control-solid' type='text' name='details_more[]' placeholder='Details'><i class='fa fa-trash' onclick='delete_row(this)' style='color:red;margin-left:15px'></i></div></div></div>")
+        i++;
+    }
+    
+	 function delete_row(em){
+        
+		$(em).closest('.row').remove();
+		
+	}
+   
+</script>
 @endsection

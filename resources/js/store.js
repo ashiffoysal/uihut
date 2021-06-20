@@ -96,8 +96,7 @@ const store = new Vuex.Store({
 		// Login adn retrive Token
 		retriveToken(context, data) {
 			return new Promise((resolve, reject) => {
-				axios.post("/login", data
-				).then((res) => {
+				axios.post("/login", data).then((res) => {
 					const token = res.data.access_token;
 					localStorage.setItem('access_token', token);
 					context.commit('RETIVE_TOKEN', token)
@@ -231,8 +230,7 @@ const store = new Vuex.Store({
 
 		// licencing
 		retriveProductByID(context, data) {
-			axios.get(`/product/${data}`
-			).then((res) => {
+			axios.get(`/product/${data}`).then((res) => {
 				context.commit('RETRIVE_PRODUCT_BY_ID', res.data.data);
 			})
 
@@ -250,10 +248,7 @@ const store = new Vuex.Store({
 				console.log(error);		
 			});
 
-				.catch((error) => {
-					console.log(error);
-					context.commit('RETRIVE_PRODUCT_BY_ID', data);
-				});
+			
 		},
 
 		// retrive categores

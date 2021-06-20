@@ -1,77 +1,86 @@
 <template>
-  <div class="col-lg-12">
-    <div class="header card m-2 p-5">
-      <h2 class="text-center">User Register</h2>
-      <form @submit.prevent="register">
-        <div class="form-group">
-          <label for="exampleInputEmail1">Full Name</label>
-          <input
-            type="text"
-            class="form-control"
-            v-model.trim="userData.fullname"
-            placeholder="Full Name"
-          />
-          <small class="text-danger" v-if="fullname_err">{{fullname_err}}</small>
+ <div class="login-register-area">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="log-reg-img">
+                        <img src="public/frontend/assets/img/sign-up.png" alt="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="log-reg-form-wrapper">
+                        <div class="login-form">
+                            <h2>Sign up to aabbro</h2>
+                            <p>Let’s sign in first for enter into Pixefy website.</p>
+                            <form @submit.prevent="register">
+                                <div class="form-group"> 
+                                    <input type="text" v-model.trim="userData.fullname" class="form-control" placeholder="Full Name">
+                                     <small class="text-danger" v-if="fullname_err">{{fullname_err}}</small>
+                                </div>
+                                <div class="form-group"> 
+                                    <input type="text" v-model.trim="userData.user_name" class="form-control" placeholder="Username">
+                                    <small class="text-danger" v-if="user_name_err">{{user_name_err}}</small>
+                                </div>
+                                <div class="form-group"> 
+                                    <input type="email" v-model.trim="userData.email" class="form-control" placeholder="Email Address">
+                                    <small class="text-danger" v-if="email_err">{{email_err}}</small>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group"> 
+                                            <div class="input-group">
+                                               <input type="password" class="form-control"  v-model.trim="userData.password" autocomplete="new-password" minlength="6" placeholder="Password">
+                                                <small class="text-danger" v-if="password_err">{{password_err}}</small>
+                                               <div class="input-group-append toggle-password">
+                                                <i class="fa fa-eye" aria-hidden="true"></i>
+        
+                                               </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group"> 
+                                            <div class="input-group">
+                                               <input type="password" class="form-control" v-model.trim="userData.password_confirmation" autocomplete="new-password" minlength="6" placeholder="Confirm">
+                                               <div class="input-group-append toggle-password">
+                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                               </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <ul class="remember-forget">
+                                    <li>
+                                        <div class="form-group">
+                                            <label for="rememberPass"> <input type="checkbox" name="" id="rememberPass"> Remember Password</label>
+                                        </div>
+                                    </li>
+                                    <li> </li>
+                                </ul>
+                                <div class="form-group">
+                                    <input type="submit" value="Sign Up" class="formSubmitBtn">
+                                </div>
+                                <span class="orC">or continue with</span>
+                                <ul class="google-fb-list">
+                                    <li>
+                                        <div class="gfl-btn">
+                                            <a href="#"><img src="public/frontend/assets/img/icons/g-icon.png" alt=""> Google</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="gfl-btn">
+                                            <a href="#"><img src="public/frontend/assets/img/icons/fb.png" alt=""> Facebook</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="form-group">
-          <label for="exampleInputEmail1">User Name</label>
-          <input
-            type="text"
-            class="form-control"
-            v-model.trim="userData.user_name"
-            placeholder="User Name"
-          />
-          <small class="text-danger" v-if="user_name_err">{{user_name_err}}</small>
-        </div>
-
-        <div class="form-group">
-          <label for="exampleInputEmail1">Email</label>
-          <input
-            type="email"
-            class="form-control"
-            v-model.trim="userData.email"
-            placeholder="Email"
-          />
-        <small class="text-danger" v-if="email_err">{{email_err}}</small>
-        </div>
-
-        <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            v-model.trim="userData.password"
-            placeholder="Password"
-          />
-          <small class="text-danger" v-if="password_err">{{password_err}}</small>
-        </div>
-
-        <div class="form-group">
-          <label for="exampleInputPassword1">Confirm</label>
-          <input
-            type="password"
-            class="form-control"
-            v-model.trim="userData.password_confirmation"
-            placeholder="Confirm Password"
-          />
-        </div>
-        <div class="form-check">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            v-model="userData.terms_privacy"
-          />
-          <label class="form-check-label" for="exampleCheck1"
-            >Agree with our terms and privacy policy</label
-          >
-        </div>
-        <button type="submit" class="btn btn-primary mx-auto text-center mt-4">
-          Submit
-        </button>
-      </form>
-    </div>
-  </div>
+ </div>
 </template>
 
 <script>

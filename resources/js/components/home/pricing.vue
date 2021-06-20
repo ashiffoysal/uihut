@@ -16,7 +16,7 @@
                         <div class="sprice-head">
                             <ul>
                                 <li>
-                                    <img src="public/frontend/assets/img/icons/pricing/free.png" alt="">
+                                    <img :src="getIcon[index]" alt="">
                                 </li>
                                 <li>
                                     <h5>{{ price.title }}</h5>
@@ -32,8 +32,8 @@
                                 <li v-for="(feature, index) in price.feature" :key="index"><img src="public/frontend/assets/img/icons/check-green.png" alt="">{{ feature }}</li>
                             </ul>
                         </div>
-                        <div class="sprice-bottom">
-                            <a href="#" class="pricing-btn pbtn-1">BUY PLANS</a>
+                        <div class="sprice-bottom" v-if="getColor.length > 0">
+                            <a href="#" :class="getColor[index]">BUY PLANS</a>
                         </div>
                     </div>
                 </div>
@@ -52,14 +52,19 @@ export default {
       require:true,
     }
   },
-  methods: {
-    getColor(index) {
-      if(index % 2 != 0){
-          return 'list-group-item text-white bg-primary'
-      }else{
-           return 'list-group-item text-white bg-success'
+  computed:{
+      getColor(){
+          return[
+              'pricing-btn pbtn-1 bg-secondery','pricing-btn pbtn-2','pricing-btn pbtn-3'
+          ]
+      },
+      getIcon(){
+          return[
+              'public/frontend/assets/img/icons/pricing/free.png',
+              'public/frontend/assets/img/icons/pricing/monthly.png',
+              'public/frontend/assets/img/icons/pricing/quarterly.png'
+          ]
       }
-    },
   },
 };
 </script>

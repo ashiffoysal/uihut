@@ -12,28 +12,8 @@ let routes = [
                 component: require('./components/home/main').default,
                 name:'home',
             },
-            {
-                path: '/register',
-                component: require('./components/auth/register').default,
-                name: 'register',
-                meta: {
-                    requiredVisitor: true,
-                }
-            },
-        
-            {
-                path: '/email_varify/:email/:id',
-                component: require('./components/auth/email_varify').default,
-                name: 'email_varify'
-            },
-            {
-                path: '/login',
-                component: require('./components/auth/login').default,
-                name: 'login',
-                meta: {
-                    requiredVisitor: true,
-                }
-            },
+           
+         
             {
                 path: '/logout',
                 component: require('./components/auth/logout').default,
@@ -85,9 +65,35 @@ let routes = [
                 name: 'products',       
             },
             {
-                path: '/:id',
+                path: '/single/product/:id',
                 component: require('./components/products/product_list/product_details').default,
                 name: 'singleProduct',       
+            },
+        ],
+    },
+
+    {
+        path:'/login',
+        component: require('./components/auth/loginmaster').default,
+        children:[
+            {       path: '/login',
+                    component: require('./components/auth/login').default,
+                    name: 'login',
+                    meta: {
+                        requiredVisitor: true,
+                    }
+            },
+            {       path: '/register',
+                    component: require('./components/auth/register').default,
+                    name: 'register',
+                    meta: {
+                        requiredVisitor: true,
+                    }     
+            },
+            {
+                path: '/email_varify/:email/:id',
+                component: require('./components/auth/email_varify').default,
+                name: 'email_varify'
             },
         ],
     },

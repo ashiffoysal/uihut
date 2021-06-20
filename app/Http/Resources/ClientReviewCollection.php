@@ -20,6 +20,8 @@ class ClientReviewCollection extends ResourceCollection
                     'name' => $data->name,
                     'designation' => $data->designation,
                     'review' => $data->review,
+                    'image' =>asset('public/uploads/client/'.$data->image),
+                    'video' => url('storage/app/public/'.$data->video),
                 ];
             })
         ];

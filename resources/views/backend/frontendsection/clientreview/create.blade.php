@@ -95,6 +95,39 @@
                                                 @enderror
                                             </div>
                                         </div>
+
+                                        <div class="row mb-10">
+                                            <label class="col-lg-3 col-form-label text-lg-end">Client Image:</label>
+                                            <div class="col-lg-9 col-xl-4">
+                                                <!--begin::Image input-->
+                                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(assets/media/avatars/blank.png)">
+
+                                                    <div class="image-input-wrapper w-125px h-125px" style="background-image"></div>
+
+
+                                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                                        <input type="file" name="image" accept=".png, .jpg, .jpeg, .gif,.mp4" />
+                                                    </label>
+                                                </div>
+
+                                                <div class="form-text">Allowed file types: .png, .jpg, .jpeg, .gif</div>
+                                                <!--end::Hint-->
+                                                </div>
+                                        </div>
+                                        
+                                        <div class="row mb-10">
+                                            <label class="col-lg-3 col-form-label text-lg-end">Client Video:</label>
+                                            <div class="col-lg-9 col-xl-4 mt-2">
+                                                <div class="form-check form-check-custom form-check-solid form-switch mb-2">
+                                                   <input type="file" name="video">
+                                                </div>
+                                                @error('review')
+                                                        <div style="color:red">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -159,6 +192,7 @@
                                             <th class="min-w-150px">Name</th>
                                             <th class="min-w-140px">Designation</th>
                                             <th class="min-w-120px">Review</th>
+                                            <th class="min-w-120px">Image</th>
                                             <th class="min-w-120px">Status</th>
                                             <th class="min-w-100px text-end">Actions</th>
                                         </tr>
@@ -172,7 +206,8 @@
                                             </td>
                                           
                                             <td class="text-dark fw-bolder text-hover-primary fs-6"> {{ $data->designation}} </td>
-                                            <td>{{ Str::limit($data->review,40)}}</td>
+                                            <td>{{ Str::limit($data->review,30)}}</td>
+                                            <td><img src="{{asset('public/uploads/client/'.$data->image)}}" height="35px" alt=""></td>
                                             <td>
                                                 @if($data->status==1)
                                                 <span class="badge badge-light-success">Active</span>

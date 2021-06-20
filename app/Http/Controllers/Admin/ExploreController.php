@@ -20,14 +20,19 @@ class ExploreController extends Controller
     }
     // 
     public function store(Request $request){
+
+        //return $request;
+
         $validated = $request->validate([
             'title' => 'required',
             'subtitle' => 'required',
             'video' => 'required',
         ]);
+
         $insert=Explore::insertGetId([
             'title'=>$request->title,
             'details'=>$request->subtitle,
+            'details_more'=>json_encode($request->details_more),
             'created_at'=>carbon::now()->toDateTimeString(),
         ]);
         if($request->hasFile('video')) {
@@ -107,6 +112,7 @@ class ExploreController extends Controller
         $update=Explore::where('id',$id)->update([
             'title'=>$request->title,
             'details'=>$request->subtitle,
+            'details_more'=>json_encode($request->details_more),
             'updated_at'=>Carbon::now()->toDateTimeString(),
         ]);
         if($request->hasFile('video')) {
