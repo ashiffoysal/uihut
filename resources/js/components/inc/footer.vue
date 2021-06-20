@@ -57,11 +57,15 @@
                                     <h4>Subscribe</h4>
                                     <p>Subscribe our newslettter</p>
                                     <div class="nl-form"> 
-                                        <form action="">
+                                        <form  @submit.prevent="createSubcription">
                                             <div class="nlip-field">
-                                                <input type="email" name="" id="" placeholder="Your Email">
-                                            <button type="submit"><img src="public/frontend/assets/img/icons/arrow-right.png" alt=""></button>
+                                               
+                                                <input type="email" v-model="userData.mail" name="mail" placeholder="Your Email" required>
+                                                <button type="submit" ><img src="public/frontend/assets/img/icons/arrow-right.png" alt=""></button>
+                                                
+                                                 
                                             </div>
+                                             <small class="text-danger" v-if="mail_err">{{mail_err}}</small>
                                         </form>
                                     </div>
                                 </div>
@@ -86,11 +90,22 @@ export default {
             }
         },
     data(){
+
         return {
               Soicals:[],
-          }        
+              userData: {
+
+                    mail:"",
+                   
+                   
+                },
+             mail_err:"",
+           
+          }
+
+           
+
     },
- 
      mounted(){
          this.loadSocial();
       },
@@ -100,6 +115,24 @@ export default {
              axios.get('/social').then(response=>{
                  this.Soicals = response.data;
              })
+          },
+          createSubcription(){
+
+              axios.post('/subscrive/user',this.userData).then((res)=>{
+                     this.userData.mail_err='';
+                    var massage = res.data.message;
+                    this.$notify({
+                    text: massage,
+                    });
+                     this.userData.mail='';
+                     this.userData.mail_err='';
+                }).catch((error) => {
+                    if(error.response.data.errors.mail){
+                        this.mail_err = error.response.data.errors.mail[0];
+                     }
+                         
+                });
+              
           }
       },
     

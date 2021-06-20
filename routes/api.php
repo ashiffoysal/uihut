@@ -69,3 +69,5 @@ Route::middleware('auth:api')->group(function () {
     Route::post('logout',[App\Http\Controllers\Api\UserController::class, 'logout']);
     Route::get('user', 'Api\AuthController@user');
 });
+
+Route::post('/subscrive/user',[App\Http\Controllers\Api\SubcriveController::class, 'store']);

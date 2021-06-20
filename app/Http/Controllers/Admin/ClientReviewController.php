@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\ClientReview;
 use Carbon\Carbon;
+use Image;
 
 
 class ClientReviewController extends Controller
@@ -27,12 +28,33 @@ class ClientReviewController extends Controller
             'designation' => 'required',
             'review' => 'required',
         ]);
-        $insert=ClientReview::insert([
+
+
+
+
+        $insert=ClientReview::insertGetId([
             'name'=>$request->name,
             'designation'=>$request->designation,
             'review'=>$request->review,
             'created_at'=>Carbon::now()->toDateTimeString(),
         ]);
+
+        if($request->hasFile('video')) {
+            $mainimage = $request->file('video')->store('image','public'); 
+            ClientReview::where('id', $insert)->update([
+                'video' => $mainimage,
+            ]);
+        }
+
+        if($request->hasFile('image')) {
+            $image = $request->file('image');
+            $ImageName = 'logo' . '_' . time() . '.' . $image->getClientOriginalExtension();
+            Image::make($image)->save('public/uploads/client/' . $ImageName);
+            ClientReview::where('id',$insert)->update([
+                'image' => $ImageName,
+            ]);
+        }
+
         if($insert){
             $notification = array(
                 'messege' => 'update Success!',
@@ -107,6 +129,23 @@ class ClientReviewController extends Controller
             'review'=>$request->review,
             'updated_at'=>Carbon::now()->toDateTimeString(),
         ]);
+
+        if($request->hasFile('video')) {
+            $mainimage = $request->file('video')->store('image','public'); 
+            ClientReview::where('id', $id)->update([
+                'video' => $mainimage,
+            ]);
+        }
+
+        if($request->hasFile('image')) {
+            $image = $request->file('image');
+            $ImageName = 'logo' . '_' . time() . '.' . $image->getClientOriginalExtension();
+            Image::make($image)->save('public/uploads/client/' . $ImageName);
+            ClientReview::where('id',$id)->update([
+                'image' => $ImageName,
+            ]);
+        }
+
         if($update){
             $notification = array(
                 'messege' => 'update Success!',

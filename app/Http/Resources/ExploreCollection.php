@@ -21,6 +21,7 @@ class ExploreCollection extends ResourceCollection
                     'details' => $data->details,
                     'button_text' => $data->button_text,
                     'button_link' => $data->button_link,
+                    'details_more' =>json_decode($data->details_more),
                     'video' => url('storage/app/public/'.$data->video),
                 ];
             })
