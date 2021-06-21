@@ -81,7 +81,7 @@
           <ul class="mcatfilter-btn">
             <li>
               <div class="mcat-btn">
-                <span class="mobilecategorybtn"
+                <span class="mobilecategorybtn" @click="mobileCatbtn"
                   ><i class="fa fa-bars" aria-hidden="true"></i
                 ></span>
               </div>
@@ -95,7 +95,7 @@
             </li>
           </ul>
         </div>
-        <div class="closeMobileCatFilter">
+        <div class="closeMobileCatFilter" @click="mobileCatbtnClose">
           <i class="fa fa-times" aria-hidden="true"></i>
         </div>
       </div>
@@ -159,6 +159,8 @@
               type="search"
               placeholder="Search"
               aria-label="Search"
+              v-model="resubcatsearch"
+              @keyup="searchResubCategory"
             />
             <button class="btn btn-outline-success" type="submit">
               <i class="fa fa-search" aria-hidden="true"></i>
@@ -234,7 +236,7 @@
       </div>
       <div class="aabbro-resources-area">
         <div class="filtered-result-box">
-          <p>UI Template : <span>1425</span></p>
+          <p>{{this.$route.params.cat.toUpperCase()}} : <span>{{countItem.countProduct}}</span></p>
           <ul>
             <li v-for="item in getTagResubCategores" :key="item.id">
               {{ item.name }}
@@ -328,9 +330,8 @@
             </div>
 
             <div class="col-md-12">
-              <div class="er-btn text-center">
-                {{showall}}
-                <!-- <a href="#" class="aabbro-btn-a">Load More {{getMainProducts.link}}</a> -->
+              <div class="er-btn text-center" v-if="productLink.next">
+                <a class="aabbro-btn-a" @click="loadMoreProduct(productLink.next)">Load More</a>
               </div>
             </div>
           </div>
@@ -350,14 +351,14 @@ export default {
   name: "ProductsComponent",
   data() {
     return {
-      page: 2,
       countItem: {},
-      showall:[],
+      showall: [],
+      resubcatsearch:'',
       selected: {
         resubcat: [],
         filter: [],
         search: "",
-        free:[],
+        free: [],
       },
     };
   },
@@ -408,9 +409,6 @@ export default {
       return this.$store.getters.getProductReSubCategores;
     },
 
-    showLoadMoreButton() {
-      return this.$store.getters.nextPageLink;
-    },
     getCatslug() {
       return this.$route.params.cat;
     },
@@ -426,25 +424,12 @@ export default {
     getTagResubCategores() {
       return this.$store.getters.getTagResubCategores;
     },
+    productLink() {
+      return this.$store.getters.productLink;
+    },
   },
 
   methods: {
-    // product pagination
-    loadMoreProduct() {
-      var cat = this.$route.params.cat;
-      var subcat = this.$route.params.subcat;
-      axios
-        .get(`get/filter/product/${cat}/${subcat}?page=${this.page}`)
-        .then((res) => {
-          var data = res.data.data;
-          this.$store.dispatch("storeLoadMoreProduct", data);
-          this.page += 1;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-
     // count all  and free item
     countProductItem() {
       var cat = this.$route.params.cat;
@@ -513,9 +498,51 @@ export default {
     },
 
     // Checkout Free Checkbox
-    showAll(){
+    showAll() {
       this.selected.free = [];
       this.resubcatClear();
+    },
+
+    // Mobile category btn
+    mobileCatbtn() {
+      $(".aabro-resource-filter-area").addClass("showMobileCat");
+      $(".closeMobileCatFilter").addClass("showMobileCatCloseIcon");
+    },
+
+    // mobile btn close
+    mobileCatbtnClose() {
+      $(".aabro-resource-filter-area").removeClass("showMobileCat");
+      $(".aabbro-category").removeClass("showMobileCat");
+      $(".closeMobileCatFilter").removeClass("showMobileCatCloseIcon");
+    },
+
+    // Load More Product
+    loadMoreProduct(link) {
+      axios
+        .get(link)
+        .then((res) => {
+          var data = res.data.data;
+          var links =res.data.links;
+          this.$store.dispatch("loadMoreProduct",data);
+          this.$store.dispatch("loadMoreProductLinks",links);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+
+    // search Resub Category
+    searchResubCategory(){
+      var cat = this.$route.params.cat;
+      var subcat = this.$route.params.subcat;
+      var search = this.resubcatsearch;
+      var data = {
+        cat:cat,
+        subcat:subcat,
+        search:search,
+      }
+      this.$store.dispatch("searchResubCat",data);
     }
   },
 };
@@ -523,7 +550,9 @@ export default {
 
 <style scoped>
 .remove,
-.clear-all-btn {
+.clear-all-btn,
+aabbro-btn-a
+ {
   cursor: pointer;
 }
 </style>

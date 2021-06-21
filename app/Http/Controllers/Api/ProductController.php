@@ -50,7 +50,7 @@ class ProductController extends Controller
         $category = Category::where('slug',$cat)->first();
         $subcat = SubCategory::where('slug',$subcat)->first();
         if($category && $subcat){
-            $products=Product::where('cate_id',$category->id)->where('subcate_id',$subcat->id)->where('status',1)->where('is_deleted',0)->paginate(10);
+            $products=Product::where('cate_id',$category->id)->where('subcate_id',$subcat->id)->where('status',1)->where('is_deleted',0)->paginate(20);
            return new ProductCollection($products);
         }
     }
@@ -85,8 +85,7 @@ class ProductController extends Controller
                 $q->where('software','like','%'.$value.'%');
             }
         })
-        ->paginate(10);
-
+        ->paginate(20);
         return new ProductCollection($products);
     }
 
@@ -119,5 +118,19 @@ class ProductController extends Controller
       $resubcat = ReSubCategory::whereIn('id',$request)->get();
       return response()->json($resubcat,200);
 
+    }
+
+    // Search ReSubCategores
+    public function searchReSubCat($cat,$subcat)
+    {
+        $cat = Category::where('slug',$cat)->first();
+        $subcat = SubCategory::where('slug',$subcat)->first();
+        $search =request()[0];
+        if($cat && $subcat){
+            $searchData =ReSubCategory::withCount('products')->where('cate_id',$cat->id)->where('subcate_id',$subcat->id)->where('name','like', '%' . $search . '%')
+            ->where('status',1)->where('is_deleted',0)->get();
+            return new ReSubCategoryCollection($searchData);
+        }
+        
     }
 }
