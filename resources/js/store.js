@@ -7,9 +7,7 @@ const store = new Vuex.Store({
 
 	state: {
 		token: localStorage.getItem('access_token') || null,
-
 		logo:{},
-
 		homebanner: {},
 		categores: {},
 		explores: {},
@@ -30,7 +28,6 @@ const store = new Vuex.Store({
 	},
 
 	// getter area start
-
 	getters: {
 		logedIn: (state) => {
 			return state.token != null;
@@ -85,8 +82,8 @@ const store = new Vuex.Store({
 		getMainProducts: (state) => {
 			return state.mainProducts;
 		},
-		nextPageLink:(state)=>{
-			return state.productlink.next !=null;
+		productLink:(state)=>{
+			return state.productlink;
 		},
 		getSoftwares: (state) =>{
 			return state.softwares;
@@ -94,6 +91,7 @@ const store = new Vuex.Store({
 		getTagResubCategores: (state) =>{
 			return state.tagResubCategores;
 		}
+
 
 	},
 
@@ -214,7 +212,6 @@ const store = new Vuex.Store({
 		},
 
 		// retrive Privacy policy
-
 		retrivePrivacypolicy(context) {
 			axios.get("/privacypolicy"
 			).then((res) => {
@@ -224,6 +221,7 @@ const store = new Vuex.Store({
 					console.log(error);
 				});
 		},
+
 		// licencing
 		retriveLicencing(context) {
 			axios.get("/licence"
@@ -240,12 +238,12 @@ const store = new Vuex.Store({
 			axios.get(`/product/${data}`).then((res) => {
 				context.commit('RETRIVE_PRODUCT_BY_ID', res.data.data);
 			})
-
 			.catch((error) => {
 				console.log(error);		
 			});
 		},
 
+		// retrive logo
 		retriveLogo(context){
 			axios.get("/logo"
 			).then((res) => {
@@ -254,7 +252,6 @@ const store = new Vuex.Store({
 			.catch((error) => {
 				console.log(error);		
 			});
-
 		},
 
 		// retrive categores
@@ -300,6 +297,7 @@ const store = new Vuex.Store({
 				.get(`/get/product/${payload.cat}/${payload.subcat}`)
 				.then((res) => {
 					context.commit('RETRIVE_MAIN_PRODUCT', res.data.data)
+					context.commit('RETRIVE_PRODUCT_LINK', res.data.links);
 				})
 				.catch((error) => {
 					console.log(error);
@@ -348,9 +346,31 @@ const store = new Vuex.Store({
 				});
 		},
 
+
+		// searchResubCat
+		searchResubCat(context, payload) {
+			axios
+				.get(`/search/resubcat/${payload.cat}/${payload.subcat}`,{
+					params: payload.search,
+				})
+				.then((res) => {
+					context.commit('SEARCH_RESUBCATEGORY', res.data.data);
+					console.log(res.data);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+
 		// store load more product
-		storeLoadMoreProduct(context,data){
+		loadMoreProduct(context,data){
 			context.commit('STORE_LOAD_MORE_PRODUCT', data);
+
+		},
+
+		// store load more product
+		loadMoreProductLinks(context,data){
+			context.commit('RETRIVE_PRODUCT_LINK', data);
 
 		}
 	},
@@ -418,7 +438,9 @@ const store = new Vuex.Store({
 			return state.mainProducts = data;
 		},
 		STORE_LOAD_MORE_PRODUCT(state,data){
-			return state.mainProducts.push(data[0]);
+			data.forEach(item => {
+				state.mainProducts.push(item);	
+			});
 		},
 		RETRIVE_PRODUCT_LINK(state,data){
 			return state.productlink = data
@@ -428,9 +450,11 @@ const store = new Vuex.Store({
 		},
 		RETRIVE_TAG_RESUB_CATEGORY(state,data){
 			return state.tagResubCategores = data
+		},
+		SEARCH_RESUBCATEGORY(state,data){
+			state.productReSubCategores=[];
+			return state.productReSubCategores = data;
 		}
-
-
 	},
 });
 

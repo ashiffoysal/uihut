@@ -59,6 +59,8 @@ Route::get('/get/resub/categores/tag',[App\Http\Controllers\Api\ProductControlle
 
 Route::get('/get/filter/product/{cat}/{subcat}',[App\Http\Controllers\Api\ProductController::class, 'getFilterProduct']);
 
+Route::get('/search/resubcat/{cat}/{subcat}',[App\Http\Controllers\Api\ProductController::class, 'searchReSubCat']);
+
 
 
 
