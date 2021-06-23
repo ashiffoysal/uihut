@@ -6,14 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductCategoryCollection;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
+use App\Http\Resources\ProductSaveResource;
 use App\Http\Resources\ReSubCategoryCollection;
+use App\Http\Resources\SaveProductCollection;
 use App\Http\Resources\SubCategoryCollection;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ReSubCategory;
+use App\Models\SaveProduct;
 use App\Models\SoftwareType;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -130,7 +134,42 @@ class ProductController extends Controller
             $searchData =ReSubCategory::withCount('products')->where('cate_id',$cat->id)->where('subcate_id',$subcat->id)->where('name','like', '%' . $search . '%')
             ->where('status',1)->where('is_deleted',0)->get();
             return new ReSubCategoryCollection($searchData);
+        }    
+    }
+
+    // product save
+    public function productSave($id)
+    {
+        $saveProduct = SaveProduct::where('user_id',auth()->user()->id)->where('product_id',$id)->first();   
+
+        if($saveProduct){
+            return response()->json([
+                'msg'=>'Product already Saved!',
+            ],200);
         }
         
+        $product = new SaveProduct();
+        $product->product_id = $id;
+        $product->user_id = Auth::user()->id;
+        if($product->save()){
+            $saveProduct = SaveProduct::with('product')->where('user_id',auth()->user()->id)->get();
+            return response()->json([
+                'msg'=>'Product Save Successfully!',
+                'data'=>new SaveProductCollection($saveProduct),
+            ],200);
+        }else{
+            return response()->json([
+                'msg'=>'Product Save Faild!'
+            ],500);
+        }
     }
+
+
+    // get Save Prodct
+    public function getSaveProduct()
+    {
+        $saveProduct = SaveProduct::with('product')->where('user_id',auth()->user()->id)->get();
+        return new SaveProductCollection($saveProduct);
+    }
+
 }
