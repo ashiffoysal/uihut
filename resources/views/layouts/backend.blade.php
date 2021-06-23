@@ -21,12 +21,14 @@
 	<link href="{{asset('public/backend')}}/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 	<link href="{{asset('public/backend')}}/assets/css/bootstrap-tagsinput.css" rel="stylesheet" type="text/css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	@paddleJS
 	<style>
 		.h-15px {
 			height: 35px !important;
 		}
 	</style>
 	<!--end::Global Stylesheets Bundle-->
+	
 </head>
 <!--end::Head-->
 <!--begin::Body-->

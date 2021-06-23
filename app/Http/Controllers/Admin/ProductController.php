@@ -8,9 +8,12 @@ use App\Models\SoftwareType;
 use App\Models\SubCategory;
 use App\Models\ReSubCategory;
 use App\Models\Product;
+use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Auth;
 use Carbon\Carbon;
+use Laravel\Paddle\Cashier;
 use Image;
 use Illuminate\Support\Facades\Storage;
 
@@ -381,6 +384,18 @@ class ProductController extends Controller
             );
             return Redirect()->back()->with($notification);
         }
+    }
+
+
+
+    // 
+    public function paddlecreate(Request $request){
+        $user = user::find(41);
+        $sub=13079;
+        $payLink = $user->newSubscription('default', $premium = $sub)
+        ->returnTo(route('admin.paddle.done',compact('sub','user')))
+        ->create();
+        return view('backend.paddle', ['payLink' => $payLink]);
     }
 
 
