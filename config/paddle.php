@@ -9,9 +9,7 @@ return [
     'public_key' => env('PADDLE_PUBLIC_KEY'),
 
     'webhook_uri' => 'paddle/webhook',
-    /**
-     * https://developer.paddle.com/getting-started/sandbox
-     */
+ 
     'sandbox_environment' => env('PADDLE_SANDBOX', false),
 
 ];

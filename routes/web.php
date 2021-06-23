@@ -10,9 +10,19 @@ Route::get('/', function () {
 
 
 Auth::routes();
+
+
+use App\Http\Controllers\WebhookController;
+
+Route::post('/paddle/webhook', WebhookController::class)->name('cashier.webhook');
+
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/admin', [App\Http\Controllers\Admin\AdminController::class, 'dashboard'])->name('admin.dashboard');
 Route::get('/admin/login', [App\Http\Controllers\Admin\LoginController::class, 'loginfrom'])->name('admin.login');
+
+
 Route::post('/admin/login', [App\Http\Controllers\Admin\LoginController::class, 'login'])->name('admin.login');
 Route::get('admin/logout', [App\Http\Controllers\Admin\AdminController::class, 'AdminLogOut'])->name('admin.logout');
 // admin sattings
@@ -103,6 +113,11 @@ Route::get('/admin/explore/deactive/{id}', [App\Http\Controllers\Admin\ExploreCo
 Route::get('/admin/explore/edit/{id}', [App\Http\Controllers\Admin\ExploreController::class, 'edit']);
 Route::post('/admin/explore/update', [App\Http\Controllers\Admin\ExploreController::class, 'update'])->name('admin.explore.update');
 Route::get('/admin/explore/delete/{id}', [App\Http\Controllers\Admin\ExploreController::class, 'Delete']);
+
+
+Route::get('/admin/paddle/create', [App\Http\Controllers\Admin\ProductController::class, 'paddlecreate'])->name('admin.paddle.create');
+Route::get('/admin/paddle/done', [App\Http\Controllers\Admin\LoginController::class, 'done'])->name('admin.paddle.done');
+
 
 
 // Blog route start from here

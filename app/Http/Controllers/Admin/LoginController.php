@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use Auth;
 use Illuminate\Support\Facades\Hash;
-
+use Laravel\Paddle\Cashier;
 
 class LoginController extends Controller
 {
@@ -37,5 +37,11 @@ class LoginController extends Controller
       );
       return redirect()->back()->with($notification);
     }
+  }
+
+  // 
+  public function done(Request $request){
+    return Cashier::useReceiptModel(Receipt::class);
+    // dd(Cashier::useReceiptModel(Receipt::class));
   }
 }

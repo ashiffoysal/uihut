@@ -19,7 +19,6 @@
 										<li class="breadcrumb-item text-muted">
 											<a href="index.html" class="text-muted text-hover-primary">Product List</a>
 										</li>
-										
 										<!--end::Item-->
 									</ul>
 									<!--end::Breadcrumb-->
