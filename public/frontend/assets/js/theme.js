@@ -108,9 +108,7 @@
             }
         });
     }
-    testimonial_carousel();
-
-
+    testimonial_carousel(); 
 
     // Testimonial Video Play Pause On click
     $('#testimonialVideoPopup').on('hidden.bs.modal', function () {
@@ -125,5 +123,36 @@
     if ($('.wow').length > 0) {
         new WOW().init();
     }
+
+
+    // Category Menu And Filter Click Event On Click
+    $('.mobilecategorybtn').on('click', function(){
+        $('.aabro-resource-filter-area').addClass('showMobileCat');
+        $('.closeMobileCatFilter').addClass('showMobileCatCloseIcon');
+    });
+    $('.mobilefilter-btn').on('click', function(){
+        $('.aabbro-category').addClass('showMobileCat');
+        $('.closeMobileCatFilter').addClass('showMobileCatCloseIcon');
+    });
+
+    $('.closeMobileCatFilter').on('click', function(){
+        $('.aabro-resource-filter-area').removeClass('showMobileCat');
+        $('.aabbro-category').removeClass('showMobileCat');
+        $('.closeMobileCatFilter').removeClass('showMobileCatCloseIcon');
+    });
+    
+    $('.filter-submit-btn').on('click', function(){
+        $('ul.filter-lists').toggleClass('hide');
+         
+    });
+
+
+
+    $('.toggle-password').click(function(){
+        $(this).children().toggleClass('mdi-eye-outline mdi-eye-off-outline');
+        let input = $(this).prev();
+        input.attr('type', input.attr('type') === 'password' ? 'text' : 'password');
+    });
+
 
 }(jQuery));

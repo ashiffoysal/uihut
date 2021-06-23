@@ -25,6 +25,12 @@ Route::get('/token', function (Request $request) {
     return response()->json($token);
 });
 
+Route::middleware('auth:api')->group(function(){
+
+    Route::get('/product/save/{id}',[App\Http\Controllers\Api\ProductController::class, 'productSave']);
+    Route::get('/get/save/product',[App\Http\Controllers\Api\ProductController::class, 'getSaveProduct']);
+});
+
 Route::post('/user/register',[App\Http\Controllers\Api\UserController::class, 'register']);
 Route::post('/user/email/varify',[App\Http\Controllers\Api\UserController::class, 'emailVarify']);
 Route::post('/login',[App\Http\Controllers\Api\UserController::class, 'login']);

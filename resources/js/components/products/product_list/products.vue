@@ -49,9 +49,21 @@
               <li class="nav-item">
                 <a class="nav-link" href="#">Coustom Service</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link sign-in-btn" href="#">Sign In</a>
+              <li class="nav-item" v-if="!logedIn">
+                <router-link
+                  class="nav-link sign-in-btn"
+                  :to="{ name: 'login' }"
+                  >Sign In</router-link
+                >
               </li>
+              <li class="nav-item" v-if="logedIn">
+                <router-link
+                  class="nav-link sign-in-btn"
+                  :to="{ name: 'dashboard' }"
+                  >Dashboard</router-link
+                >
+              </li>
+
               <li>
                 <div class="search-form-header">
                   <form class="d-flex">
@@ -236,7 +248,10 @@
       </div>
       <div class="aabbro-resources-area">
         <div class="filtered-result-box">
-          <p>{{this.$route.params.cat.toUpperCase()}} : <span>{{countItem.countProduct}}</span></p>
+          <p>
+            {{ this.$route.params.cat.toUpperCase() }} :
+            <span>{{ countItem.countProduct }}</span>
+          </p>
           <ul>
             <li v-for="item in getTagResubCategores" :key="item.id">
               {{ item.name }}
@@ -331,7 +346,11 @@
 
             <div class="col-md-12">
               <div class="er-btn text-center" v-if="productLink.next">
-                <a class="aabbro-btn-a" @click="loadMoreProduct(productLink.next)">Load More</a>
+                <a
+                  class="aabbro-btn-a"
+                  @click="loadMoreProduct(productLink.next)"
+                  >Load More</a
+                >
               </div>
             </div>
           </div>
@@ -353,7 +372,7 @@ export default {
     return {
       countItem: {},
       showall: [],
-      resubcatsearch:'',
+      resubcatsearch: "",
       selected: {
         resubcat: [],
         filter: [],
@@ -426,6 +445,9 @@ export default {
     },
     productLink() {
       return this.$store.getters.productLink;
+    },
+    logedIn() {
+      return this.$store.getters.logedIn;
     },
   },
 
@@ -522,28 +544,27 @@ export default {
         .get(link)
         .then((res) => {
           var data = res.data.data;
-          var links =res.data.links;
-          this.$store.dispatch("loadMoreProduct",data);
-          this.$store.dispatch("loadMoreProductLinks",links);
+          var links = res.data.links;
+          this.$store.dispatch("loadMoreProduct", data);
+          this.$store.dispatch("loadMoreProductLinks", links);
         })
         .catch((error) => {
           console.log(error);
         });
     },
 
-
     // search Resub Category
-    searchResubCategory(){
+    searchResubCategory() {
       var cat = this.$route.params.cat;
       var subcat = this.$route.params.subcat;
       var search = this.resubcatsearch;
       var data = {
-        cat:cat,
-        subcat:subcat,
-        search:search,
-      }
-      this.$store.dispatch("searchResubCat",data);
-    }
+        cat: cat,
+        subcat: subcat,
+        search: search,
+      };
+      this.$store.dispatch("searchResubCat", data);
+    },
   },
 };
 </script>
@@ -551,8 +572,7 @@ export default {
 <style scoped>
 .remove,
 .clear-all-btn,
-aabbro-btn-a
- {
+aabbro-btn-a {
   cursor: pointer;
 }
 </style>

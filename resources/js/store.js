@@ -7,7 +7,7 @@ const store = new Vuex.Store({
 
 	state: {
 		token: localStorage.getItem('access_token') || null,
-		logo:{},
+		logo: {},
 		homebanner: {},
 		categores: {},
 		explores: {},
@@ -25,6 +25,8 @@ const store = new Vuex.Store({
 		productlink: {},
 		softwares: {},
 		tagResubCategores: {},
+		saveProduct: [],
+		productID: '',
 	},
 
 	// getter area start
@@ -63,7 +65,7 @@ const store = new Vuex.Store({
 			return state.licencing;
 		},
 
-		getLogo:(state)=>{
+		getLogo: (state) => {
 			return state.logo;
 		},
 
@@ -82,14 +84,26 @@ const store = new Vuex.Store({
 		getMainProducts: (state) => {
 			return state.mainProducts;
 		},
-		productLink:(state)=>{
+		productLink: (state) => {
 			return state.productlink;
 		},
-		getSoftwares: (state) =>{
+		getSoftwares: (state) => {
 			return state.softwares;
 		},
-		getTagResubCategores: (state) =>{
+		getTagResubCategores: (state) => {
 			return state.tagResubCategores;
+		},
+		getSaveProduct: (state) => {
+			return state.saveProduct;
+		},
+		checkSavedProduct: (state) => {
+			var product =[]; 
+			state.saveProduct.find(function (item) {
+				if(state.productID == item.product_id){
+					product.push(item);
+				}
+			})
+			return product;
 		}
 
 
@@ -238,20 +252,20 @@ const store = new Vuex.Store({
 			axios.get(`/product/${data}`).then((res) => {
 				context.commit('RETRIVE_PRODUCT_BY_ID', res.data.data);
 			})
-			.catch((error) => {
-				console.log(error);		
-			});
+				.catch((error) => {
+					console.log(error);
+				});
 		},
 
 		// retrive logo
-		retriveLogo(context){
+		retriveLogo(context) {
 			axios.get("/logo"
 			).then((res) => {
-				context.commit('RETRIVE_LOGO',res.data);
+				context.commit('RETRIVE_LOGO', res.data);
 			})
-			.catch((error) => {
-				console.log(error);		
-			});
+				.catch((error) => {
+					console.log(error);
+				});
 		},
 
 		// retrive categores
@@ -335,7 +349,7 @@ const store = new Vuex.Store({
 		// retrive tag resub categores
 		retriveTagResuCategores(context, payload) {
 			axios
-				.get("/get/resub/categores/tag",{
+				.get("/get/resub/categores/tag", {
 					params: payload
 				})
 				.then((res) => {
@@ -350,7 +364,7 @@ const store = new Vuex.Store({
 		// searchResubCat
 		searchResubCat(context, payload) {
 			axios
-				.get(`/search/resubcat/${payload.cat}/${payload.subcat}`,{
+				.get(`/search/resubcat/${payload.cat}/${payload.subcat}`, {
 					params: payload.search,
 				})
 				.then((res) => {
@@ -363,16 +377,51 @@ const store = new Vuex.Store({
 		},
 
 		// store load more product
-		loadMoreProduct(context,data){
+		loadMoreProduct(context, data) {
 			context.commit('STORE_LOAD_MORE_PRODUCT', data);
 
 		},
 
 		// store load more product
-		loadMoreProductLinks(context,data){
+		loadMoreProductLinks(context, data) {
 			context.commit('RETRIVE_PRODUCT_LINK', data);
 
+		},
+		// save product
+		SavedProduct(context, data) {
+			return new Promise((resolve, reject) => {
+				axios
+					.get(`/product/save/${data}`)
+					.then((res) => {
+						context.commit('SAVE_PRODUCT', res.data.data.data);
+						resolve(res);
+					})
+					.catch((error) => {
+						reject(error);
+						console.log(error);
+					});
+
+			});
+		},
+
+		// retrive saved product
+		retriveSavedProduct(context) {
+			axios
+				.get('/get/save/product')
+				.then((res) => {
+					context.commit('GET_SAVE_PRODUCT', res.data.data);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+
+		// saved Product
+		savedProduct(context, data) {
+			context.commit('CHECK_SAVED_PRODUCT', data);
 		}
+
+
 	},
 
 	// mutations area start
@@ -414,7 +463,7 @@ const store = new Vuex.Store({
 			return state.licencing = data;
 		},
 
-		RETRIVE_LOGO(state,data){
+		RETRIVE_LOGO(state, data) {
 			return state.logo = data;
 		},
 		RETRIVE_PRODUCT_BY_ID(state, data) {
@@ -437,23 +486,32 @@ const store = new Vuex.Store({
 			state.mainProducts = [];
 			return state.mainProducts = data;
 		},
-		STORE_LOAD_MORE_PRODUCT(state,data){
+		STORE_LOAD_MORE_PRODUCT(state, data) {
 			data.forEach(item => {
-				state.mainProducts.push(item);	
+				state.mainProducts.push(item);
 			});
 		},
-		RETRIVE_PRODUCT_LINK(state,data){
+		RETRIVE_PRODUCT_LINK(state, data) {
 			return state.productlink = data
 		},
-		RETRIVE_SOFTWARE_TYPE(state,data){
+		RETRIVE_SOFTWARE_TYPE(state, data) {
 			return state.softwares = data
 		},
-		RETRIVE_TAG_RESUB_CATEGORY(state,data){
+		RETRIVE_TAG_RESUB_CATEGORY(state, data) {
 			return state.tagResubCategores = data
 		},
-		SEARCH_RESUBCATEGORY(state,data){
-			state.productReSubCategores=[];
+		SEARCH_RESUBCATEGORY(state, data) {
+			state.productReSubCategores = [];
 			return state.productReSubCategores = data;
+		},
+		GET_SAVE_PRODUCT(state, data) {
+			return state.saveProduct = data;
+		},
+		SAVE_PRODUCT(state, data) {
+			return state.saveProduct = data;
+		},
+		CHECK_SAVED_PRODUCT(state, data) {
+			return state.productID = data;
 		}
 	},
 });
