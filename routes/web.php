@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 
 
+
+
 Route::get('/', function () {
     return view('welcome');
 })->name('home.frontend');
@@ -120,6 +122,9 @@ Route::get('/admin/paddle/create', [App\Http\Controllers\Admin\ProductController
 Route::get('/admin/paddle/done', [App\Http\Controllers\Admin\LoginController::class, 'done'])->name('admin.paddle.done');
 
 
+Route::get('/admin/configration/index', [App\Http\Controllers\Admin\ConfigarationController::class, 'index'])->name('admin.configration.index');
+
+Route::post('/admin/configration/index', [App\Http\Controllers\Admin\ConfigarationController::class, 'update'])->name('admin.configration.index');
 
 // Blog route start from here
 Route::prefix('/admin/blog')->group(function(){
@@ -204,3 +209,6 @@ Route::get('/admin/softwaretype/delete/{id}', [App\Http\Controllers\Admin\Softwa
 
 Route::get('/admin/subcription/index', [App\Http\Controllers\Admin\SubcriptionController::class, 'index'])->name('admin.allsubcription.index');
 
+Route::get('/{any?}', function () {
+    return view('welcome');
+})->where('any','[\/\w\.-]*');

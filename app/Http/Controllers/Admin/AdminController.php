@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Auth;
 use Image;
 use App\Models\Admin;
+use App\Models\Product;
+use DB;
 use Carbon\Carbon;
 
 class AdminController extends Controller
@@ -19,7 +21,15 @@ class AdminController extends Controller
     // dashboard
     public function dashboard()
     {
-        return view('backend.home.index');
+
+        $productcount=Product::where('is_deleted',0)->where('status',1)->count();
+        $downloadscount=Product::sum('download');
+        $draftcount=Product::where('is_deleted',0)->where('status',1)->where('draft',1)->count();
+
+        $totalcustomer=DB::table('customers')->count();
+
+        return view('backend.home.index',compact('productcount','downloadscount','draftcount','totalcustomer'));
+
     }
     // admin profile
     public function adminProfile()

@@ -30,6 +30,7 @@ class PackageController extends Controller
         $data->title = $request->title;
         $data->access_time_text = $request->access_time_text;
         $data->price = $request->price;
+        $data->paddle_id = $request->paddle_id;
         $data->old_price = $request->old_price;
         $data->feature = json_encode($request->feature);
         if($data->save()){
@@ -104,6 +105,7 @@ class PackageController extends Controller
         $data->title = $request->title;
         $data->access_time_text = $request->access_time_text;
         $data->price = $request->price;
+        $data->paddle_id = $request->paddle_id;
         $data->old_price = $request->old_price;
         $data->feature = json_encode($request->feature);
         if($data->save()){

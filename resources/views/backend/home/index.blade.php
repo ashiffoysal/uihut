@@ -51,7 +51,7 @@
 								</svg>
 							</span>
 							<!--end::Svg Icon-->
-							<div class="text-inverse-white fw-bolder fs-2 mb-2 mt-5">500</div>
+							<div class="text-inverse-white fw-bolder fs-2 mb-2 mt-5">{{ $productcount }}</div>
 							<div class="fw-bold text-inverse-white fs-7">Total Products</div>
 						</div>
 						<!--end::Body-->
@@ -75,7 +75,7 @@
 								</svg>
 							</span>
 							<!--end::Svg Icon-->
-							<div class="text-inverse-dark fw-bolder fs-2 mb-2 mt-5">3000</div>
+							<div class="text-inverse-dark fw-bolder fs-2 mb-2 mt-5">{{$downloadscount}}</div>
 							<div class="fw-bold text-inverse-dark fs-7">Total Downloads</div>
 						</div>
 						<!--end::Body-->
@@ -95,7 +95,7 @@
 								</svg>
 							</span>
 							<!--end::Svg Icon-->
-							<div class="text-inverse-warning fw-bolder fs-2 mb-2 mt-5">50,00</div>
+							<div class="text-inverse-warning fw-bolder fs-2 mb-2 mt-5">{{$draftcount}}</div>
 							<div class="fw-bold text-inverse-warning fs-7">Total Drafts</div>
 						</div>
 						<!--end::Body-->
@@ -118,8 +118,8 @@
 								</svg>
 							</span>
 							<!--end::Svg Icon-->
-							<div class="text-inverse-info fw-bolder fs-2 mb-2 mt-5">50,00</div>
-							<div class="fw-bold text-inverse-info fs-7">Total Sale</div>
+							<div class="text-inverse-info fw-bolder fs-2 mb-2 mt-5">{{$totalcustomer}}</div>
+							<div class="fw-bold text-inverse-info fs-7">Total Customer</div>
 						</div>
 						<!--end::Body-->
 					</a>

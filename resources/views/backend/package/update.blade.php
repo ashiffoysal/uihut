@@ -99,6 +99,14 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row mb-10">
+                                            <label class="col-lg-3 col-form-label text-lg-end">Paddle ID:</label>
+                                            <div class="col-lg-9 col-xl-4">
+                                                <div class="form-check form-check-custom form-check-solid form-switch mb-2">
+                                                    <input class="form-control form-control-solid" type="number" name="paddle_id" placeholder="Old Price" value="{{$edit->paddle_id}}">
+                                                </div>
+                                            </div>
+                                        </div>
                                         @foreach (json_decode($edit->feature) as $key => $option)
                                         <div class="row mb-10">
                                             <label class="col-lg-3 col-form-label text-lg-end">Feature:</label>
