@@ -50,16 +50,10 @@ let routes = [
                 path: '/termsandcondition',
                 component: require('./components/termsandcondition/termsandcondition').default,
                 name: 'termsandcondition',
-               
             },
 
         ]
     },
-    // { 
-    //     path: '/:catchAll(.*)', 
-    //     component: require('./components/errors/404').default,
-    //     name: 'NotFound'
-    //   },
     {
         path:'/',
         component: require('./components/products/product_master').default,
@@ -73,6 +67,14 @@ let routes = [
                 path: '/single/product/:id',
                 component: require('./components/products/product_list/product_details').default,
                 name: 'singleProduct',       
+            },
+            {
+                path: '/product/download',
+                component: require('./components/products/product_list/product_download').default,
+                name: 'downloadFile',
+                meta: {
+                    requiresAuth: true,
+                },
             },
         ],
     },
