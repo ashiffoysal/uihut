@@ -19,6 +19,7 @@ class ProductCollection extends ResourceCollection
                 return [
                     'id'=>$data->id,
                     'title' => $data->title,
+                    'slug' => $data->slug,
                     'image'=> asset('public/uploads/products/thumbnail/'.$data->thumbnail_img),
                 ];
             }),

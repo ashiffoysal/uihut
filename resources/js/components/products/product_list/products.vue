@@ -307,7 +307,7 @@
             >
               <div class="single-category-block">
                 <router-link
-                  :to="{ name: 'singleProduct', params: { id: product.id } }"
+                  :to="{ name: 'singleProduct', params: { id: product.id,slug:product.slug } }"
                 >
                   <div class="scb-img">
                     <img :src="product.image" alt="" />

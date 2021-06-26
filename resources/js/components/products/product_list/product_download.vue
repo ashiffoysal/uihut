@@ -1,5 +1,6 @@
 <template></template>
 <script>
+import fileDownload from 'js-file-download';
 export default {
   mounted() {
     var data = {
@@ -7,7 +8,13 @@ export default {
       file: this.$route.params.file,
       product_id: this.$route.params.product_id,
     };
-    this.getDownLoadLink(data);
+    if(this.$store.getters.isSubscriber){
+      this.getDownLoadLink(data);
+    }else{
+      this.$router.push({name:'pricing'})
+    }
+
+     this.$router.go(-1);
   },
   methods: {
     getDownLoadLink(data) {
@@ -19,6 +26,7 @@ export default {
         })
         .then((res) => {
           this.downloadSoftware(res.data);
+          this.redirectTo(res.data);
         })
         .catch((error) => {
           console.log(error);
@@ -28,28 +36,27 @@ export default {
     // download software
     downloadSoftware(link) {
       axios({
-        url: link,
+        url: link.link,
         methods: "GET",
         responseType: "blob",
       })
         .then((res) => {
-          const url = window.URL.createObjectURL(new Blob([res.data]));
-          const link = document.createElement("a");
-          link.href = link;
-          link.setAttribute("download", "image.zip");
-          document.body.appendChild(link);
-          link.click();
-          this.$router.push({ name: "home" });
+          console.log(res);
+            var randomstring = Math.random().toString(36).substring(2);
+             fileDownload(res.data, randomstring+'.zip');
         })
         .catch((error) => {
-          
           this.$notify({
             type: "error",
             title: "Not Download! Something Went Wrong",
           });
-          this.$router.push({ name: "home" });
+          // this.$router.push({ name: "home" });
+          this.$router.go(-1);
         });
     },
+    redirectTo(data){
+      this.$router.push({ name:"singleProduct",params:{id:data.product.id}});
+    }
   },
 };
 </script>

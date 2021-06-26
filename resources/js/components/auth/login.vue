@@ -22,7 +22,7 @@
                                     <div class="input-group">
                                        <input type="password" class="form-control" v-model.trim="userData.password"  minlength="6" placeholder="Enter Password">
                                         <small class="text-danger" v-if="password_err">{{password_err}}</small>
-                                       <div class="input-group-append toggle-password">
+                                       <div class="input-group-append toggle-password" >
                                         <i class="fa fa-eye" aria-hidden="true"></i>
 
                                        </div>
@@ -86,8 +86,7 @@ export default {
         name: '',
         email: '',
         personalID: '',
-        FB: undefined
-
+        FB: undefined,
     };
   },
   mounted() {},
@@ -135,7 +134,7 @@ export default {
     },
     onLogout() {
       this.isConnected = false;
-    }
+    },
   },
 };
 </script>
