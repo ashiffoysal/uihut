@@ -34,6 +34,8 @@ Route::middleware('auth:api')->group(function(){
 
     Route::post('/get/download/link',[App\Http\Controllers\Api\ProductController::class, 'getDownloadLink']);
 
+    Route::get('/check/subcriber',[App\Http\Controllers\Api\ProductController::class, 'checkSubscriber']);
+
 });
 
 Route::post('/user/register',[App\Http\Controllers\Api\UserController::class, 'register']);
@@ -71,6 +73,7 @@ Route::get('/get/resub/categores/tag',[App\Http\Controllers\Api\ProductControlle
 Route::get('/get/filter/product/{cat}/{subcat}',[App\Http\Controllers\Api\ProductController::class, 'getFilterProduct']);
 
 Route::get('/search/resubcat/{cat}/{subcat}',[App\Http\Controllers\Api\ProductController::class, 'searchReSubCat']);
+Route::get('/similer/product/{id}',[App\Http\Controllers\Api\ProductController::class, 'similerProduct']);
 
 
 

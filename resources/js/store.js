@@ -28,6 +28,8 @@ const store = new Vuex.Store({
 		saveProduct: [],
 		productID: '',
 		paymentLink: '',
+		subcriber:[],
+		similerProduct:[],
 	},
 
 	// getter area start
@@ -108,6 +110,12 @@ const store = new Vuex.Store({
 		},
 		paymentLink:(state)=>{
 			return state.paymentLink;
+		},
+		isSubscriber: (state) => {
+			return state.subcriber.length > 0;
+		},
+		getSimilerProduct: (state) =>{
+			return state.similerProduct;
 		}
 	},
 
@@ -378,6 +386,18 @@ const store = new Vuex.Store({
 				});
 		},
 
+		// similer Product
+		similerProduct(context, payload) {
+			axios
+				.get(`/similer/product/${payload}`)
+				.then((res) => {
+					context.commit('RETRIVE_SIMILER_PRODUCT', res.data.data);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+
 		// store load more product
 		loadMoreProduct(context, data) {
 			context.commit('STORE_LOAD_MORE_PRODUCT', data);
@@ -433,7 +453,20 @@ const store = new Vuex.Store({
 		// saved Product
 		savedProduct(context, data) {
 			context.commit('CHECK_SAVED_PRODUCT', data);
+		},
+
+		//Check Subcriber
+		checkSubscriber(context){
+			axios
+			.get('/check/subcriber')
+			.then((res) => {
+				context.commit('CHECK_SUBCRIBER',res.data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 		}
+
 
 
 	},
@@ -529,6 +562,12 @@ const store = new Vuex.Store({
 		},
 		RETRIVE_PAYMENT_LINK(state,data){
 			return state.paymentLink = data;
+		},
+		CHECK_SUBCRIBER(state,data){
+			return state.subcriber.push(data);
+		},
+		RETRIVE_SIMILER_PRODUCT(state,data){
+			return state.similerProduct = data;
 		}
 	},
 });

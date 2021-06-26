@@ -52,11 +52,7 @@
                 <div class="pdha-btn">
                   <ul>
                     <li>
-                      <a
-                        :class="addSavedClass"
-                        @click="productSave"
-                        >Save</a
-                      >
+                      <a :class="addSavedClass" @click="productSave">Save</a>
                     </li>
 
                     <li>
@@ -80,14 +76,23 @@
         <div class="download-wrapper">
           <h4>Download File</h4>
           <ul class="download-list" v-if="getSingleProduct.software">
-
-            <li v-for="(item,index) in getSingleProduct.software" :key="index">
+            <li v-for="(item, index) in getSingleProduct.software" :key="index">
               <span class="dl-format">
-                <img src="assets/img/icons/figma.png" alt="" />{{index}}
+                <img src="assets/img/icons/figma.png" alt="" />{{ index }}
               </span>
-              <router-link :to="{name:'downloadFile',params:{name:index,file:item,product_id:getSingleProduct.id}}" class="product-dl-btn btn-clr-1">Download</router-link>
+              <router-link
+                :to="{
+                  name: 'downloadFile',
+                  params: {
+                    name: index,
+                    file: item,
+                    product_id: getSingleProduct.id,
+                  },
+                }"
+                class="product-dl-btn btn-clr-1"
+                >Download</router-link
+              >
             </li>
-         
           </ul>
         </div>
       </div>
@@ -128,20 +133,21 @@
         </div>
         <div class="product-caegory-wrapper">
           <div class="row">
-            <div class="col-md-4">
+
+            <div class="col-md-4" v-for="(product,index) in getSimilerProduct" :key="index">
               <div class="single-category-block">
-                <a href="#">
+                <router-link :to="{ name: 'singleProduct', params: { id: product.id,slug:product.slug } }">
                   <div class="scb-img">
-                    <img src="assets/img/category/cat-1.png" alt="" />
+                    <img :src="product.image" :alt="product.title" />
                   </div>
                   <div class="scb-text">
-                    <h4>Web Template Design</h4>
+                    <h4>{{product.title}}</h4>
                     <ul>
                       <li>
                         <div class="scbt-download">
                           <img
-                            src="assets/img/icons/download.png"
-                            alt=""
+                            :src="asset('public/frontend/assets/img/icons/download.png')"
+                            alt="download"
                           /><span>2360</span>
                         </div>
                       </li>
@@ -155,69 +161,10 @@
                       </li>
                     </ul>
                   </div>
-                </a>
+                </router-link>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="single-category-block">
-                <a href="#">
-                  <div class="scb-img">
-                    <img src="assets/img/category/cat-2.png" alt="" />
-                  </div>
-                  <div class="scb-text">
-                    <h4>Web Template Design</h4>
-                    <ul>
-                      <li>
-                        <div class="scbt-download">
-                          <img
-                            src="assets/img/icons/download.png"
-                            alt=""
-                          /><span>2360</span>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="scbt-premium">
-                          <img
-                            src="assets/img/icons/premium-yellow.png"
-                            alt=""
-                          />
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="single-category-block">
-                <a href="#">
-                  <div class="scb-img">
-                    <img src="assets/img/category/cat-3.png" alt="" />
-                  </div>
-                  <div class="scb-text">
-                    <h4>Web Template Design</h4>
-                    <ul>
-                      <li>
-                        <div class="scbt-download">
-                          <img
-                            src="assets/img/icons/download.png"
-                            alt=""
-                          /><span>2360</span>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="scbt-premium">
-                          <img
-                            src="assets/img/icons/premium-yellow.png"
-                            alt=""
-                          />
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </a>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -249,22 +196,50 @@
             <ul class="share-icons">
               <li>
                 <a href="#">
-                  <img :src="asset('public/frontend/assets/img/icons/social/instagram.png')" alt="instagram" />
+                  <img
+                    :src="
+                      asset(
+                        'public/frontend/assets/img/icons/social/instagram.png'
+                      )
+                    "
+                    alt="instagram"
+                  />
                 </a>
               </li>
               <li>
                 <a href="#">
-                  <img :src="asset('public/frontend/assets/img/icons/social/facebook-sq.png')" alt="facebook-sq" />
+                  <img
+                    :src="
+                      asset(
+                        'public/frontend/assets/img/icons/social/facebook-sq.png'
+                      )
+                    "
+                    alt="facebook-sq"
+                  />
                 </a>
               </li>
               <li>
                 <a href="#">
-                  <img :src="asset('public/frontend/assets/img/icons/social/linkedin.png')" alt="linkedin" />
+                  <img
+                    :src="
+                      asset(
+                        'public/frontend/assets/img/icons/social/linkedin.png'
+                      )
+                    "
+                    alt="linkedin"
+                  />
                 </a>
               </li>
               <li>
                 <a href="#">
-                  <img :src="asset('public/frontend/assets/img/icons/social/twitter.png')" alt="twitter" />
+                  <img
+                    :src="
+                      asset(
+                        'public/frontend/assets/img/icons/social/twitter.png'
+                      )
+                    "
+                    alt="twitter"
+                  />
                 </a>
               </li>
             </ul>
@@ -414,12 +389,21 @@ export default {
     var id = this.$route.params.id;
     this.$store.dispatch("retriveProductByID", id);
     this.$store.dispatch("retriveSavedProduct");
-    this.$store.dispatch("savedProduct",id);
+    this.$store.dispatch("savedProduct", id);
+    if (this.$store.getters.logedIn) {
+      this.$store.dispatch("checkSubscriber");
+    }
+
+    this.$store.dispatch('similerProduct',id);
   },
   watch: {
     $route(to, from) {
       var id = this.$route.params.id;
       this.$store.dispatch("retriveProductByID", id);
+      if (this.$store.getters.logedIn) {
+        this.$store.dispatch("checkSubscriber");
+      }
+      this.$store.dispatch('similerProduct',id);
     },
   },
   computed: {
@@ -429,26 +413,27 @@ export default {
     getSaveProduct() {
       return this.$store.getters.getSaveProduct;
     },
-    getUrlLink(){
+    getUrlLink() {
       return window.location.href;
     },
-    checkSavedProduct(){
-      
-    },
-    addSavedClass(){
+    checkSavedProduct() {},
+    addSavedClass() {
       var product = this.$store.getters.checkSavedProduct;
-      if(product.length > 0){
-          return 'save-share-btn product-save product-dl-btn btn-clr-1';
-      }else{
-          return 'save-share-btn product-save';
+      if (product.length > 0) {
+        return "save-share-btn product-save product-dl-btn btn-clr-1";
+      } else {
+        return "save-share-btn product-save";
       }
+    },
+    getSimilerProduct(){
+      return this.$store.getters.getSimilerProduct;
     }
-   
   },
   methods: {
     productSave() {
       if (this.$store.getters.logedIn) {
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
+        axios.defaults.headers.common["Authorization"] =
+          "Bearer " + localStorage.getItem("access_token");
         var id = this.getSingleProduct.id;
         this.$store.dispatch("SavedProduct", id).then((res) => {
           this.$notify({

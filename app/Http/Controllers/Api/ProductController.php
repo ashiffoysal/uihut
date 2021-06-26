@@ -19,6 +19,9 @@ use App\Models\SoftwareType;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Paddle\Customer;
+use DB;
+use GuzzleHttp\Psr7\Response;
 
 class ProductController extends Controller
 {
@@ -173,7 +176,6 @@ class ProductController extends Controller
     // Get Product Download Link
     public function getDownloadLink(Request $request)
     {
-
         $product_id = $request->product_id;
         $product = Product::findOrFail($product_id);
         if ($product) {
@@ -186,9 +188,42 @@ class ProductController extends Controller
                 }
                 if (array_key_exists($name, $item)) {
                     $link=$item[$name];
-                    return response()->json($link,200);
+                    
+                    return response()->json([
+                        'link'=>$link,
+                        'product'=>$product,
+                    ],200);
                 }
+            }elseif($product->file_type == 1){
+                
             }
         }
+    }
+
+    // check Subcriber
+    public function checkSubscriber()
+    {
+        $id =auth()->user()->id;
+        $customars =DB::table('customers')->where('billable_id',$id)->first();
+        if($customars){
+            $subcriber = DB::table('subscriptions')->where('billable_id',$id)->where('paddle_status','trialing')->orderBy('id','desc')->first();
+        }
+
+        if($subcriber){
+            return response()->json($subcriber,200);
+        }else{
+            return response()->json('Subcriber Not Found!',500);
+        }
+    }
+
+    // Get Similer Product
+    public function similerProduct($id)
+    {
+        $product = Product::findOrFail($id);
+        if($product){
+            $products = Product::where('cate_id', $product->cate_id)->where('subcate_id', $product->subcate_id)->where('id','!=',$id)->where('status', 1)->where('is_deleted', 0)->paginate(3);
+            return new ProductCollection($products);
+        }
+        
     }
 }

@@ -6,14 +6,14 @@ let routes = [
     {
         path: '/',
         component: require('./components/home/master').default,
-        children:[
+        children: [
             {
                 path: '/',
                 component: require('./components/home/main').default,
-                name:'home',
+                name: 'home',
             },
-           
-         
+
+
             {
                 path: '/logout',
                 component: require('./components/auth/logout').default,
@@ -31,19 +31,19 @@ let routes = [
                 path: '/blogs',
                 component: require('./components/blog/blog').default,
                 name: 'blogs',
-               
+
             },
             {
                 path: '/privacy_&_policy',
                 component: require('./components/privacypolicy/privacy_&_policy').default,
                 name: 'privacy',
-               
+
             },
             {
                 path: '/licence',
                 component: require('./components/licencing/licence').default,
                 name: 'licence',
-               
+
             },
 
             {
@@ -55,24 +55,24 @@ let routes = [
                 path: '/pricing',
                 component: require('./components/pricingpage/master').default,
                 name: 'pricing',
-               
+
             },
 
         ]
     },
     {
-        path:'/',
+        path: '/',
         component: require('./components/products/product_master').default,
-        children:[
+        children: [
             {
                 path: '/:cat/:subcat',
                 component: require('./components/products/product_list/products').default,
-                name: 'products',       
+                name: 'products',
             },
             {
-                path: '/single/product/:id',
+                path: '/product-/:slug/:id',
                 component: require('./components/products/product_list/product_details').default,
-                name: 'singleProduct',       
+                name: 'singleProduct',
             },
             {
                 path: '/product/download',
@@ -84,25 +84,27 @@ let routes = [
             },
         ],
     },
-    
+
 
     {
-        path:'/login',
+        path: '/login',
         component: require('./components/auth/loginmaster').default,
-        children:[
-            {       path: '/login',
-                    component: require('./components/auth/login').default,
-                    name: 'login',
-                    meta: {
-                        requiredVisitor: true,
-                    }
+        children: [
+            {
+                path: '/login',
+                component: require('./components/auth/login').default,
+                name: 'login',
+                meta: {
+                    requiredVisitor: true,
+                }
             },
-            {       path: '/register',
-                    component: require('./components/auth/register').default,
-                    name: 'register',
-                    meta: {
-                        requiredVisitor: true,
-                    }     
+            {
+                path: '/register',
+                component: require('./components/auth/register').default,
+                name: 'register',
+                meta: {
+                    requiredVisitor: true,
+                }
             },
             {
                 path: '/email_varify/:email/:id',
@@ -119,7 +121,7 @@ const router = new VueRouter({
     hashbang: false,
     // linkActiveClass: 'active',
     routes,
-     
+
 });
 
 router.beforeEach((to, from, next) => {
@@ -142,6 +144,26 @@ router.beforeEach((to, from, next) => {
     } else {
         next() // make sure to always call next()!
     }
+
+    // if (to.matched.some(record => record.meta.requiredDownloadAuth)) {
+    //     if (!store.getters.logedIn) {
+    //         next({
+    //             name: 'login',
+    //         })
+    //     } else {
+    //         next()
+    //     }
+    // } else if (to.matched.some(record => record.meta.requiredSubcriber)) {
+    //     if (!store.getters.isSubscriber) {
+    //         next({
+    //             name: 'pricing',
+    //         })
+    //     } else {
+    //         next()
+    //     }
+    // }else{
+    //     next()
+    // }
 });
 
 export default router;
