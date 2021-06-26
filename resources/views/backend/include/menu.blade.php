@@ -145,14 +145,14 @@
                             <span class="menu-title">Social</span>
                         </a>
                     </div>
-                    <div class="menu-item">
+                    <!-- <div class="menu-item">
                         <a class="menu-link {{ request()->routeIs('admin.subscriver.create*') ? 'active' : '' }}"" href="{{route('admin.subscriver.create')}}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
                             <span class="menu-title">Subscriber</span>
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
@@ -315,6 +315,15 @@
             </div>
 
             <div class="menu-item">
+                <a class="menu-link" href="{{route('admin.subscriver.create')}}">
+                    <span class="menu-icon">
+                        <i class="bi bi-card-text fs-3"></i>
+                    </span>
+                    <span class="menu-title">Subcribe Email</span>
+                </a>
+            </div>
+            
+            <div class="menu-item">
                 <a class="menu-link" href="{{ route('admin.allsubcription.index')}}">
                     <span class="menu-icon">
                         <i class="bi bi-card-text fs-3"></i>
@@ -322,6 +331,15 @@
                     <span class="menu-title">Subcription</span>
                 </a>
             </div>
+            <div class="menu-item">
+                <a class="menu-link" href="{{ route('admin.configration.index')}}">
+                    <span class="menu-icon">
+                        <i class="bi bi-card-text fs-3"></i>
+                    </span>
+                    <span class="menu-title">Configration</span>
+                </a>
+            </div>
+            
         </div>
          
         <!--end::Menu-->
