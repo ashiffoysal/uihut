@@ -31,6 +31,7 @@ return array(
     'App\\Http\\Controllers\\Api\\HomeController' => $baseDir . '/app/Http/Controllers/Api/HomeController.php',
     'App\\Http\\Controllers\\Api\\LicenceController' => $baseDir . '/app/Http/Controllers/Api/LicenceController.php',
     'App\\Http\\Controllers\\Api\\LogoController' => $baseDir . '/app/Http/Controllers/Api/LogoController.php',
+    'App\\Http\\Controllers\\Api\\PaddelController' => $baseDir . '/app/Http/Controllers/Api/PaddelController.php',
     'App\\Http\\Controllers\\Api\\PrivacyPolicyController' => $baseDir . '/app/Http/Controllers/Api/PrivacyPolicyController.php',
     'App\\Http\\Controllers\\Api\\ProductController' => $baseDir . '/app/Http/Controllers/Api/ProductController.php',
     'App\\Http\\Controllers\\Api\\SubcriveController' => $baseDir . '/app/Http/Controllers/Api/SubcriveController.php',

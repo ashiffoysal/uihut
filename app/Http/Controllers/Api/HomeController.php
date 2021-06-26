@@ -15,6 +15,7 @@ use App\Models\Explore;
 use App\Models\HomeFirstSection;
 use App\Models\Package;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -56,5 +57,7 @@ class HomeController extends Controller
     {
         return new HeaderSubCategoryResource(Category::with('subcategory')->where('status',1)->where('is_deleted',0)->first());
     }
+
+  
 
 }

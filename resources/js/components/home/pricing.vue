@@ -1,6 +1,5 @@
 <template>
-
-    <!-- Pricing Area -->
+  
     <div class="aabbro-pricing-area">
         <div class="container">
             <div class="row">
@@ -33,16 +32,15 @@
                             </ul>
                         </div>
                         <div class="sprice-bottom" v-if="getColor.length > 0">
-                            <a href="#" :class="getColor[index]">BUY PLANS</a>
+                            <a :href="paymentLink" :class="getColor[index]">
+                                BUY PLANS
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- /Pricing Area -->
-<!--  -->
- 
 </template>
 <script>
 export default {
@@ -64,7 +62,13 @@ export default {
               'public/frontend/assets/img/icons/pricing/monthly.png',
               'public/frontend/assets/img/icons/pricing/quarterly.png'
           ]
+      },
+      paymentLink(){
+          return this.$store.getters.paymentLink;
       }
   },
+  mounted() {
+      this.$store.dispatch('retrivePaymentLink');
+  }
 };
 </script>

@@ -23,7 +23,7 @@
                                     <img :src="category.image" alt="">
                                 </div>
                                 <div class="scb-text">
-                                    <h4>{{ category.name  }}</h4>
+                                    <h4>{{ category.name }}</h4>
                                     <ul>
                                         <li><div class="scbt-download"><img src="public/frontend/assets/img/icons/download.png" alt=""><span>2360</span></div></li>
                                         <li><div class="scbt-premium"><img src="public/frontend/assets/img/icons/premium-yellow.png" alt=""></div></li>

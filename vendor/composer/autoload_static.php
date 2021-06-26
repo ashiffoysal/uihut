@@ -32,9 +32,11 @@ class ComposerStaticInitf6faad91a81a582b15f23c4bf2609be1
         'c7a3c339e7e14b60e06a2d7fcce9476b' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Events/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+
         '256c1545158fc915c75e51a931bdba60' => __DIR__ . '/..' . '/lcobucci/jwt/compat/class-aliases.php',
         '0d273777b2b0d96e49fb3d800c6b0e81' => __DIR__ . '/..' . '/lcobucci/jwt/compat/json-exception-polyfill.php',
         'd6b246ac924292702635bb2349f4a64b' => __DIR__ . '/..' . '/lcobucci/jwt/compat/lcobucci-clock-polyfill.php',
+
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         '9cdd7b9056abc3081735233ba9dd9c7f' => __DIR__ . '/..' . '/facade/flare-client-php/src/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
@@ -634,6 +636,7 @@ class ComposerStaticInitf6faad91a81a582b15f23c4bf2609be1
         'App\\Http\\Controllers\\Api\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/HomeController.php',
         'App\\Http\\Controllers\\Api\\LicenceController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/LicenceController.php',
         'App\\Http\\Controllers\\Api\\LogoController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/LogoController.php',
+        'App\\Http\\Controllers\\Api\\PaddelController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/PaddelController.php',
         'App\\Http\\Controllers\\Api\\PrivacyPolicyController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/PrivacyPolicyController.php',
         'App\\Http\\Controllers\\Api\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/ProductController.php',
         'App\\Http\\Controllers\\Api\\SubcriveController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/SubcriveController.php',

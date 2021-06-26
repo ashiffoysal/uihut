@@ -313,6 +313,15 @@
                     </div>
                 </div>
             </div>
+
+            <div class="menu-item">
+                <a class="menu-link" href="{{ route('admin.allsubcription.index')}}">
+                    <span class="menu-icon">
+                        <i class="bi bi-card-text fs-3"></i>
+                    </span>
+                    <span class="menu-title">Subcription</span>
+                </a>
+            </div>
         </div>
          
         <!--end::Menu-->

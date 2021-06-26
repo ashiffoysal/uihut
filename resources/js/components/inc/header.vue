@@ -19,7 +19,7 @@
                             <router-link class="nav-link active" aria-current="page" :to="{name:'products',params:{cat:getHeaderSubcat.slug,subcat:getHeaderSubcat.subcat,id:getHeaderSubcat.id}}">Resources</router-link>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
+                            <router-link class="nav-link" :to="{name:'pricing'}">Pricing</router-link >
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Coustom Service</a>

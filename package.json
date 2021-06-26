@@ -31,6 +31,7 @@
         "nprogress": "^0.2.0",
         "or": "^0.2.0",
         "owl.carousel": "^2.3.4",
+        "paddle-sdk": "^2.2.0",
         "vue-notification": "^1.3.20",
         "vue-owl-carousel": "^2.0.3",
         "vue-router": "^3.5.1",

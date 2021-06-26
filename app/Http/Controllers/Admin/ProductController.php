@@ -393,7 +393,7 @@ class ProductController extends Controller
         $user = user::find(41);
         $sub=13079;
         $payLink = $user->newSubscription('default', $premium = $sub)
-        ->returnTo(route('admin.paddle.done',compact('sub','user')))
+        ->returnTo(route('home.frontend'))
         ->create();
         return view('backend.paddle', ['payLink' => $payLink]);
     }
