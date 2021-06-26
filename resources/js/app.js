@@ -10,6 +10,7 @@ import Nprogress from 'nprogress'
 import 'nprogress/nprogress.css';
 
 
+
 axios.interceptors.request.use(function (config) {
     
     Nprogress.start();

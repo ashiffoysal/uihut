@@ -4,9 +4,10 @@
 use Illuminate\Support\Facades\Route;
 
 
+
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home.frontend');
 
 
 Auth::routes();
@@ -200,4 +201,6 @@ Route::get('/admin/softwaretype/deactive/{id}', [App\Http\Controllers\Admin\Soft
 Route::get('/admin/softwaretype/edit/{id}', [App\Http\Controllers\Admin\SoftwareTypeController::class, 'edit']);
 Route::post('/admin/softwaretype/update', [App\Http\Controllers\Admin\SoftwareTypeController::class, 'update'])->name('admin.softwaretype.update');
 Route::get('/admin/softwaretype/delete/{id}', [App\Http\Controllers\Admin\SoftwareTypeController::class, 'Delete']);
+
+Route::get('/admin/subcription/index', [App\Http\Controllers\Admin\SubcriptionController::class, 'index'])->name('admin.allsubcription.index');
 

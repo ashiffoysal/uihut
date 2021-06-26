@@ -41,15 +41,17 @@
     <!-- Favicon -->
 
     <link rel="shortcut icon" type="image/png" href="{{asset('public/frontend')}}/assets/img/favicon.ico">
-
-    <script> window._asset = '{{ asset('') }}'; </script>
+    @paddleJS
+    <!-- <script> window._asset = '{{ asset('') }}'; </script> -->
 
 
 </head>
 
 <body>
-    <div id="app">
-        <main-component></main-component>
+    <div class="container-fluid" id="app">
+        <div class="col-md-12 p-0 m-0">
+            <main-component></main-component>
+        </div>
     </div>
 </body>
     <!-- Scripts -->

@@ -29,6 +29,7 @@ Route::middleware('auth:api')->group(function(){
 
     Route::get('/product/save/{id}',[App\Http\Controllers\Api\ProductController::class, 'productSave']);
     Route::get('/get/save/product',[App\Http\Controllers\Api\ProductController::class, 'getSaveProduct']);
+    Route::get('/get/paddle/pay/link',[App\Http\Controllers\Api\PaddelController::class, 'showPaddlePayLink']);
 });
 
 Route::post('/user/register',[App\Http\Controllers\Api\UserController::class, 'register']);

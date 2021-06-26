@@ -27,6 +27,7 @@ const store = new Vuex.Store({
 		tagResubCategores: {},
 		saveProduct: [],
 		productID: '',
+		paymentLink: '',
 	},
 
 	// getter area start
@@ -104,9 +105,10 @@ const store = new Vuex.Store({
 				}
 			})
 			return product;
+		},
+		paymentLink:(state)=>{
+			return state.paymentLink;
 		}
-
-
 	},
 
 	// action area start
@@ -416,6 +418,18 @@ const store = new Vuex.Store({
 				});
 		},
 
+		// retrive saved product
+		retrivePaymentLink(context) {
+			axios
+				.get('/get/paddle/pay/link')
+				.then((res) => {
+					context.commit('RETRIVE_PAYMENT_LINK', res.data);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+
 		// saved Product
 		savedProduct(context, data) {
 			context.commit('CHECK_SAVED_PRODUCT', data);
@@ -512,6 +526,9 @@ const store = new Vuex.Store({
 		},
 		CHECK_SAVED_PRODUCT(state, data) {
 			return state.productID = data;
+		},
+		RETRIVE_PAYMENT_LINK(state,data){
+			return state.paymentLink = data;
 		}
 	},
 });

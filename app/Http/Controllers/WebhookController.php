@@ -93,7 +93,6 @@ class WebhookController extends CashierController
             'currency' => $payload['currency'],
             'quantity' => (int) $payload['quantity'],
             'receipt_url' => $payload['receipt_url'],
-			
             'paid_at' => Carbon::createFromFormat('Y-m-d H:i:s', $payload['event_time'], 'UTC'),
         ]);
 

@@ -52,6 +52,12 @@ let routes = [
                 name: 'termsandcondition',
                
             },
+            {
+                path: '/pricing',
+                component: require('./components/pricingpage/master').default,
+                name: 'pricing',
+               
+            },
 
         ]
     },
