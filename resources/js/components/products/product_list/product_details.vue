@@ -79,25 +79,15 @@
         <productCarousel :images="getSingleProduct.image"></productCarousel>
         <div class="download-wrapper">
           <h4>Download File</h4>
-          <ul class="download-list">
-            <li>
+          <ul class="download-list" v-if="getSingleProduct.software">
+
+            <li v-for="(item,index) in getSingleProduct.software" :key="index">
               <span class="dl-format">
-                <img src="assets/img/icons/figma.png" alt="" />Figma
+                <img src="assets/img/icons/figma.png" alt="" />{{index}}
               </span>
-              <a href="#" class="product-dl-btn btn-clr-1">Download</a>
+              <router-link :to="{name:'downloadFile',params:{name:index,file:item,product_id:getSingleProduct.id}}" class="product-dl-btn btn-clr-1">Download</router-link>
             </li>
-            <li>
-              <span class="dl-format">
-                <img src="assets/img/icons/xd.png" alt="" />Adobe XD
-              </span>
-              <a href="#" class="product-dl-btn btn-clr-2">Download</a>
-            </li>
-            <li>
-              <span class="dl-format">
-                <img src="assets/img/icons/sketch.png" alt="" />Sketch
-              </span>
-              <a href="#" class="product-dl-btn btn-clr-3">Download</a>
-            </li>
+         
           </ul>
         </div>
       </div>

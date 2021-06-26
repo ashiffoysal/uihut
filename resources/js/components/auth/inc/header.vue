@@ -2,11 +2,11 @@
    <header class="aabbro-header aabbro-headerV3"> 
         <nav class="navbar navbar-expand-lg aabbro-navbar">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">
+                <router-link class="navbar-brand" :to="{name:'home'}">
                     <div class="logo"> 
                         <img src="public/frontend/assets/img/main-logo-2.png" alt="Logo"> 
                     </div>
-                </a>
+                </router-link>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
