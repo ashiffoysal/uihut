@@ -82,6 +82,11 @@ let routes = [
                     requiresAuth: true,
                 },
             },
+            {
+                path: '/gallery/image/:slug/:id',
+                component: require('./components/products/product_list/details/gallery_img_details').default,
+                name: 'galleryImage',
+            },
         ],
     },
 

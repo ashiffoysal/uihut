@@ -1,6 +1,6 @@
 <template></template>
 <script>
-import fileDownload from 'js-file-download';
+import fileDownload from "js-file-download";
 export default {
   mounted() {
     var data = {
@@ -8,13 +8,24 @@ export default {
       file: this.$route.params.file,
       product_id: this.$route.params.product_id,
     };
-    if(this.$store.getters.isSubscriber){
+    this.$store.dispatch("checkSubscriber");
+    if (this.$store.getters.isSubscriber) {
       this.getDownLoadLink(data);
-    }else{
-      this.$router.push({name:'pricing'})
+    } else {
+      this.$notify({
+        type: "error",
+        title: "You need to Subscription!",
+      });
+      this.$router.push({ name: "pricing" });
     }
 
-     this.$router.go(-1);
+    this.$notify({
+        type: "error",
+        title: "Sorry!Something went wrong! Please try again",
+      });
+      this.$router.push({ name: "pricing" });
+
+    //  this.$router.go(-1);
   },
   methods: {
     getDownLoadLink(data) {
@@ -25,6 +36,7 @@ export default {
           product_id: data.product_id,
         })
         .then((res) => {
+          console.log(res);
           this.downloadSoftware(res.data);
           this.redirectTo(res.data);
         })
@@ -35,15 +47,16 @@ export default {
 
     // download software
     downloadSoftware(link) {
+      var link = link;
       axios({
         url: link.link,
         methods: "GET",
         responseType: "blob",
       })
         .then((res) => {
-          console.log(res);
-            var randomstring = Math.random().toString(36).substring(2);
-             fileDownload(res.data, randomstring+'.zip');
+          console.log(link);
+          var randomstring = Math.random().toString(36).substring(2);
+          fileDownload(res.data, randomstring + "." + link.ext);
         })
         .catch((error) => {
           this.$notify({
@@ -54,9 +67,12 @@ export default {
           this.$router.go(-1);
         });
     },
-    redirectTo(data){
-      this.$router.push({ name:"singleProduct",params:{id:data.product.id}});
-    }
+    redirectTo(data) {
+      this.$router.push({
+        name: "singleProduct",
+        params: { id: data.product.id },
+      });
+    },
   },
 };
 </script>

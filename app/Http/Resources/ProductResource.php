@@ -19,6 +19,7 @@ class ProductResource extends JsonResource
         $data = array();
         $data['id'] = $this->id;
         $data['title'] = $this->title;
+        $data['slug'] = $this->slug;
         $data['description'] = $this->description;
         $data['tag'] = explode(',',$this->tag);
         $data['image'] = json_decode($this->gallery_img);
