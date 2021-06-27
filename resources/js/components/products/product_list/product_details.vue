@@ -72,7 +72,7 @@
         </div>
       </div>
       <div class="product-details-gallary">
-        <productCarousel :images="getSingleProduct.image"></productCarousel>
+        <productCarousel :getSingleProduct="getSingleProduct"></productCarousel>
         <div class="download-wrapper">
           <h4>Download File</h4>
           <ul class="download-list" v-if="getSingleProduct.software">

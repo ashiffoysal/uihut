@@ -2,15 +2,15 @@
   <div class="pdg-box">
     <div class="container">
       <div class="row">
-        <div class="col-md-12" v-if="images.length >0">
+        <div class="col-md-12" v-if="getSingleProduct.image.length >0">
           <div
             id="custCarousel"
             class="product-gallary-carousel carousel slide"
             data-bs-ride="carousel"
           >
             <div class="carousel-inner">
-              <div class="carousel-item active" v-for="(image,index) in images" :key="index">
-                <a href="gallery-img-details.html">
+              <div class="carousel-item" v-for="(image,index) in getSingleProduct.image" :key="index" :class="{'active':index == 0}">
+                <router-link :to="{name:'galleryImage',params:{slug:getSingleProduct.slug,id:getSingleProduct.id,product:getSingleProduct}}">
                   <img
                     :src="
                       asset(
@@ -19,7 +19,7 @@
                     "
                     alt="Hills"
                   />
-                </a>
+                </router-link>
               </div>
               
            
@@ -38,11 +38,11 @@
             ></a>
             <ol class="carousel-indicators list-inline">
 
-              <li class="list-inline-item" v-for="(image,index) in images" :key="index">
+              <li class="list-inline-item" v-for="(image,index) in getSingleProduct.image" :key="index" :class="{'active':index == 0}">
                 <a
-                  id="carousel-selector-0"
+                  :id="`carousel-selector-${index}`"
                   class="carousel-thumb selected"
-                  data-slide-to="0"
+                  :data-slide-to="index"
                   data-target="#custCarousel"
                 >
                   <img
@@ -69,7 +69,7 @@
 export default {
     name:'ProductDetailsCarousel',
     props:{
-        images:{
+        getSingleProduct:{
             require:true,
         }
     }

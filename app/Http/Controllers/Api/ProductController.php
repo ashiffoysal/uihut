@@ -187,15 +187,31 @@ class ProductController extends Controller
                     $item[$key] = $value;
                 }
                 if (array_key_exists($name, $item)) {
-                    $link=$item[$name];
-                    
+                    $link = $item[$name];
+                    $ext =explode('.',$link);
+
                     return response()->json([
-                        'link'=>$link,
-                        'product'=>$product,
-                    ],200);
+                        'link' => $link,
+                        'product' => $product,
+                        'ext' => $ext[1],
+                    ], 200);
                 }
-            }elseif($product->file_type == 1){
-                
+            } elseif ($product->file_type == 1) {
+                $name = $request->name;
+                $software = SoftwareRelationship::doRelation($product->software, $product->link);
+                $item = array();
+                foreach ($software as $key => $value) {
+                    $item[$key] = $value;
+                }
+                if (array_key_exists($name, $item)) {
+                    $link = $item[$name];
+                    $ext =explode('.',$link);
+                    return response()->json([
+                        'link' =>asset('public/uploads/').'/'.$link,
+                        'product' => $product,
+                        'ext' => $ext[1],
+                    ], 200);
+                }
             }
         }
     }
@@ -203,16 +219,16 @@ class ProductController extends Controller
     // check Subcriber
     public function checkSubscriber()
     {
-        $id =auth()->user()->id;
-        $customars =DB::table('customers')->where('billable_id',$id)->first();
-        if($customars){
-            $subcriber = DB::table('subscriptions')->where('billable_id',$id)->where('paddle_status','trialing')->orderBy('id','desc')->first();
+        $id = auth()->user()->id;
+        $customars = DB::table('customers')->where('billable_id', $id)->first();
+        if ($customars) {
+            $subcriber = DB::table('subscriptions')->where('billable_id', $id)->where('paddle_status', 'trialing')->orderBy('id', 'desc')->first();
         }
 
-        if($subcriber){
-            return response()->json($subcriber,200);
-        }else{
-            return response()->json('Subcriber Not Found!',500);
+        if ($subcriber) {
+            return response()->json($subcriber, 200);
+        } else {
+            return response()->json('Subcriber Not Found!', 500);
         }
     }
 
@@ -220,10 +236,9 @@ class ProductController extends Controller
     public function similerProduct($id)
     {
         $product = Product::findOrFail($id);
-        if($product){
-            $products = Product::where('cate_id', $product->cate_id)->where('subcate_id', $product->subcate_id)->where('id','!=',$id)->where('status', 1)->where('is_deleted', 0)->paginate(3);
+        if ($product) {
+            $products = Product::where('cate_id', $product->cate_id)->where('subcate_id', $product->subcate_id)->where('id', '!=', $id)->where('status', 1)->where('is_deleted', 0)->paginate(3);
             return new ProductCollection($products);
         }
-        
     }
 }
