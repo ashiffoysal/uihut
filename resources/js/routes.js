@@ -19,14 +19,7 @@ let routes = [
                 component: require('./components/auth/logout').default,
                 name: 'logout',
             },
-            {
-                path: '/dashboard',
-                component: require('./components/dashboard/dashboard').default,
-                name: 'dashboard',
-                meta: {
-                    requiresAuth: true,
-                }
-            },
+        
             {
                 path: '/blogs',
                 component: require('./components/blog/blog').default,
@@ -111,6 +104,43 @@ let routes = [
                 component: require('./components/auth/email_varify').default,
                 name: 'email_varify'
             },
+        ],
+    },
+    {
+        path: '/dashboard',
+        component: require('./components/dashboard/master').default,
+        children: [
+            {
+            
+                path: '/dashboard',
+                component: require('./components/dashboard/dashboard').default,
+                name: 'dashboard',
+                meta: {
+                    requiresAuth: true,
+                }
+                
+            },
+            {
+            
+                path: '/collection',
+                component: require('./components/dashboard/collection').default,
+                name: 'collection',
+                meta: {
+                    requiresAuth: true,
+                }
+                
+            },
+            {
+            
+                path: '/billingplan',
+                component: require('./components/dashboard/plan_and_billing').default,
+                name: 'planandbilling',
+                meta: {
+                    requiresAuth: true,
+                }
+                
+            },
+            
         ],
     },
 

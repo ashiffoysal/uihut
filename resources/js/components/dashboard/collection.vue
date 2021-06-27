@@ -1,0 +1,214 @@
+<template>
+    <div class="dash-board-content-wrapper">
+        <div class="sidemenu-toggler">
+            <button class="navbar-toggler" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+        </div>
+        <div class="dashboard-collections">
+            <div class="row">
+                    
+                <div class="col-md-3">
+                    <div class="single-collection">
+                        <a href="product-details.html">
+                            <div class="scb-img">
+                                  <img src="public/frontend/assets/img/collection-img/collection-img.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                            </div>
+                            <div class="scb-text">
+                                <h4>UI Template</h4>
+                                <p>22 Shots</p> 
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="single-collection">
+                        <a href="product-details.html">
+                            <div class="scb-img">
+                               <img src="public/frontend/assets/img/collection-img/collection-img.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                            </div>
+                            <div class="scb-text">
+                                <h4>UI Template</h4>
+                                <p>22 Shots</p> 
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="single-collection">
+                        <a href="product-details.html">
+                          <div class="scb-img">
+                             <img src="public/frontend/assets/img/collection-img/collection-img.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                            </div>
+                            <div class="scb-text">
+                                <h4>UI Template</h4>
+                                <p>22 Shots</p> 
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="single-collection">
+                        <a href="product-details.html">
+                             <div class="scb-img">
+                                   <img src="public/frontend/assets/img/collection-img/collection-img.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                            </div>
+                            <div class="scb-text">
+                                <h4>UI Template</h4>
+                                <p>22 Shots</p> 
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="single-collection">
+                        <a href="product-details.html">
+                             <div class="scb-img">
+                                  <img src="public/frontend/assets/img/collection-img/collection-img.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                            </div>
+                            <div class="scb-text">
+                                <h4>UI Template</h4>
+                                <p>22 Shots</p> 
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="single-collection">
+                        <a href="product-details.html">
+                             <div class="scb-img">
+                                     <img src="public/frontend/assets/img/collection-img/collection-img.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                            </div>
+                            <div class="scb-text">
+                                <h4>UI Template</h4>
+                                <p>22 Shots</p> 
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="single-collection">
+                        <a href="product-details.html">
+                             <div class="scb-img">
+                                   <img src="public/frontend/assets/img/collection-img/collection-img.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                            </div>
+                            <div class="scb-text">
+                                <h4>UI Template</h4>
+                                <p>22 Shots</p> 
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="single-collection">
+                        <a href="product-details.html">
+                              <div class="scb-img">
+                                 <img src="public/frontend/assets/img/collection-img/collection-img.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                            </div>
+                            <div class="scb-text">
+                                <h4>UI Template</h4>
+                                <p>22 Shots</p> 
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="single-collection">
+                        <a href="product-details.html">
+                              <div class="scb-img">
+                                     <img src="public/frontend/assets/img/collection-img/collection-img.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                            </div>
+                            <div class="scb-text">
+                                <h4>UI Template</h4>
+                                <p>22 Shots</p> 
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="single-collection">
+                        <a href="product-details.html">
+                             <div class="scb-img">
+                                 <img src="public/frontend/assets/img/collection-img/collection-img.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                            </div>
+                            <div class="scb-text">
+                                <h4>UI Template</h4>
+                                <p>22 Shots</p> 
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="single-collection">
+                        <a href="product-details.html">
+                             <div class="scb-img">
+                             <img src="public/frontend/assets/img/collection-img/collection-img.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                            </div>
+                            <div class="scb-text">
+                                <h4>UI Template</h4>
+                                <p>22 Shots</p> 
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="single-collection">
+                        <a href="product-details.html">
+                             <div class="scb-img">
+                                <img src="public/frontend/assets/img/collection-img/collection-img.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
+                            </div>
+                            <div class="scb-text">
+                                <h4>UI Template</h4>
+                                <p>22 Shots</p> 
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+export default {
+  name: "collection",
+  mounted() {
+    
+  },
+};
+</script>
