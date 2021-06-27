@@ -13,7 +13,6 @@
                 <div class="col-md-12" v-if="clientSays.length >0">
                     <div class="testimonial-slider wow slideInUp" data-wow-duration="1s">
                       <carousel :autoplay="true" :items="2" :nav="true">
-
                         
                             <div class="item" v-for="(review,index) in clientSays" :key="index">
                                 <div class="single-testimonial">
@@ -34,8 +33,6 @@
                                     </div>
                                 </div>
                             </div>
-                          
-
                          </carousel>
                     </div>
                 </div>
@@ -88,3 +85,71 @@ export default {
   }
 };
 </script>
+<style >
+.single-testimonial .st-img a.st-play-btn {
+    position: absolute;
+    width: 20px;
+    height: 27px;
+    top: calc(50% - 13px);
+    left: calc(50% - 10px);
+    z-index: 1;
+}
+.owl-theme .owl-nav [class*='owl-']:hover {
+  background-color: #6235E5;
+color: #fff;
+}
+.owl-theme .owl-nav [class*='owl-'] {
+    color: #6235E5;
+    border: 1px solid #6235E5;
+    background-color: #fff;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    font-size: 30px;
+    padding-top: 8px;
+    font-size: 14px;
+}
+.owl-theme .owl-nav [class*=owl-]:hover {
+    background: #6235E5;
+    color: #FFF;
+    text-decoration: none;
+}
+
+
+.owl-nav {
+    position: relative !important;
+    margin: 0px auto !important;
+    float: right !important;
+    z-index: 1 !important;
+}
+
+
+.owl-dots .owl-dot.active span {
+    background-color: #6235E5 !important;
+}
+
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+    background: #869791 !important;
+}
+
+.owl-dots {
+    text-align: left !important;
+    position: relative !important;
+    margin: 10px auto !important;
+}
+
+.owl-dots .owl-dot span {
+    width: 24px !important;
+    background-color: #D9D9D9 !important;
+    height: 3px !important;
+    border-radius: 3px !important;
+}
+
+.owl-dots .owl-dot.active span{
+    background-color: #6235E5 !important;
+}
+.owl-dots .owl-dot.active span {
+    background-color: #6235E5!important;
+}
+
+</style>
