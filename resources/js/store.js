@@ -465,6 +465,19 @@ const store = new Vuex.Store({
 			.catch((error) => {
 				console.log(error);
 			});
+		},
+		saveProductSearch(context,data){
+			axios
+			.get('/save/product/search',{
+				params:data
+			})
+			.then((res) => {
+				console.log(res);
+				context.commit('SAVE_PRODUCT_SEARCH',res.data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 		}
 
 
@@ -568,6 +581,9 @@ const store = new Vuex.Store({
 		},
 		RETRIVE_SIMILER_PRODUCT(state,data){
 			return state.similerProduct = data;
+		},
+		SAVE_PRODUCT_SEARCH(state,data){
+			return state.saveProduct = data;
 		}
 	},
 });

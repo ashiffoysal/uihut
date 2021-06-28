@@ -18,7 +18,7 @@ class SaveProductCollection extends ResourceCollection
             'data' => $this->collection->map(function ($data) {
                 return [
                     'id' => $data->id,
-                    'image' => asset('public/uploads/products/thumbnail/'.$data->product->thumbnail_img ?? ' '),
+                    'image' => asset('public/uploads/products/thumbnail/'.$data->product->thumbnail_img ??' '),
                     'name' => $data->product->title ?? ' ',
                     'product_id' => $data->product->id ?? ' ',
                 ];

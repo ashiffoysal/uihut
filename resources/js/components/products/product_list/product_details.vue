@@ -289,6 +289,7 @@
                     type="text"
                     v-model="save_product_search"
                     placeholder="Filter Collections"
+                    @keyup="saveProductsearch"
                   />
                 </div>
               </form>
@@ -446,6 +447,12 @@ export default {
         this.$router.push({ name: "login" });
       }
     },
+    saveProductsearch(){
+      var search =this.save_product_search;
+      this.$store.dispatch('saveProductSearch',{
+        searchdata:search
+      });
+    }
   },
 };
 </script>
