@@ -35,6 +35,7 @@ Route::middleware('auth:api')->group(function(){
     Route::post('/get/download/link',[App\Http\Controllers\Api\ProductController::class, 'getDownloadLink']);
 
     Route::get('/check/subcriber',[App\Http\Controllers\Api\ProductController::class, 'checkSubscriber']);
+    Route::get('/save/product/search',[App\Http\Controllers\Api\ProductController::class, 'saveProductSearch']);
 
 });
 
