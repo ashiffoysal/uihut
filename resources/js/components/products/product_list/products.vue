@@ -39,11 +39,14 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Resources</a
+                <a class="nav-link active" aria-current="page" href="#"
+                  >Resources</a
                 >
               </li>
               <li class="nav-item">
-               <router-link class="nav-link" :to="{name:'pricing'}">Pricing</router-link >
+                <router-link class="nav-link" :to="{ name: 'pricing' }"
+                  >Pricing</router-link
+                >
               </li>
               <!-- <li class="nav-item">
                 <a class="nav-link" href="#">Coustom Service</a>
@@ -84,287 +87,293 @@
       </nav>
     </header>
     <!-- /Header Area -->
-
-    <!-- Category Area -->
-    <div class="aabbro-category-area">
-      <div class="mobile-cat-filter-btn">
-        <div class="container-fluid">
-          <ul class="mcatfilter-btn">
-            <li>
-              <div class="mcat-btn">
-                <span class="mobilecategorybtn" @click="mobileCatbtn"
-                  ><i class="fa fa-bars" aria-hidden="true"></i
-                ></span>
-              </div>
-            </li>
-            <li>
-              <div class="m-filter">
-                <span class="mobilefilter-btn" v-if="getLogo"
-                  >Menu<img :src="getLogo.logo" alt=""
-                /></span>
-              </div>
-            </li>
-          </ul>
+    <preloader v-if="preloader"></preloader>
+    <div class="product_main_area" v-if="!preloader">
+      <!-- Category Area -->
+      <div class="aabbro-category-area">
+        <div class="mobile-cat-filter-btn">
+          <div class="container-fluid">
+            <ul class="mcatfilter-btn">
+              <li>
+                <div class="mcat-btn">
+                  <span class="mobilecategorybtn" @click="mobileCatbtn"
+                    ><i class="fa fa-bars" aria-hidden="true"></i
+                  ></span>
+                </div>
+              </li>
+              <li>
+                <div class="m-filter">
+                  <span class="mobilefilter-btn" v-if="getLogo"
+                    >Menu<img :src="getLogo.logo" alt=""
+                  /></span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="closeMobileCatFilter" @click="mobileCatbtnClose">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </div>
         </div>
-        <div class="closeMobileCatFilter" @click="mobileCatbtnClose">
-          <i class="fa fa-times" aria-hidden="true"></i>
+        <div class="container-fluid mt-3">
+          <div class="row">
+            <div class="col-md-9">
+              <div class="aabbro-category">
+                <ul class="aabbro-category-lists">
+                  <li
+                    v-for="cat in getProductCategores"
+                    :key="cat.id"
+                    :class="getCatslug == cat.slug ? 'active' : ''"
+                  >
+                    <router-link
+                      :to="{
+                        name: 'products',
+                        params: { cat: cat.slug, subcat: cat.subcate },
+                      }"
+                    >
+                      {{ cat.name }}
+                    </router-link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="category-promo-name">
+                <p>
+                  Flash Sale For <a href="#">Illustration</a><span>25%Off</span>
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="container-fluid mt-3">
-        <div class="row">
-          <div class="col-md-9">
-            <div class="aabbro-category">
-              <ul class="aabbro-category-lists">
-                <li
-                  v-for="cat in getProductCategores"
-                  :key="cat.id"
-                  :class="getCatslug == cat.slug ? 'active' : ''"
-                >
-                  <router-link
+      <!-- /Category Area -->
+
+      <!-- Resources Area -->
+      <div class="aabbro-main-resources-area">
+        <div class="aabro-resource-filter-area">
+          <div class="aabro-resource-filter-tab">
+            <ul>
+              <li v-for="subcat in getProductSubCategores" :key="subcat.id">
+                <span
+                  ><router-link
+                    :class="getSubCatslug == subcat.slug ? 'active' : ' '"
                     :to="{
                       name: 'products',
-                      params: { cat: cat.slug, subcat: cat.subcate },
+                      params: { cat: getCategerySlug, subcat: subcat.slug },
                     }"
-                  >
-                    {{ cat.name }}
-                  </router-link>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="category-promo-name">
-              <p>
-                Flash Sale For <a href="#">Illustration</a><span>25%Off</span>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /Category Area -->
-
-    <!-- Resources Area -->
-    <div class="aabbro-main-resources-area">
-      <div class="aabro-resource-filter-area">
-        <div class="aabro-resource-filter-tab">
-          <ul>
-            <li v-for="subcat in getProductSubCategores" :key="subcat.id">
-              <span
-                ><router-link
-                  :class="getSubCatslug == subcat.slug ? 'active' : ' '"
-                  :to="{
-                    name: 'products',
-                    params: { cat: getCategerySlug, subcat: subcat.slug },
-                  }"
-                  >{{ subcat.name }}</router-link
-                ></span
-              >
-            </li>
-          </ul>
-        </div>
-        <div class="filter-search">
-          <div class="search-form-header">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              v-model="resubcatsearch"
-              @keyup="searchResubCategory"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              <i class="fa fa-search" aria-hidden="true"></i>
-            </button>
-          </div>
-        </div>
-        <div class="aabbro-filter-sidebar">
-          <ul class="aabbro-filter-lists">
-            <li>
-              <div class="aabbro-checkbox-default">
-                <label class="aabbro-checkbox-wrapper">
-                  <input
-                    type="checkbox"
-                    class="aabbro-checkbox-input"
-                    value="007"
-                    v-model="showall"
-                    @click="showAll"
-                  />
-
-                  <span class="aabbro-filterCategory-Text"
-                    >All
-                    <span class="filterPcount">{{
-                      countItem.countProduct
-                    }}</span></span
-                  >
-                </label>
-              </div>
-            </li>
-            <li>
-              <div class="aabbro-checkbox-default">
-                <label class="aabbro-checkbox-wrapper">
-                  <input
-                    type="checkbox"
-                    class="aabbro-checkbox-input"
-                    value="2"
-                    v-model="selected.free"
-                    @click="fillterproduct"
-                  />
-
-                  <span class="aabbro-filterCategory-Text"
-                    >Free
-                    <span class="filterPcount">{{
-                      countItem.countFreeItem
-                    }}</span></span
-                  >
-                </label>
-              </div>
-            </li>
-
-            <li v-for="resub in getProductReSubCategores" :key="resub.id">
-              <div class="aabbro-checkbox-default">
-                <label class="aabbro-checkbox-wrapper">
-                  <input
-                    type="checkbox"
-                    class="aabbro-checkbox-input"
-                    :value="resub.id"
-                    :id="'id' + resub.id"
-                    v-model="selected.resubcat"
-                    @click="fillterproduct"
-                  />
-
-                  <span class="aabbro-filterCategory-Text"
-                    >{{ resub.name }}
-                    <span class="filterPcount">{{
-                      resub.products_count
-                    }}</span></span
-                  ></label
+                    >{{ subcat.name }}</router-link
+                  ></span
                 >
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="aabbro-resources-area">
-        <div class="filtered-result-box">
-          <p>
-            {{ this.$route.params.cat.toUpperCase() }} :
-            <span>{{ countItem.countProduct }}</span>
-          </p>
-          <ul>
-            <li v-for="item in getTagResubCategores" :key="item.id">
-              {{ item.name }}
-              <span class="remove" @click="removeTagResubcategores(item)"
-                ><i class="fa fa-times" aria-hidden="true"></i
-              ></span>
-            </li>
-          </ul>
-          <span
-            class="clear-all-btn"
-            @click="resubcatClear"
-            v-if="getTagResubCategores.length > 0"
-            >Clear All</span
-          >
-          <div class="filterd-btn-box">
-            <button @click="fillterItem" class="filter-submit-btn">
-              Filter Resources
-              <img
-                :src="asset('public/frontend/assets/img/icons/manu-bar.png')"
-              />
-            </button>
-            <ul class="filter-lists hide">
-              <li>
-                <label for="filterCheck-0">
-                  <input type="checkbox" id="filterCheck-0" />Newest
-                </label>
               </li>
-              <li class="fl-border-bottom">
-                <label for="filterCheck-1">
-                  <input type="checkbox" id="filterCheck-1" />Popular
-                </label>
+            </ul>
+          </div>
+          <div class="filter-search">
+            <div class="search-form-header">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                v-model="resubcatsearch"
+                @keyup="searchResubCategory"
+              />
+              <button class="btn btn-outline-success" type="submit">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+          <div class="aabbro-filter-sidebar">
+            <ul class="aabbro-filter-lists">
+              <li>
+                <div class="aabbro-checkbox-default">
+                  <label class="aabbro-checkbox-wrapper">
+                    <input
+                      type="checkbox"
+                      class="aabbro-checkbox-input"
+                      value="007"
+                      v-model="showall"
+                      @click="showAll"
+                    />
+
+                    <span class="aabbro-filterCategory-Text"
+                      >All
+                      <span class="filterPcount">{{
+                        countItem.countProduct
+                      }}</span></span
+                    >
+                  </label>
+                </div>
+              </li>
+              <li>
+                <div class="aabbro-checkbox-default">
+                  <label class="aabbro-checkbox-wrapper">
+                    <input
+                      type="checkbox"
+                      class="aabbro-checkbox-input"
+                      value="2"
+                      v-model="selected.free"
+                      @click="fillterproduct"
+                    />
+
+                    <span class="aabbro-filterCategory-Text"
+                      >Free
+                      <span class="filterPcount">{{
+                        countItem.countFreeItem
+                      }}</span></span
+                    >
+                  </label>
+                </div>
               </li>
 
-              <li v-for="software in getSoftwares" :key="software.id">
-                <label for="filterCheck-2">
-                  <input
-                    type="checkbox"
-                    @click="fillterproduct"
-                    :value="software.id"
-                    v-model="selected.filter"
-                    :id="'filterCheck' + software.id"
-                  />{{ software.name }}
-                </label>
+              <li v-for="resub in getProductReSubCategores" :key="resub.id">
+                <div class="aabbro-checkbox-default">
+                  <label class="aabbro-checkbox-wrapper">
+                    <input
+                      type="checkbox"
+                      class="aabbro-checkbox-input"
+                      :value="resub.id"
+                      :id="'id' + resub.id"
+                      v-model="selected.resubcat"
+                      @click="fillterproduct"
+                    />
+
+                    <span class="aabbro-filterCategory-Text"
+                      >{{ resub.name }}
+                      <span class="filterPcount">{{
+                        resub.products_count
+                      }}</span></span
+                    ></label
+                  >
+                </div>
               </li>
             </ul>
           </div>
         </div>
-        <div class="container-fluid" v-if="getMainProducts.length > 0">
-          <div class="row">
-            <div
-              class="col-md-3"
-              v-for="product in getMainProducts"
-              :key="product.id"
+        <div class="aabbro-resources-area">
+          <div class="filtered-result-box">
+            <p>
+              {{ this.$route.params.cat.toUpperCase() }} :
+              <span>{{ countItem.countProduct }}</span>
+            </p>
+            <ul>
+              <li v-for="item in getTagResubCategores" :key="item.id">
+                {{ item.name }}
+                <span class="remove" @click="removeTagResubcategores(item)"
+                  ><i class="fa fa-times" aria-hidden="true"></i
+                ></span>
+              </li>
+            </ul>
+            <span
+              class="clear-all-btn"
+              @click="resubcatClear"
+              v-if="getTagResubCategores.length > 0"
+              >Clear All</span
             >
-              <div class="single-category-block">
-                <router-link
-                  :to="{ name: 'singleProduct', params: { id: product.id,slug:product.slug } }"
-                >
-                  <div class="scb-img">
-                    <img :src="product.image" alt="" />
-                  </div>
-                  <div class="scb-text">
-                    <h4>{{ product.title }}</h4>
-                    <ul>
-                      <li>
-                        <div class="scbt-download">
-                          <img
-                            :src="
-                              asset(
-                                'public/frontend/assets/img/icons/download.png'
-                              )
-                            "
-                          /><span>2360</span>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="scbt-premium">
-                          <img
-                            :src="
-                              asset(
-                                'public/frontend/assets/img/icons/premium-yellow.png'
-                              )
-                            "
-                          />
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </router-link>
-              </div>
-            </div>
+            <div class="filterd-btn-box">
+              <button @click="fillterItem" class="filter-submit-btn">
+                Filter Resources
+                <img
+                  :src="asset('public/frontend/assets/img/icons/manu-bar.png')"
+                />
+              </button>
+              <ul class="filter-lists hide">
+                <li>
+                  <label for="filterCheck-0">
+                    <input type="checkbox" id="filterCheck-0" />Newest
+                  </label>
+                </li>
+                <li class="fl-border-bottom">
+                  <label for="filterCheck-1">
+                    <input type="checkbox" id="filterCheck-1" />Popular
+                  </label>
+                </li>
 
-            <div class="col-md-12">
-              <div class="er-btn text-center" v-if="productLink.next">
-                <a
-                  class="aabbro-btn-a"
-                  @click="loadMoreProduct(productLink.next)"
-                  >Load More</a
-                >
+                <li v-for="software in getSoftwares" :key="software.id">
+                  <label for="filterCheck-2">
+                    <input
+                      type="checkbox"
+                      @click="fillterproduct"
+                      :value="software.id"
+                      v-model="selected.filter"
+                      :id="'filterCheck' + software.id"
+                    />{{ software.name }}
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="container-fluid" v-if="getMainProducts.length > 0">
+            <div class="row">
+              <div
+                class="col-md-3"
+                v-for="product in getMainProducts"
+                :key="product.id"
+              >
+                <div class="single-category-block">
+                  <router-link
+                    :to="{
+                      name: 'singleProduct',
+                      params: { id: product.id, slug: product.slug },
+                    }"
+                  >
+                    <div class="scb-img">
+                      <img :src="product.image" alt="" />
+                    </div>
+                    <div class="scb-text">
+                      <h4>{{ product.title }}</h4>
+                      <ul>
+                        <li>
+                          <div class="scbt-download">
+                            <img
+                              :src="
+                                asset(
+                                  'public/frontend/assets/img/icons/download.png'
+                                )
+                              "
+                            /><span>2360</span>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="scbt-premium">
+                            <img
+                              :src="
+                                asset(
+                                  'public/frontend/assets/img/icons/premium-yellow.png'
+                                )
+                              "
+                            />
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </router-link>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="er-btn text-center" v-if="productLink.next">
+                  <a
+                    class="aabbro-btn-a"
+                    @click="loadMoreProduct(productLink.next)"
+                    >Load More</a
+                  >
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="notfound" v-else>
-          <h4 class="text-center">No Data Found!</h4>
+          <div class="notfound" v-else>
+            <h4 class="text-center">No Data Found!</h4>
+          </div>
         </div>
       </div>
+      <!-- /Resources Area -->
     </div>
-    <!-- /Resources Area -->
   </div>
 </template>
 
 <script>
 import $ from "jquery";
+import preloader from "../preloader";
 export default {
   name: "ProductsComponent",
   data() {
@@ -372,6 +381,7 @@ export default {
       countItem: {},
       showall: [],
       resubcatsearch: "",
+      preloader: false,
       selected: {
         resubcat: [],
         filter: [],
@@ -390,6 +400,10 @@ export default {
     this.$store.dispatch("retriveLogo");
     this.$store.dispatch("retriveSoftware");
     this.countProductItem();
+
+    eventBus.$on("startLoader", (data) => {
+      this.preloader = data;
+    });
   },
 
   watch: {
@@ -409,7 +423,7 @@ export default {
       this.countProductItem();
     },
   },
-
+  components: { preloader },
   computed: {
     getMainProducts() {
       return this.$store.getters.getMainProducts;
