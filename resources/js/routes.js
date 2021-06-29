@@ -107,7 +107,34 @@ let routes = [
             {
                 path: '/email_varify/:email/:id',
                 component: require('./components/auth/email_varify').default,
-                name: 'email_varify'
+                name: 'email_varify',
+                meta: {
+                    requiredVisitor: true,
+                }
+            },
+            {
+                path: '/forgot/password/email',
+                component: require('./components/auth/forgot_password/email').default,
+                name: 'forgotPassword',
+                meta: {
+                    requiredVisitor: true,
+                }
+            },
+            {
+                path: '/email/varify/:token',
+                component: require('./components/auth/forgot_password/forgot_email_varify').default,
+                name: 'forgot_email_varify',
+                meta: {
+                    requiredVisitor: true,
+                }
+            },
+            {
+                path: '/forgot/password/reset/:remember_token',
+                component: require('./components/auth/forgot_password/forgot_password_reset').default,
+                name: 'forgotPasswordReset',
+                meta: {
+                    requiredVisitor: true,
+                }
             },
         ],
     },

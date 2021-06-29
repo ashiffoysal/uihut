@@ -42,6 +42,9 @@ Route::middleware('auth:api')->group(function(){
 Route::post('/user/register',[App\Http\Controllers\Api\UserController::class, 'register']);
 Route::post('/user/email/varify',[App\Http\Controllers\Api\UserController::class, 'emailVarify']);
 Route::post('/login',[App\Http\Controllers\Api\UserController::class, 'login']);
+Route::post('/forgot/password',[App\Http\Controllers\Api\UserController::class, 'forgotPassword']);
+Route::post('/forgot/varify/token/send',[App\Http\Controllers\Api\UserController::class, 'forgotVarifyTokenSend']);
+Route::post('/forgot/reset/password',[App\Http\Controllers\Api\UserController::class, 'forgotResetPassword']);
 // blog catgegory
 Route::get('/blog/category',[App\Http\Controllers\Api\BlogController::class, 'index']);
 Route::get('/allblog',[App\Http\Controllers\Api\BlogController::class, 'allblog']);
