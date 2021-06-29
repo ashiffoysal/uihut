@@ -22,6 +22,7 @@ class CategoryCollection extends ResourceCollection
                     'icon' => $data->icon,
                     'slug' => $data->slug,
                     'subcat' => $data->subcategory->slug ??' ',
+                    'product'=>$data->products,
                 ];
             })
         ];

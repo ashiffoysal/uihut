@@ -20,6 +20,7 @@ class ProductCollection extends ResourceCollection
                     'id'=>$data->id,
                     'title' => $data->title,
                     'slug' => $data->slug,
+                    'no_of_download' => $data->download,
                     'image'=> asset('public/uploads/products/thumbnail/'.$data->thumbnail_img),
                 ];
             }),

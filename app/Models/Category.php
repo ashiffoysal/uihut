@@ -13,5 +13,10 @@ class Category extends Model
     {
         return $this->hasOne('App\Models\SubCategory','cate_id')->where('is_deleted',0)->where('status',1);
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class,'cate_id','id');
+    }
    
 }
