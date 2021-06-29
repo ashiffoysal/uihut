@@ -41,6 +41,7 @@
     <!-- Favicon -->
 
     <link rel="shortcut icon" type="image/png" href="{{asset('public/frontend')}}/assets/img/favicon.ico">
+
     @paddleJS
     <!-- <script> window._asset = '{{ asset('') }}'; </script> -->
 
@@ -49,6 +50,7 @@
 
 <body>
     <div class="container-fluid" id="app">
+    <script data-n-head="ssr" src="https://cdn.paddle.com/paddle/paddle.js" data-body="true"></script>
         <div class="col-md-12 p-0 m-0">
             <main-component></main-component>
         </div>
@@ -56,6 +58,7 @@
 </body>
     <!-- Scripts -->
     <!-- jQuery Plugin -->
+    <script data-n-head="ssr" src="https://cdn.paddle.com/paddle/paddle.js" data-body="true"></script>
     <script src="{{asset('public/frontend')}}/assets/js/jquery-3.2.0.min.js"></script>
     <script src="{{asset('public/frontend')}}/assets/js/jquery-ui.js"></script>
     <!-- Owl Carousel Plugin -->

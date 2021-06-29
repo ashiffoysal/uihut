@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 
+
 class UserController extends Controller
 {
     public function register(Request $request)
@@ -120,6 +121,7 @@ class UserController extends Controller
         ]);
     }
 
+
     // Forgot Password area
     public function forgotPassword(Request $request)
     {
@@ -177,4 +179,5 @@ class UserController extends Controller
             ],200);
         }
     }
+
 }

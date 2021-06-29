@@ -6,7 +6,6 @@
                             <div class="logo mobile-logo">
                                 
                                 <img src="public/frontend/assets/img/main-logo-2.png" alt="Logo">
-        
                             </div>
                         </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -18,34 +17,36 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">Resources</a>
+                                   <router-link class="nav-link active" aria-current="page" :to="{name:'products',params:{cat:getHeaderSubcat.slug,subcat:getHeaderSubcat.subcat,id:getHeaderSubcat.id}}">Resources</router-link>
                                 </li>
                                 <li class="nav-item">
                                     <router-link class="nav-link" :to="{name:'pricing'}">Pricing</router-link >
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link" href="#">Coustom Service</a>
                                 </li>
-                               
-                              
+                                -->
                                   <li class="nav-item dropdown profile-loggedin-btn">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                         data-bs-toggle="dropdown" aria-expanded="false">
-                                        <img src="https://via.placeholder.com/150" alt=""> Alex Hales
+                                        <img :src="asset('public/uploads/user/'+uset.image)" alt=""> {{ uset.full_name}}
                                         <!-- <i class="fa fa-angle-down" aria-hidden="true"></i> -->
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li>
                                             <div class="user-logged-box">
-                                                <img src="https://via.placeholder.com/150" alt="">
-                                                <h4>Alex Hales</h4>
-                                                <p>alexhales@gmail.com</p>
+                                                <img :src="asset('public/uploads/user/'+uset.image)" alt="">
+                                                <h4>{{ uset.full_name}}</h4>
+                                                <p>{{ uset.email}}</p>
                                             </div>
                                         </li>
-                                        <li><a class="dropdown-item" href="#">Edit Profile</a></li> 
-                                        <li><a class="dropdown-item" href="#">Settings</a></li> 
-                                        <li><a class="dropdown-item" href="#">Billing</a></li> 
-                                        <li><a class="dropdown-item" href="#">Collection</a></li> 
+                                        <li><router-link class="dropdown-item" to="dashboard">Edit Profile</router-link></li> 
+                                        <!-- <li><a class="dropdown-item" href="#">Settings</a></li>  -->
+                                        <li>
+                                             <router-link class="dropdown-item" to="billingplan">Plan & Billing</router-link>
+                                            
+                                            </li> 
+                                        <li> <router-link class="dropdown-item" to="collection">Collection</router-link></li> 
                                         <li><a class="dropdown-item" href="#">Support</a></li> 
                                         <li><router-link class="dropdown-item" :to="{name:'logout'}">Logout</router-link></li> 
                                     </ul>
@@ -60,7 +61,7 @@
                                 <i class="fa fa-times" aria-hidden="true"></i>
                             </span>
                             <div class="usr-info">
-                                <h4>Md Shakib</h4>
+                                <h4>{{ uset.full_name}}</h4>
                                 <p>Designer</p>
                                 <a href="#" class="aabbro-btn-b">Edit Profile</a>
                             </div>
@@ -82,7 +83,31 @@
             </div>    
 </template>
 <script>
-// export default defineComponent({
-//       name:'HeaderPart',
-// })
+export default {
+    data(){
+        return {
+            uset:[],
+        }
+    },
+  mounted() {
+      this.loadprofile();
+      this.$store.dispatch('getHeaderSubcat');
+  },
+  methods:{
+        loadprofile(){
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' +localStorage.getItem('access_token');
+                axios.get('/user/profile').then(response =>{
+                    // console.log(response.data);
+                      this.uset=response.data;
+                });
+            }
+  },
+computed:{
+
+        getHeaderSubcat(){
+            return this.$store.getters.getSubCategory;
+        },
+        
+    },
+};
 </script>
