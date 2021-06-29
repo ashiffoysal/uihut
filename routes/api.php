@@ -37,9 +37,18 @@ Route::middleware('auth:api')->group(function(){
     Route::get('/check/subcriber',[App\Http\Controllers\Api\ProductController::class, 'checkSubscriber']);
     Route::get('/save/product/search',[App\Http\Controllers\Api\ProductController::class, 'saveProductSearch']);
 
+
+    Route::get('/user/edit',[App\Http\Controllers\Api\UserDashboardController::class, 'edit']);
+    Route::post('/update/user',[App\Http\Controllers\Api\UserDashboardController::class, 'update']);
+    Route::get('/user/collection',[App\Http\Controllers\Api\UserDashboardController::class, 'allcollection']);
+    Route::get('/user/profile',[App\Http\Controllers\Api\UserDashboardController::class, 'profile']);
+
 });
 
 Route::post('/user/register',[App\Http\Controllers\Api\UserController::class, 'register']);
+
+
+
 Route::post('/user/email/varify',[App\Http\Controllers\Api\UserController::class, 'emailVarify']);
 Route::post('/login',[App\Http\Controllers\Api\UserController::class, 'login']);
 // blog catgegory

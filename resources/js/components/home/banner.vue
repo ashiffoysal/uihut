@@ -6,7 +6,7 @@
                     <div class="hero-content wow slideInUp" data-wow-duration="1s">
                         <h1>	{{ banner.heading_text }} </h1>
                         <p>{{ banner.sub_text }}</p>
-                        <a href="#" class="aabbro-btn-a">Explore Resources</a>
+                        <router-link class="aabbro-btn-a" :to="{name:'products',params:{cat:getHeaderSubcat.slug,subcat:getHeaderSubcat.subcat,id:getHeaderSubcat.id}}">Explore Resources</router-link>
                     </div>
                     <div class="hero-img-video wow slideInUp" data-wow-duration="1.5s"> 
                          <div class="hero-vid-border">
@@ -30,5 +30,16 @@ export default {
       require: true,
     }
   },
+  mounted() {
+
+    this.$store.dispatch('getHeaderSubcat');
+  },
+  computed:{
+          getHeaderSubcat(){
+              return this.$store.getters.getSubCategory;
+          },
+          
+      },
+  
 };
 </script>

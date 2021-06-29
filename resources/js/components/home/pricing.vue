@@ -45,6 +45,16 @@
 <script>
 export default {
   name: "PricingComponent",
+//    head: {
+//     script: [
+//       {
+//         hid: 'Paddle',
+//         src: 'https://cdn.paddle.com/paddle/paddle.js',
+//         async: true,
+//         defer: false
+//       }
+//     ]
+//   },
   props:{
     prices:{
       require:true,

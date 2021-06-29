@@ -21,9 +21,9 @@
                         <li class="nav-item">
                             <router-link class="nav-link" :to="{name:'pricing'}">Pricing</router-link >
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="#">Coustom Service</a>
-                        </li>
+                        </li> -->
                         <li class="nav-item" v-if="!logedIn">
                             <router-link class="nav-link sign-in-btn" :to="{name:'login'}">Sign In</router-link>
                         </li>
@@ -31,11 +31,9 @@
                             <router-link class="nav-link sign-in-btn" :to="{name:'dashboard'}">Dashboard</router-link>
                         </li>
                     </ul>
-    
                 </div>
             </div>
         </nav>
-    
     </header>
 </template>
 
@@ -47,9 +45,8 @@ export default {
                 required:true,
             }
         },
-        mounted(){
+    mounted(){
         this.$store.dispatch('getHeaderSubcat');
-        
     },
     computed:{
         logedIn(){
@@ -58,10 +55,6 @@ export default {
         getHeaderSubcat(){
             return this.$store.getters.getSubCategory;
         },
-       
     },
-
-
-
 }
 </script>

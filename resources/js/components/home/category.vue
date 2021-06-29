@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="er-btn wow slideInUp" data-wow-duration="1s">
-                        <a href="#" class="aabbro-btn-a">Explore Resources</a>
+                        <router-link class="aabbro-btn-a" :to="{name:'products',params:{cat:getHeaderSubcat.slug,subcat:getHeaderSubcat.subcat,id:getHeaderSubcat.id}}">Explore Resources</router-link>
                     </div>
                 </div>
               
@@ -18,24 +18,24 @@
                 <div class="row">
                     <div class="col-md-4 wow slideInUp" data-wow-duration=".33s" v-for="(category, index) in categores" :key="index">
                         <div class="single-category-block">
-                            <a href="#">
+                            <router-link :to="{name:'products',params:{cat:getHeaderSubcat.slug,subcat:getHeaderSubcat.subcat,id:getHeaderSubcat.id}}">
                                 <div class="scb-img">
                                     <img :src="category.image" alt="">
                                 </div>
                                 <div class="scb-text">
                                     <h4>{{ category.name }}</h4>
                                     <ul>
-                                        <li><div class="scbt-download"><img src="public/frontend/assets/img/icons/download.png" alt=""><span>2360</span></div></li>
+                                        <li><div class="scbt-download"><img src="public/frontend/assets/img/icons/download.png" alt=""><span>10</span></div></li>
                                         <li><div class="scbt-premium"><img src="public/frontend/assets/img/icons/premium-yellow.png" alt=""></div></li>
                                     </ul>
                                 </div>
-                            </a>
+                            </router-link>
                         </div>
                     </div>
              
                     <div class="col-md-12">
                         <div class="er-btn er-btn-mobile wow slideInUp" data-wow-duration="1s">
-                            <a href="#" class="aabbro-btn-a">Explore Resources</a>
+                            <router-link class="aabbro-btn-a" :to="{name:'products',params:{cat:getHeaderSubcat.slug,subcat:getHeaderSubcat.subcat,id:getHeaderSubcat.id}}">Explore Resources</router-link>
                         </div>
                     </div>
                 </div>
@@ -54,5 +54,15 @@ export default {
       require: true,
     },
   },
+ mounted() {
+
+    this.$store.dispatch('getHeaderSubcat');
+  },
+  computed:{
+          getHeaderSubcat(){
+              return this.$store.getters.getSubCategory;
+          },
+          
+      },
 };
 </script>

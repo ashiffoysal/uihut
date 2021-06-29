@@ -7,7 +7,8 @@
                         <h2>Want to custom services<br>
                             from aabbro?</h2>
                         <a href="#" class="aabbro-btn-a">Book A Schedule</a>
-                        <a href="#" class="aabbro-btn-c">See Pricing</a>
+                        <router-link class="aabbro-btn-c" :to="{name:'pricing'}">See Pricing</router-link>
+                         
                     </div>
                 </div>
                 <div class="col-md-4">
