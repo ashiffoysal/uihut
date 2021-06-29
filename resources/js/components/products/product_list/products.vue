@@ -330,7 +330,7 @@
                                   'public/frontend/assets/img/icons/download.png'
                                 )
                               "
-                            /><span>2360</span>
+                            /><span>{{product.no_of_download}}</span>
                           </div>
                         </li>
                         <li>

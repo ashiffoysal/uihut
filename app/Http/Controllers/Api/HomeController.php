@@ -30,7 +30,7 @@ class HomeController extends Controller
 
     public function showCategores()
     {
-        return new CategoryCollection(Category::where('status',1)->where('is_deleted',0)->get());
+        return new CategoryCollection(Category::with('products')->where('status',1)->where('is_deleted',0)->get());
     }
 
     // Show Explores

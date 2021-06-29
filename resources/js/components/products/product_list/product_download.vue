@@ -18,14 +18,6 @@ export default {
       });
       this.$router.push({ name: "pricing" });
     }
-
-    this.$notify({
-        type: "error",
-        title: "Sorry!Something went wrong! Please try again",
-      });
-      this.$router.push({ name: "pricing" });
-
-    //  this.$router.go(-1);
   },
   methods: {
     getDownLoadLink(data) {

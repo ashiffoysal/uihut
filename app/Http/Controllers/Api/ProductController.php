@@ -179,6 +179,7 @@ class ProductController extends Controller
         $product_id = $request->product_id;
         $product = Product::findOrFail($product_id);
         if ($product) {
+            $product->increment('download',1);
             if ($product->file_type == 2) {
                 $name = $request->name;
                 $software = SoftwareRelationship::doRelation($product->software, $product->link);
