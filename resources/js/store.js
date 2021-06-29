@@ -138,6 +138,48 @@ const store = new Vuex.Store({
 
 		},
 
+		// Forgot password
+		forgotPassword(context, data) {
+			return new Promise((resolve, reject) => {
+				axios.post("/forgot/password", data).then((res) => {
+					console.log(res);
+					resolve(res);
+				})
+					.catch((error) => {
+						reject(error);
+					});
+			})
+
+		},
+
+		// sand Varify Token
+		forgotPasswordVarify(context, data) {
+			return new Promise((resolve, reject) => {
+				axios.post("/forgot/varify/token/send", data).then((res) => {
+					
+					resolve(res);
+				})
+					.catch((error) => {
+						reject(error);
+					});
+			})
+
+		},
+
+		// passwordReset
+		passwordReset(context, data) {
+			return new Promise((resolve, reject) => {
+				axios.post("/forgot/reset/password", data).then((res) => {
+					console.log(res);
+					resolve(res);
+				})
+					.catch((error) => {
+						reject(error);
+					});
+			})
+
+		},
+
 		// Logout adn destroy Token
 		destroyToken(context) {
 			if (context.getters.logedIn) {

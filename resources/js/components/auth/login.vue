@@ -10,7 +10,7 @@
                 <div class="col-md-6">
                     <div class="log-reg-form-wrapper">
                         <div class="login-form">
-                            <h2>Sign In to aabbro </h2>
+                            <h2>Sign In to aabbro</h2>
                             
                             <p>Let’s sign in first for enter into Pixefy website.</p>
                             <form @submit.prevent="login">
@@ -36,7 +36,7 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <a href="#" class="forget-pass-btn">Forgot Password? </a>
+                                        <router-link :to="{name:'forgotPassword'}" class="forget-pass-btn">Forgot Password? </router-link>
                                     </li>
                                 </ul>
                                 <div class="form-group">
