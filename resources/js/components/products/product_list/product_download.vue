@@ -39,7 +39,17 @@ export default {
           this.redirectTo(res.data);
         })
         .catch((error) => {
-          console.log(error);
+           this.$notify({
+            type: "error",
+            title: `Error!${error.response.data.message}`,
+          });
+           this.$notify({
+            type: "error",
+            title: "Sorry! Something went wrong",
+          });
+         
+          console.log(error.response.data.message);
+          this.$router.push({ name: "home" });
         });
     },
 

@@ -10,7 +10,6 @@ class SocialLoginController extends Controller
 {
     public function facebookLogin(Request $request)
     {
-        $user = Socialite::driver('facebook')->user();
-        return $token = $user->token;
+        $user = Socialite::driver('google')->user();
     }
 }
