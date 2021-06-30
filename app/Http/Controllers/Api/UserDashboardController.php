@@ -23,10 +23,6 @@ class UserDashboardController extends Controller
     public function update(Request $request){
 
         $id=Auth::user()->id;
-
-
-
-
         $post = User::findorFail($id);
         $post->full_name = $request->full_name;
         $post->user_name = $request->user_name;
@@ -59,7 +55,14 @@ class UserDashboardController extends Controller
     public function allcollection(){
         $id=Auth::user()->id;
         $data=SaveProduct::where('user_id',$id)->OrderBy('id','DESC')->with('product')->paginate(12);
-        return new SaveProductCollection($data);
+        if($data){
+            return new SaveProductCollection($data);
+        }else{
+            return response()->json([
+                'msg'=>'No Data Found!'
+            ],204);
+        }
+       
     }
     // 
     public function profile(){
@@ -67,5 +70,20 @@ class UserDashboardController extends Controller
         $data=Auth::user();
         return response()->json($data);
 
+    }
+
+    // user dashboard
+    public function productdownload(){
+
+        $id=Auth::user()->id;
+        $user = User::findOrFail($id);
+        if($user->DownloadProduct){
+            return response()->json($user->DownloadProduct,200);
+        }else{
+            return response()->json([
+                'msg'=>'No Data Found!'
+            ],204);
+        }
+        
     }
 }

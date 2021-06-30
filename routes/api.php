@@ -42,6 +42,7 @@ Route::middleware('auth:api')->group(function(){
     Route::post('/update/user',[App\Http\Controllers\Api\UserDashboardController::class, 'update']);
     Route::get('/user/collection',[App\Http\Controllers\Api\UserDashboardController::class, 'allcollection']);
     Route::get('/user/profile',[App\Http\Controllers\Api\UserDashboardController::class, 'profile']);
+    Route::get('/user/product/downloads',[App\Http\Controllers\Api\UserDashboardController::class, 'productdownload']);
 
 });
 
@@ -103,5 +104,3 @@ Route::middleware('auth:api')->group(function () {
 Route::post('/subscrive/user',[App\Http\Controllers\Api\SubcriveController::class, 'store']);
 
 
-// facebook login
-Route::get('/facebook/login',[App\Http\Controllers\Api\SocialLoginController::class, 'facebookLogin'])->middleware('web');

@@ -18,12 +18,13 @@ class LoginController extends Controller
 
   public function login(Request $request)
   {
-    // Validate the form data
+    //  return $request;
+
     $this->validate($request, [
       'email'   => 'required',
       'password' => 'required|min:6'
     ]);
-    // Attempt to log the user in
+   
     if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
       $notification = array(
         'messege' => 'Login success!',

@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Paddle\Customer;
 use DB;
 use GuzzleHttp\Psr7\Response;
-use App\Http\Models\User;
+use App\Models\User;
 
 class ProductController extends Controller
 {
@@ -177,15 +177,38 @@ class ProductController extends Controller
     // Get Product Download Link
     public function getDownloadLink(Request $request)
     {
+      
         $id=Auth::user()->id;
         $product_id = $request->product_id;
         $product = Product::findOrFail($product_id);
         if($product){
                 $product->increment('download',1);
-                $user =User::findOrFail($id);
-                $user->downloads_product=json_encode($product_id);
-                $user->save();
+
                 
+                $user = User::findOrFail($id);
+
+                $data = json_decode($user->downloads_product);
+
+                $productdata = array();
+
+                if(count($data) > 0){
+                    $items = json_decode($user->downloads_product);
+                    foreach ($items as $value) {
+                        if($value != $product_id){
+                            array_push($productdata,$value);
+                        }
+                    }
+                    array_push($productdata, $product_id);
+                }else{
+                        array_push($productdata,$product_id);
+                }
+                
+
+
+
+                $user->downloads_product = json_encode($productdata);
+                $user->save();
+            
             if ($product->file_type == 2) {
                 $name = $request->name;
                 $software = SoftwareRelationship::doRelation($product->software, $product->link);
@@ -220,9 +243,6 @@ class ProductController extends Controller
                     ], 200);
                 }
             }
-
-
-
         }
     }
 
@@ -257,7 +277,6 @@ class ProductController extends Controller
     {
        
         $search = $request->input('searchdata');
-
         // return $product = Product::where('title','like','%'.$search.'%')->get();
 
         $search = SaveProduct::where('user_id', auth()->user()->id)->when(isset($search),function($q) use($search){

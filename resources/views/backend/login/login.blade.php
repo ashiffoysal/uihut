@@ -36,7 +36,7 @@
 
 					<div class="w-lg-500px bg-white rounded shadow-sm p-10 p-lg-15 mx-auto">
 						<!--begin::Form-->
-						<form  action="{{ route('admin.login') }}" method="POST" class="form w-100" novalidate="novalidate"  >
+						<form  action="{{ route('admin.login') }}" method="POST" class="form w-100" novalidate="novalidate">
                                 @csrf
 			
 							<div class="text-center mb-10">
