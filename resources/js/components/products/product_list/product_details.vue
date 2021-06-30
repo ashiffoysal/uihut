@@ -78,7 +78,7 @@
           <ul class="download-list" v-if="getSingleProduct.software">
             <li v-for="(item, index) in getSingleProduct.software" :key="index">
               <span class="dl-format">
-                <img src="assets/img/icons/figma.png" alt="" />{{ index }}
+                <img src="public/frontend/assets/img/icons/figma.png" alt=""/>{{ index }}
               </span>
               <router-link
                 :to="{

@@ -172,6 +172,18 @@ let routes = [
                 }
                 
             },
+            {
+            
+                path: '/downloads',
+                component: require('./components/dashboard/downloads').default,
+                name: 'downloads',
+                meta: {
+                    requiresAuth: true,
+                }
+                
+            },
+
+            
             
         ],
     },

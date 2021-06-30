@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Paddle\Customer;
 use DB;
 use GuzzleHttp\Psr7\Response;
+use App\Http\Models\User;
 
 class ProductController extends Controller
 {
@@ -176,10 +177,15 @@ class ProductController extends Controller
     // Get Product Download Link
     public function getDownloadLink(Request $request)
     {
+        $id=Auth::user()->id;
         $product_id = $request->product_id;
         $product = Product::findOrFail($product_id);
-        if ($product) {
-            $product->increment('download',1);
+        if($product){
+                $product->increment('download',1);
+                $user =User::findOrFail($id);
+                $user->downloads_product=json_encode($product_id);
+                $user->save();
+                
             if ($product->file_type == 2) {
                 $name = $request->name;
                 $software = SoftwareRelationship::doRelation($product->software, $product->link);
@@ -214,6 +220,9 @@ class ProductController extends Controller
                     ], 200);
                 }
             }
+
+
+
         }
     }
 

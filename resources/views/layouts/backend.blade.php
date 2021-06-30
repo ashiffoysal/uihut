@@ -21,7 +21,10 @@
 	<link href="{{asset('public/backend')}}/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 	<link href="{{asset('public/backend')}}/assets/css/bootstrap-tagsinput.css" rel="stylesheet" type="text/css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	@paddleJS
+<!-- 
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css" />
+	<link href="https://cdn.datatables.net/1.10.25/css/dataTables.semanticui.min.css"/> -->
+	<!-- @paddleJS -->
 	<style>
 		.h-15px {
 			height: 35px !important;
@@ -3254,8 +3257,13 @@
 	<script src="{{asset('public/backend')}}/assets/js/custom/apps/chat/chat.js"></script>
 	<script src="{{asset('public/backend')}}/assets/js/custom/modals/create-app.js"></script>
 	<script src="{{asset('public/backend')}}/assets/js/custom/modals/upgrade-plan.js"></script>
+	<script src="{{asset('public/backend')}}/assets/js/custom/modals/table-treeview.js"></script>
 	<!--end::Page Custom Javascript-->
 	<!--end::Javascript-->
+	<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.25/js/dataTables.semanticui.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script> -->
 
 
 	<script>
@@ -3313,6 +3321,11 @@
 			});
 
 		});
+	</script>
+	<script>
+	$(document).ready(function() {
+			$('#data-table').DataTable();
+		} );
 	</script>
 </body>
 <!--end::Body-->
