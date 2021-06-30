@@ -260,4 +260,13 @@ class ProductController extends Controller
         })->get();
         return new SaveProductCollection($search);
     }
+
+    // check Free Item
+    public function checkFreeItem($id)
+    {
+        $product = Product::findOrFail($id);
+        if($product->product_type == 2){
+            return $product;
+        }
+    }
 }

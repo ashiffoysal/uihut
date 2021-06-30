@@ -520,10 +520,36 @@ const store = new Vuex.Store({
 			.catch((error) => {
 				console.log(error);
 			});
+		},
+
+		retriveTokenForFacebookLogin(context){
+			return new Promise((resolve, reject) => {
+				axios.get("/facebook/login"
+				).then((res) => {
+					console.log(res);
+				
+					resolve(res);
+				})
+					.catch((error) => {
+		
+						reject(error);
+					});
+			})
+		},
+		checkfreeItem(context,data){
+			return new Promise((resolve, reject) => {
+				axios.get(`/check/free/item/${data.product_id}`
+				).then((res) => {
+					console.log(res);
+				
+					resolve(res);
+				})
+					.catch((error) => {
+		
+						reject(error);
+					});
+			})
 		}
-
-
-
 	},
 
 	// mutations area start
