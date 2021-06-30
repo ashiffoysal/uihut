@@ -30,6 +30,7 @@ class LoginController extends Controller
         'messege' => 'Login success!',
         'alert-type' => 'success'
       );
+     
       return redirect()->intended(route('admin.dashboard'))->with($notification);
     }else{
       $notification = array(

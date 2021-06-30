@@ -491,6 +491,7 @@
       array (
       ),
       'reference' => 'dc7a9ca301fc89e9eaa164d58eac39a39c2e93b0',
+
     ),
     'laravel/tinker' => 
     array (
