@@ -180,7 +180,7 @@
                             <!--begin::Table container-->
                             <div class="table-responsive">
                                 <!--begin::Table-->
-                                <table class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+                                <table class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3"  id="data-table" class="data-table" style="width:100%">
                                     <!--begin::Table head-->
                                     <thead>
                                         <tr class="fw-bolder text-muted">

@@ -15,14 +15,13 @@
                             <router-link  to="dashboard">Edit Profile</router-link>
                         </li>
                         <li>
-                           
                              <router-link  to="billingplan">Plan & Billing</router-link>
                         </li>
                         <li>
-                             <router-link  to="collection">Collection</router-link>
+                            <router-link  to="collection">Collection</router-link>
                         </li>
                         <li>
-                            <a href="#">Download</a>
+                            <router-link  to="downloads">Download</router-link>
                         </li>
                         <li>
                             <a href="#">Support Tickets</a>
