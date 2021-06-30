@@ -173,6 +173,7 @@ class UserController extends Controller
             $user->password = Hash::make($request->password);
             $user->varify_token = Null;
             $user->is_varify = 1;
+            $user->save();
         }else{
             return response()->json([
                 'msg'=>'User Not Found!'
