@@ -169,7 +169,7 @@ class UserController extends Controller
         ]);
 
         $user = User::where('remember_token', $request->token)->first();
-        if ($user) {
+        if($user){
             $user->password = Hash::make($request->password);
             $user->varify_token = Null;
             $user->is_varify = 1;

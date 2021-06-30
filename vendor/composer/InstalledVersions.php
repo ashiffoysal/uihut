@@ -514,6 +514,7 @@ private static $installed = array (
       array (
       ),
       'reference' => 'dc7a9ca301fc89e9eaa164d58eac39a39c2e93b0',
+
     ),
     'laravel/socialite' => 
     array (
@@ -523,6 +524,7 @@ private static $installed = array (
       array (
       ),
       'reference' => '1960802068f81e44b2ae9793932181cf1cb91b5c',
+
     ),
     'laravel/tinker' => 
     array (
@@ -542,14 +544,23 @@ private static $installed = array (
       ),
       'reference' => '07d725813350c695c779382cbd6dac0ab8665537',
     ),
-    'lcobucci/jwt' => 
+    'lcobucci/clock' => 
     array (
-      'pretty_version' => '3.4.5',
-      'version' => '3.4.5.0',
+      'pretty_version' => '2.0.0',
+      'version' => '2.0.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '511629a54465e89a31d3d7e4cf0935feab8b14c1',
+      'reference' => '353d83fe2e6ae95745b16b3d911813df6a05bfb3',
+    ),
+    'lcobucci/jwt' => 
+    array (
+      'pretty_version' => '4.0.3',
+      'version' => '4.0.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'ae4165a76848e070fdac691e773243d10cd06ce1',
     ),
     'league/commonmark' => 
     array (
@@ -586,15 +597,6 @@ private static $installed = array (
       array (
       ),
       'reference' => '3b9dff8aaf7323590c1d2e443db701eb1f9aa0d3',
-    ),
-    'league/oauth1-client' => 
-    array (
-      'pretty_version' => 'v1.9.0',
-      'version' => '1.9.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '1e7e6be2dc543bf466236fb171e5b20e1b06aee6',
     ),
     'league/oauth2-server' => 
     array (

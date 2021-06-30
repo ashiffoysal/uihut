@@ -1,52 +1,45 @@
 <template>
-    <div class="dash-board-content-wrapper">
-        <div class="sidemenu-toggler">
-            <button class="navbar-toggler" type="button">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-        </div>
-        <div class="dashboard-collections">
-            <div class="row">
-                    
-                <div class="col-md-3" v-for="allcollection in allcollections" :key="allcollection.id">
-                    <div class="single-collection">
-                        <router-link :to="{ name: 'singleProduct', params: { id: allcollection.id,slug:allcollection.slug } }">
-                            <div class="scb-img">
-                                <img :src="allcollection.image" alt="">
-                                <!-- <img src="public/frontend/assets/img/category/cat-1.png" alt="">
-                                <img src="public/frontend/assets/img/category/cat-1.png" alt="">
-                                <img src="public/frontend/assets/img/category/cat-1.png" alt=""> -->
+  <div class="dash-board-content-wrapper">
+                <div class="sidemenu-toggler">
+                    <button class="navbar-toggler" type="button">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                </div>
+                <div class="dashboard-collections">
+                    <div class="row">
+                         
+                        <div class="col-md-3" v-for="alldownload in alldownloads" :key="alldownload.id" >
+                            <div class="single-download">
+                                <router-link :to="{ name: 'singleProduct', params: { id: alldownload.id,slug:alldownload.slug } }">
+                                    <div class="sdb-img">
+                                        <img :src="asset('public/uploads/products/thumbnail/'+alldownload.thumbnail_img)" alt=""> 
+                                    </div>
+                                    <div class="sdb-text">
+                                        <h4>{{alldownload.title}}</h4> 
+                                    </div>
+                               </router-link> 
                             </div>
-                            <div class="scb-text">
-                                <h4>{{allcollection.name}}</h4>
-                                <p>22 Shots</p> 
-                            </div>
-                        </router-link>
+                        </div>
+                        
                     </div>
                 </div>
-               <pagination :data="allcollections">
-                    <span slot="prev-nav">&lt; Previous</span>
-                    <span slot="next-nav">Next &gt;</span>
-                </pagination>
             </div>
-        </div>
-    </div>
 </template>
 <script>
 export default {
   name: "downloads",
     data(){
         return {
-            allcollections:[],
+             alldownloads:[],
         }
     },
   mounted() {
-      this.loadcollection();
+      this.loaddownloads();
   },
   methods:{
-        loadcollection(){
-                axios.get('/user/collection').then(response =>{
-                      this.allcollections=response.data.data;
+        loaddownloads(){
+                axios.get('/user/product/downloads').then(response =>{
+                     this.alldownloads=response.data;
                 });
             }
   }

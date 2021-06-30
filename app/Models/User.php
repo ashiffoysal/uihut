@@ -42,4 +42,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function getDownloadProductAttribute()
+    {
+        $product_id = json_decode($this->attributes['downloads_product']);
+        $data = array();
+        foreach ($product_id as $value) {
+            $product = Product::findOrFail($value);
+            if($product){
+                array_push($data,$product);
+            }
+        }
+
+        return $data;
+        
+    }
 }

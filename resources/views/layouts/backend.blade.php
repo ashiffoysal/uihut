@@ -3167,11 +3167,11 @@
 	<!--begin::Javascript-->
 	<!--begin::Global Javascript Bundle(used by all pages)-->
 	<script src="{{asset('public/backend')}}/assets/plugins/global/plugins.bundle.js"></script>
-	<script src="{{asset('public/backend')}}/assets/js/scripts.bundle.js"></script>
+  <script src="{{asset('public/backend')}}/assets/js/scripts.bundle.js"></script>
 	<script src="{{asset('public/backend')}}/assets/js/bootstrap-tagsinput.js"></script>
 	<script src="{{asset('public/backend')}}/assets/js/spartan-multi-image-picker.js"></script>
 	<script src="{{asset('public/backend')}}/assets/plugins/ckeditor/ckeditor.js"></script>
-	<script src="{{asset('public/backend')}}/assets/plugins/ckeditor/ckeditor-active.js"></script>
+	<script src="{{asset('public/backend')}}/assets/plugins/ckeditor/ckeditor-active.js"></script> 
 	<script>
 		CKEDITOR.replace('editor1');
 	</script>
