@@ -50,10 +50,9 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <facebookLogin class="button" appId="196647462367533" @login="onLogin" @logout="onLogout" @sdk-loaded="sdkLoaded"></facebookLogin>
-                                            <!-- <a href="#"><img src="public/frontend/assets/img/icons/fb.png" alt=""> Facebook</a> -->
-                                           
-                                      
+                                      <div class="gfl-btn">
+                                            <a @click="fbLogin"><img src="public/frontend/assets/img/icons/fb.png" alt=""> Facebook</a>
+                                        </div>
                                     </li>
                                 </ul>
                             </form>
@@ -66,12 +65,8 @@
 </template>
 
 <script>
-import facebookLogin from 'facebook-login-vuejs'
 export default {
   name: "Login",
-  components: {
-    facebookLogin:facebookLogin
-  },
   data() {
     return {
         userData:{
@@ -80,13 +75,6 @@ export default {
         },
         email_err:'',
         password_err:'',
-
-        // idImage, loginImage, mailImage, faceImage,
-        isConnected: false,
-        name: '',
-        email: '',
-        personalID: '',
-        FB: undefined,
     };
   },
   mounted() {},
@@ -111,34 +99,18 @@ export default {
             }
           });
       },
-      // fb login
-      getUserData() {
-      this.FB.api('/me', 'GET', { fields: 'id,name,email' },
-        userInformation => {
-          this.$router.push({ name: 'dashboard'});
-          console.warn("data api",userInformation)
-          this.personalID = userInformation.id;
-          this.email = userInformation.email;
-          this.name = userInformation.name;
-        }
-      )
-    },
-    sdkLoaded(payload) {
-      this.isConnected = payload.isConnected
-      this.FB = payload.FB
-      if (this.isConnected) this.getUserData()
-    },
-    onLogin() {
-      this.isConnected = true
-      this.getUserData()
-    },
-    onLogout() {
-      this.isConnected = false;
-    },
+
+    // facebook login
+    fbLogin(){
+      this.$store.dispatch('retriveTokenForFacebookLogin');
+    }
   },
 };
 </script>
 <style scoped>
+.gfl-btn{
+  cursor: pointer;
+}
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

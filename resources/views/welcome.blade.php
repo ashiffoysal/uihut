@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="api-base-url" content="{{ url('api/') }}" />
- 
+
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="keywords" content="">
@@ -44,38 +44,33 @@
 
     @paddleJS
     <!-- <script> window._asset = '{{ asset('') }}'; </script> -->
-
-
 </head>
 
 <body>
     <div class="container-fluid" id="app">
-    <script data-n-head="ssr" src="https://cdn.paddle.com/paddle/paddle.js" data-body="true"></script>
         <div class="col-md-12 p-0 m-0">
             <main-component></main-component>
         </div>
     </div>
 </body>
-    <!-- Scripts -->
-    <!-- jQuery Plugin -->
-    <script data-n-head="ssr" src="https://cdn.paddle.com/paddle/paddle.js" data-body="true"></script>
-    <script src="{{asset('public/frontend')}}/assets/js/jquery-3.2.0.min.js"></script>
-    <script src="{{asset('public/frontend')}}/assets/js/jquery-ui.js"></script>
-    <!-- Owl Carousel Plugin -->
-    <script src="{{asset('public/frontend')}}/assets/js/owl.carousel.min.js"></script>
-    <!-- Main Counterup Plugin-->
-    <script src="{{asset('public/frontend')}}/assets/js/jquery.counterup.min.js"></script>
-    <script src="{{asset('public/frontend')}}/assets/js/countdown.js"></script>
-    <script src="{{asset('public/frontend')}}/assets/js/jquery.scrollUp.js"></script>
-    <script src="{{asset('public/frontend')}}/assets/js/jquery.waypoints.min.js"></script>
-    <script src="{{asset('public/frontend')}}/assets/js/wow.min.js"></script>
-    <!-- Bootstrap JS -->
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+<script src="{{asset('public/frontend')}}/assets/js/jquery-3.2.0.min.js"></script>
+<script src="{{asset('public/frontend')}}/assets/js/jquery-ui.js"></script>
+<!-- Owl Carousel Plugin -->
+<script src="{{asset('public/frontend')}}/assets/js/owl.carousel.min.js"></script>
+<!-- Main Counterup Plugin-->
+<script src="{{asset('public/frontend')}}/assets/js/jquery.counterup.min.js"></script>
+<script src="{{asset('public/frontend')}}/assets/js/countdown.js"></script>
+<script src="{{asset('public/frontend')}}/assets/js/jquery.scrollUp.js"></script>
+<script src="{{asset('public/frontend')}}/assets/js/jquery.waypoints.min.js"></script>
+<script src="{{asset('public/frontend')}}/assets/js/wow.min.js"></script>
+<!-- Bootstrap JS -->
 
-    <!-- Main Script -->
-    <script src="{{asset('public/frontend')}}/assets/js/theme.js"></script>
-    <script src="{{asset('public/js/app.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+
+<!-- Main Script -->
+<script src="{{asset('public/frontend')}}/assets/js/theme.js"></script>
+<script src="{{asset('public/js/app.js')}}"></script>
 
 </html>

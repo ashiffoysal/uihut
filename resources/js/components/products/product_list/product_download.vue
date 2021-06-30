@@ -12,11 +12,17 @@ export default {
     if (this.$store.getters.isSubscriber) {
       this.getDownLoadLink(data);
     } else {
-      this.$notify({
-        type: "error",
-        title: "You need to Subscription!",
+      this.$store.dispatch("checkfreeItem", data).then((res) => {
+        if (res.data) {
+          this.getDownLoadLink(data);
+        } else {
+          this.$notify({
+            type: "error",
+            title: "You need to Subscription!",
+          });
+          this.$router.push({ name: "pricing" });
+        }
       });
-      this.$router.push({ name: "pricing" });
     }
   },
   methods: {

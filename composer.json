@@ -13,6 +13,7 @@
         "laravel/cashier-paddle": "^1.4",
         "laravel/framework": "^8.40",
         "laravel/passport": "^10.1",
+        "laravel/socialite": "^5.2",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2"
     },

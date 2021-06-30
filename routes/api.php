@@ -84,6 +84,7 @@ Route::get('/get/resub/categores/tag',[App\Http\Controllers\Api\ProductControlle
 
 
 Route::get('/get/filter/product/{cat}/{subcat}',[App\Http\Controllers\Api\ProductController::class, 'getFilterProduct']);
+Route::get('/check/free/item/{id}',[App\Http\Controllers\Api\ProductController::class, 'checkFreeItem']);
 
 Route::get('/search/resubcat/{cat}/{subcat}',[App\Http\Controllers\Api\ProductController::class, 'searchReSubCat']);
 Route::get('/similer/product/{id}',[App\Http\Controllers\Api\ProductController::class, 'similerProduct']);
@@ -100,3 +101,7 @@ Route::middleware('auth:api')->group(function () {
 });
 
 Route::post('/subscrive/user',[App\Http\Controllers\Api\SubcriveController::class, 'store']);
+
+
+// facebook login
+Route::get('/facebook/login',[App\Http\Controllers\Api\SocialLoginController::class, 'facebookLogin'])->middleware('web');
